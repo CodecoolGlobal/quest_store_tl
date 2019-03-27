@@ -5,10 +5,10 @@
         <meta charset="utf-8">
         <meta name="description" content="First Assignment in Team work week">
         <meta name="keywords" content="HTML,CSS,JavaScript">
-        <meta name="author" content="Liz, Tatiana Slonimskaia">
+        <meta name="author" content="Liz C., Tatiana S.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Quest store</title>
-        <link rel="stylesheet" href="assets/stylesheets/main.css">
+        <link rel="stylesheet" href="../assets/stylesheets/main.css">
     </head>
 
     <body>
@@ -16,27 +16,51 @@
         <!--Header-->
 
         <header>
+            <div class="primary-header flex-container-header">
+                <div>
+                    <img src="../assets/images/logo/logo.png" alt="website Logo" id="main-logo"/>
+                </div>
 
-            <img src="../assets/images/logo/logo.png" alt="website Logo"/>
-
-            <nav>
-                <a href="#">HOME</a>
-                <a href="#">Do something</a>
-                <a href="#">LOGOUT</a> 
-                <input type="text" placeholder="Search..">  
-            </nav>
-            
+                <div>
+                    <ul class="nav primary-nav">                 
+                        <li class="flex-item-header"><a href="#">HOME</a></li>
+                        <li class="flex-item-header"><a href="#">Do Something</a></li>
+                        <li class="flex-item-header"><a href="#">LOGOUT</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class ="primary-header">
+                <input class="search-field" type="text" placeholder="Search..." id="main-page-search">
+            </div>  
         </header>
+
+        <section class="content">
+
+        </section>
+
     
         <!--Footer-->
 
         <footer>
-            <small>Copyright &copy; 2019 Quest Store</small>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">Do something</a>
-                <a href="#">Logout</a>    
-            </nav>
+
+            <div class="flex-container-footer">
+                <div id="copyright">
+                    <small>Copyright &copy; 2019 Quest Store</small>
+                </div>
+
+                <div id="icon-github" class="icons">
+                    <a href="#"><img src="../assets/images/navigation-icons/icon-github.png" />
+                </div>
+
+                <div>
+                    <ul class="icons nav">
+                        <li class="flex-item-footer"><a href="#"><img src="../assets/images/navigation-icons/icon-home.png"/></a></li>
+                        <li class="flex-item-footer"><a href="#"><img src="../assets/images/navigation-icons/icon-logout.png"/></a></li>
+                        <li class="flex-item-footer"><label for="main-page-search"><img src="../assets/images/navigation-icons/icon-search.png"/></label></li>
+                    </ul>
+                </div>
+            </div>
+
         </footer>
 
     </body>   
