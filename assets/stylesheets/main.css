@@ -71,6 +71,7 @@ a {
 */
 .logo {
   float: left;
+  max-width:100%;
 }
 .primary-nav {
   font-size: 18px;
@@ -149,6 +150,7 @@ input[type="text"].search-field {
 }
 
 .flex-container-footer {
+  height: 70px;
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -168,4 +170,4 @@ input[type="text"].search-field {
 .icons img:hover {
   cursor: pointer;
   -webkit-filter: brightness(70%);filter: brightness(70%);
-}
+} 
