@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8"/>
-    <title>Artifact Card</title>
+    <title>Quest Card</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="../assets/stylesheets/main.css"/>
     <link rel="stylesheet" href="../assets/stylesheets/item-card.css"/>
@@ -27,65 +27,75 @@
             </ul>
         </div>
     </div>
-    <div class ="primary-header">
+    <div class="primary-header">
         <input class="search-field" type="text" placeholder="Search..." id="main-page-search">
     </div>
 </header>
 
-<section class="artifacts-section content">
+<section class="quests-section content">
 
-    <div id="primary-artifacts-container">
+    <div id="primary-quests-container">
 
-<!--Normal Card-->
+        <!--Basic Quest-->
 
-        <div class="artifact-container basic-artifact">
+        <div class="quest-container basic-quest">
 
-            <div class="artifact-image-container">
-                <img src="../assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
+            <div class="quest-image-container">
+                <div class="bag-of-coins">
+                    <img src="../assets/images/quest-icons/basic-quest.png" alt="Quest Image"/>
+                </div>
+
+                <div class="pile-of-coins">
+                    <img src="../assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                </div>
             </div>
 
-            <div class="artifact-price-container">
-                <span>9999</span>
-                <img src="../assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+            <div class="quest-reward-container">
+                <p>9999</p>
             </div>
 
-            <div class="artifact-title-container">
+            <div class="quest-title-container">
                 <p>Title</p>
             </div>
 
-            <div class="artifact-description-container">
-                <p>Description of artifact</p>
+            <div class="quest-description-container">
+                <p>Description</p>
             </div>
 
-            <div class="artifact-purchase-button-container">
-                <button>Artifact! Get your artifact here!</button>
+            <div class="quest-claim-button-container">
+                <button>I did it!</button>
             </div>
 
         </div>
 
-<!--Team Artifact-->
+        <!--Extra Quest-->
 
-        <div class="artifact-container magic-artifact">
+        <div class="quest-container extra-quest">
 
-            <div class="artifact-image-container">
-                <img src="../assets/images/artifact-icons/artifact2.png" alt="Artifact Image"/>
+            <div class="quest-image-container">
+                <div class="bag-of-coins">
+                    <img src="../assets/images/quest-icons/extra-quest.png" alt="Quest Image"/>
+                </div>
+
+                <div class="pile-of-coins">
+                    <img src="../assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                </div>
             </div>
 
-            <div class="artifact-price-container">
-                <span>9999</span>
-                <img src="../assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+            <div class="quest-reward-container">
+                <p>9999</p>
             </div>
 
-            <div class="artifact-title-container">
+            <div class="quest-title-container">
                 <p>Title</p>
             </div>
 
-            <div class="artifact-description-container">
-                <p>Description of artifact</p>
+            <div class="quest-description-container">
+                <p>Description</p>
             </div>
 
-            <div class="artifact-purchase-button-container">
-                <button>Artifact! Get your artifact here!</button>
+            <div class="quest-claim-button-container">
+                <button>I did it!</button>
             </div>
 
         </div>
@@ -111,7 +121,8 @@
                         src="../assets/images/navigation-icons/icon-home.png"/></a></li>
                 <li class="flex-item-footer"><a href="#"><img src="../assets/images/navigation-icons/icon-logout.png"/></a>
                 </li>
-                <li class="flex-item-footer"><img src="../assets/images/navigation-icons/icon-search.png"/></li>
+                <li class="flex-item-footer"><label for="main-page-search"><img
+                        src="../assets/images/navigation-icons/icon-search.png"/></label></li>
             </ul>
         </div>
     </div>

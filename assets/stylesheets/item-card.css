@@ -1,12 +1,13 @@
 /*
   ========================================
-  Artifact Card Styles
+  Item Card Styles
   ========================================
 */
 
 /* centering */
 
-#primary-artifacts-container {
+#primary-artifacts-container,
+#primary-quests-container {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -14,9 +15,10 @@
     height: 100%;
 }
 
-/* artifact's main container */
+/* main container */
 
-.artifact-container {
+.artifact-container,
+.quest-container {
     margin: 90px 0;
     width: 300px;
     height: 380px;
@@ -27,24 +29,34 @@
             0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.basic-artifact:hover {
+.quest-container {
+    margin-right: 30px;
+}
+
+.basic-artifact:hover,
+.basic-quest:hover {
     box-shadow:
             0 4px 8px 0 rgba(64, 156, 255, 0.74),
             0 6px 20px 0 rgba(64, 156, 255, 0.19);
 }
 
-.magic-artifact:hover {
+.magic-artifact:hover,
+.extra-quest:hover {
     box-shadow:
             0 4px 8px 0 rgba(174, 0, 15, 0.88),
             0 6px 20px 0 rgba(174, 0, 15, 0.19);
 }
 
-/* image of artifact */
+/* image container */
 
-div.artifact-image-container img {
+div.artifact-image-container img,
+div.quest-image-container img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+div.artifact-image-container img {
     padding-top: 4px;
     height: 280px;
     position: relative;
@@ -54,7 +66,22 @@ div.artifact-image-container img {
             0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* artifact's price container */
+div.quest-image-container img {
+    width: 200px;
+}
+
+.bag-of-coins img {
+    position: relative;
+    bottom: 70px;
+}
+
+.pile-of-coins img {
+    position: relative;
+    bottom: 150px;
+    left: 85px;
+}
+
+/* price container */
 
 .artifact-price-container {
     position: relative;
@@ -62,7 +89,14 @@ div.artifact-image-container img {
     bottom: 115px;
 }
 
-.artifact-price-container span {
+.quest-reward-container {
+    position: relative;
+    padding-left: 25px;
+    bottom: 215px;
+}
+
+.artifact-price-container span,
+.quest-reward-container p {
     padding-right: 5px;
     font-size: 30px;
     font-weight: bolder;
@@ -76,56 +110,90 @@ div.artifact-price-container img {
     width: 100px;
 }
 
-/* artifact's title container */
+/* title container */
 
 div.artifact-title-container {
+    position: relative;
+    bottom: 90px;
+}
+
+div.quest-title-container {
+    position: relative;
+    bottom: 140px;
+}
+
+div.artifact-title-container,
+div.quest-title-container {
+    margin: auto;
     height: 20px;
     width: 150px;
+    padding: 5px;
     border-radius: 10px;
     border: 2px solid rgba(64, 156, 255, 0.74);
     border-bottom: none;
-    position: relative;
-    bottom: 85px;
-    margin: auto;
     background-color: #f3f3f3;
 }
 
-div.artifact-title-container p {
-    font-size: 20px;
+.magic-artifact .artifact-title-container,
+.extra-quest .quest-title-container {
+    border: 2px solid rgba(174, 0, 15, 0.88);
+    border-bottom: none;
+}
+
+div.artifact-title-container p,
+div.quest-title-container p {
+    font-size: 18px;
     font-weight: bolder;
     text-align: center;
     text-transform: uppercase;
     color: #57033b;
 }
 
-/* artifact's description container */
+/* description container */
 
 div.artifact-description-container {
-    height: 80px;
-    width: 250px;
-    border-top: 2px solid rgba(64, 156, 255, 0.74);
     position: relative;
     bottom: 78px;
-    margin: auto;
-    border-radius: 10px;
-    background-color: #f3f3f3;
 }
 
-div.artifact-description-container p {
+div.quest-description-container {
+    position: relative;
+    bottom: 120px;
+}
+
+div.artifact-description-container,
+div.quest-description-container {
+    margin: auto;
+    height: 70px;
+    width: 250px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    border-top: 2px solid rgba(64, 156, 255, 0.74);
+}
+
+.magic-artifact .artifact-description-container,
+.extra-quest .quest-description-container {
+    border-top: 2px solid rgba(174, 0, 15, 0.88);
+}
+
+div.artifact-description-container p,
+div.quest-description-container p {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 18px;
     font-size: 20px;
     color: #57033b;
 }
 
-/* Buy artifact button */
+/* buttons */
 
-div.artifact-purchase-button-container {
+div.artifact-purchase-button-container,
+div.quest-claim-button-container {
     position: relative;
     bottom: 70px;
 }
 
-div.artifact-purchase-button-container button {
+div.artifact-purchase-button-container button,
+div.quest-claim-button-container button {
     height: 50px;
     width: 100%;
     font-size: 18px;
@@ -142,19 +210,9 @@ div.artifact-purchase-button-container button {
     transition: all 0.5s linear 0s;
 }
 
-div.artifact-purchase-button-container button:hover {
+div.artifact-purchase-button-container button:hover,
+div.quest-claim-button-container button:hover {
     cursor: pointer;
     color: #57033b;
     background-color: #f3f3f3;
-}
-
-/* Magic Artifact */
-
-.magic-artifact .artifact-title-container {
-    border: 2px solid rgba(174, 0, 15, 0.88);
-    border-bottom: none;
-}
-
-.magic-artifact .artifact-description-container {
-    border-top: 2px solid rgba(174, 0, 15, 0.88);
 }
