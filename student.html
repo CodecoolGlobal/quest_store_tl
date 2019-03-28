@@ -3,44 +3,112 @@
     
     <head>
         <meta charset="utf-8">
-        <meta name="description" content="First Assignment in Team work week">
-        <meta name="keywords" content="HTML,CSS,JavaScript">
-        <meta name="author" content="Liz C., Tatiana S.">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="First Assignment in Team work week"/>
+        <meta name="keywords" content="HTML,CSS,JavaScript"/>
+        <meta name="author" content="Liz C., Tatiana S."/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Quest store</title>
-        <link rel="stylesheet" href="assets/stylesheets/student.css">
+        <link rel="stylesheet" href="assets/stylesheets/main.css"/>
+        <link rel="stylesheet" href="assets/stylesheets/student-team.css"/>
     </head>
 
     <body>
 
         <!--Header-->
-
         <header>
 
-            <img src="assets/images/logo/logo.png" alt="website Logo"/>
+            <div class="primary-header flex-container-header">
 
-            <nav>
-                <a href="../student.html">HOME</a>
-                <a href="../login.html">LOGOUT</a> 
-
-                
+                <div>
+                    <img src="assets/images/logo/logo.png" alt="website Logo" id="main-logo"/>
                 </div>
 
-            </nav>
+                <div class="nav primary-nav">
+
+                    <div class="flex-item-header">
+                        <a href="student.html">HOME</a>
+                    </div>
+                    
+                    <div class="dropdown flex-item-header">
+                        <button class="dropbtn">MENU<i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="artifacts.html">ARTIFACTS</a>
+                            <a href="quests.html">QUESTS</a>
+                        </div>
+                    </div> 
+
+                    <div class="flex-item-header">
+                        <a href="login.html">LOGOUT</a>
+                    </div>
+                    
+                </div>
+                                
+            </div>
+
+            <div class ="primary-header">
+                <input class="search-field" type="text" placeholder="Search..." id="main-page-search">
+            </div> 
             
         </header>
+
+        <section>
+
+            <div class="grid">
+
+                 <!--Information about student-->
+
+                <section class="content col-1-3">
+
+                        <ul class="student-content">
+                            <li>Name of Student</li>
+                            <li class="flex-item-column"><img id="photo" src="assets/images/student/test.jpg"/></li>
+                            <li><button><a href="team.html">Go to my team</a></button></li>
+                            <li><button><a href="quests.html">Go to quests</a></button></li>
+                            <li><button><a href="artifacts.html">Go to artifacts</a></button></li>
+                        </ul>
+                
+                </section><!--
+
+                    Artifacts and quest
+
+                --><section class="content col-2-3">
+
+                    <ul class="artifacts-quests">
+                        <li>My Artifacts</li>
+                        <li>My Quest</li>
+                        <li>Pending Quests</li>
+                    </ul>
+
+                </section>
+
+            </div>
+
+        </section>
     
         <!--Footer-->
 
         <footer>
-            <small>Copyright &copy; 2019 Quest Store</small>
-            <nav>
-                <a href="../student.html">HOME</a>
-                <a href="../quests.html">QUESTS</a>
-                <a href="../artifacts.html">ARTIFACTS</a>
-                <a href="../firstTeam.html">TEAM</a>
-                <a href="../login.html">LOGOUT</a> >    
-            </nav>
+
+            <div class="flex-container-footer">
+
+                <div id="copyright">
+                    <small>Copyright &copy; 2019 Quest Store</small>
+                </div>
+
+                <div id="icon-github" class="icons">
+                    <a href="#"><img src="assets/images/navigation-icons/icon-github.png" />
+                </div>
+
+                <div>
+                    <ul class="icons nav">
+                        <li class="flex-item-footer"><a href="student.html"><img src="assets/images/navigation-icons/icon-home.png"/></a></li>
+                        <li class="flex-item-footer"><a href="login.html"><img src="assets/images/navigation-icons/icon-logout.png"/></a></li>
+                        <li class="flex-item-footer"><label for="main-page-search"><img src="assets/images/navigation-icons/icon-search.png"/></label></li>
+                    </ul>
+                </div>
+
+            </div>
+
         </footer>
 
     </body>   
