@@ -159,7 +159,7 @@ div.student-photo-container img {
 
 /*
   ========================================
-  Button on student page
+  Button on pages
   ========================================
 */
 
@@ -215,6 +215,10 @@ div.student-photo-container img {
   transition:800ms ease all;
 }
 
+.button-team {
+ margin-top: 30px;
+}
+
 /*
   ========================================
   Team Content
@@ -246,16 +250,13 @@ div.student-photo-container img {
   Artifacts and Quests of Student!
   ========================================
 */
-.small-card-artifact {
-  transform: scale(0.4, 0.4);
-  -webkit-transform: scale(0.4, 0.4);
+.small-card {
+  transform: scale(0.6, 0.6);
+  -webkit-transform: scale(0.6, 0.6);
 }
 
-.small-card-artifact {
-  border: 0px;
-    padding:0; 
+.small-card { 
     margin:0;
-    border-collapse: collapse;
 }
 
 .artifacts-quests {
