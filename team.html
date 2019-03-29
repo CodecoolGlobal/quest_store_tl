@@ -10,6 +10,7 @@
         <title>Quest store</title>
         <link rel="stylesheet" href="assets/stylesheets/main.css"/>
         <link rel="stylesheet" href="assets/stylesheets/student-team.css"/>
+        <link rel="stylesheet" href="assets/stylesheets/item-card.css"/>
     </head>
 
     <body>
@@ -55,105 +56,201 @@
 
         <section class="content">
 
-            <div class="team-container col-1-3">
+            <div class="flex-team-container">
 
-                <!--First Student-->
+                <div class="student-content">
 
-                <div class="information-student-container">
+                    <!--First Student-->
 
-                    <div class="student-photo-container">
-                        <img src="assets/images/student/codecooler.png" alt="Student photo"/>
+                    <div class="student information-student-container">
+
+                        <div class="student-photo-container">
+                            <img src="assets/images/student/codecooler.png" alt="Student photo"/>
+                        </div>
+
+                        <div class="student-coins-container">
+                            <img src="assets/images/student/coins-bag.png" alt="Number of Coins"/>
+                        </div>
+
+                        <div class="coins">
+                            <p>9999</p>
+                        </div>
+
+
+                        <div class="info-container">
+                            <p>Name:<br/></p>
+                            <p>Surname:<br/></p>
+                            <p>E-mail:<br/></p>
+                            <p>Phone number:<br/></p>
+                        </div>
+
                     </div>
 
-                    <div class="student-coins-container">
-                        <img src="assets/images/student/coins-bag.png" alt="Number of Coins"/>
+                    <!--Second student-->
+
+                    <div class=" student information-student-container">
+
+                        <div class="first-student-background student-photo-container">
+                            <img src="assets/images/student/codecooler.png" alt="Student photo"/>
+                        </div>
+
+                        <div class="student-coins-container">
+                            <img src="assets/images/student/coins-bag.png" alt="Number of Coins"/>
+                        </div>
+
+                        <div class="coins">
+                            <p>9999</p>
+                        </div>
+
+
+                        <div class="info-container">
+                            <p>Name:<br/></p>
+                            <p>Surname:<br/></p>
+                            <p>E-mail:<br/></p>
+                            <p>Phone number:<br/></p>
+                        </div>
+
                     </div>
 
-                    <div class="coins">
-                        <p>9999</p>
-                    </div>
+                    <!--Third student-->
+
+                    <div class="student information-student-container">
+
+                        <div class="second-student-background student-photo-container">
+                            <img src="assets/images/student/codecooler.png" alt="Student photo"/>
+                        </div>
+
+                        <div class="student-coins-container">
+                            <img src="assets/images/student/coins-bag.png" alt="Number of Coins"/>
+                        </div>
+
+                        <div class="coins">
+                            <p>9999</p>
+                        </div>
 
 
-                    <div class="info-container">
-                        <p>Name:<br/></p>
-                        <p>Surname:<br/></p>
-                        <p>E-mail:<br/></p>
-                        <p>Phone number:<br/></p>
+                        <div class="info-container">
+                            <p>Name:<br/></p>
+                            <p>Surname:<br/></p>
+                            <p>E-mail:<br/></p>
+                            <p>Phone number:<br/></p>
+                        </div>
+
                     </div>
 
                 </div>
 
-                <!--Second student-->
+                <!--Artifacts and Quests-->
 
-                <div class="information-student-container">
+                <div class="artifacts-quests-team">
 
-                    <div class="student-photo-container">
-                        <img src="assets/images/student/codecooler.png" alt="Student photo"/>
-                    </div>
+                    <!--Artifacts-->
 
-                    <div class="student-coins-container">
-                        <img src="assets/images/student/coins-bag.png" alt="Number of Coins"/>
-                    </div>
+                    <div>
 
-                    <div class="coins">
-                        <p>9999</p>
-                    </div>
+                        <p>My Artifacts</p>
 
+                        <div id="primary-artifacts-container">
 
-                    <div class="info-container">
-                        <p>Name:<br/></p>
-                        <p>Surname:<br/></p>
-                        <p>E-mail:<br/></p>
-                        <p>Phone number:<br/></p>
-                    </div>
+                            <div id="primary-artifacts-container">
 
-                </div>
-
-                <!--Third student-->
-
-                <div class="information-student-container">
-
-                    <div class="student-photo-container">
-                        <img src="assets/images/student/codecooler.png" alt="Student photo"/>
-                    </div>
-
-                    <div class="student-coins-container">
-                        <img src="assets/images/student/coins-bag.png" alt="Number of Coins"/>
-                    </div>
-
-                    <div class="coins">
-                        <p>9999</p>
-                    </div>
-
-
-                    <div class="info-container">
-                        <p>Name:<br/></p>
-                        <p>Surname:<br/></p>
-                        <p>E-mail:<br/></p>
-                        <p>Phone number:<br/></p>
-                    </div>
-
-                </div>
-
-            </div>
-
-             <!--Artifacts and Quests-->
-            <div class="artifacts-quests col-2-3">
-                <p>Artifacts</p>
-                    
+                                <!--Normal Card-->
                         
-                <div>
-                    <img src="#" alt="Artifact photo first"/>
-                    <img src="#" alt="Artifact photo second"/>
-                    <img src="#" alt="Artifact photo third"/>
-                </div>
+                                <div class="small-card-artifact artifact-container basic-artifact">
 
-                <p>Pending Artifacts</p>
+                                    <div class="artifact-image-container">
+                                        <img src="assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
+                                    </div>
+                        
+                                    <div class="artifact-price-container">
+                                        <span>9999</span>
+                                        <img src="assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+                                    </div>
+                        
+                                    <div class="artifact-title-container">
+                                        <p>Title</p>
+                                    </div>
+                        
+                                    <div class="artifact-description-container">
+                                        <p>Description of artifact</p>
+                                    </div>
+                        
+                                    <div class="artifact-purchase-button-container">
+                                        <button>Artifact! Get your artifact here!</button>
+                                    </div>
+                        
+                                </div>
+                            
+                        
+                
+                                <!--Team Artifact-->
+                        
+                                <div class="small-card-artifact artifact-container magic-artifact">
 
-                <div>
-                    <img src="#" alt="Pending quest photo first"/>
-                    <img src="#" alt="Pending quest photo second"/>
-                    <img src="#" alt="Pending quest photo third"/>
+                                    <div class="artifact-image-container">
+                                        <img src="assets/images/artifact-icons/artifact2.png" alt="Artifact Image"/>
+                                    </div>
+                        
+                                    <div class="artifact-price-container">
+                                        <span>9999</span>
+                                        <img src="assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+                                    </div>
+                        
+                                    <div class="artifact-title-container">
+                                        <p>Title</p>
+                                    </div>
+                        
+                                    <div class="artifact-description-container">
+                                        <p>Description of artifact</p>
+                                    </div>
+                        
+                                    <div class="artifact-purchase-button-container">
+                                        <button>Artifact! Get your artifact here!</button>
+                                    </div>
+                        
+                                </div>
+
+                            </div>
+                
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <p>Pending Artifacts</p>
+
+                        <div class="small-card-artifact artifact-container magic-artifact">
+
+                            <div class="artifact-image-container">
+                                <img src="assets/images/artifact-icons/artifact2.png" alt="Artifact Image"/>
+                            </div>
+                
+                            <div class="artifact-price-container">
+                                <span>9999</span>
+                                <img src="assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+                            </div>
+                
+                            <div class="artifact-title-container">
+                                <p>Title</p>
+                            </div>
+                
+                            <div class="artifact-description-container">
+                                <p>Description of artifact</p>
+                            </div>
+                
+                            <div class="artifact-purchase-button-container">
+                                <button>Artifact! Get your artifact here!</button>
+                            </div>
+                
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <a href="artifacts.html"><button class="button-student">Go to artifacts</button></a>   
+                    </div>
+
                 </div>
 
             </div>
