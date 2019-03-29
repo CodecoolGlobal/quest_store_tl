@@ -64,11 +64,10 @@
   float: left;
   padding: 35px;
   width: 70%;
-  margin: 0 150px;
+  /* margin: 0 150px; */
 }
 .artifacts-quests p,
 .artifacts-quests-team p {
-  margin: auto;
   font-size: 30px;
   font-weight: bold;
   color: #57033b;
@@ -88,13 +87,13 @@ section:after {
   }
 } 
 
-.flex-container-content,
+/* .flex-container-content,
 .flex-team-container {
   list-style: none;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-}
+} */
 
 div.student-photo-container img {
   display: block;
@@ -263,6 +262,29 @@ div.student-photo-container img {
   float: left;
   padding: 35px;
   width: 70%;
-  margin: 0 150px;
+  /* margin: 0 150px; */
 }
 
+.flex-artifacts-container,
+.artifacts-container,
+.quests-container,
+.flex-quests-container
+.flex-container-content {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+.artifacts-container p {
+  align-self: center;
+  position: relative;
+}
+
+/* .flex-container-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;    
+  flex-wrap: wrap;
+} */

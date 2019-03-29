@@ -33,6 +33,10 @@
     margin-right: 30px;
 }
 
+.artifact-container {
+    padding-top: 30px;
+}
+
 .basic-artifact:hover,
 .basic-quest:hover {
     box-shadow:
