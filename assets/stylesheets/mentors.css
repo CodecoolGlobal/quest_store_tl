@@ -1,0 +1,15 @@
+.flex-mentors-container{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+.margins-mentors {
+    margin: 90px 20px 20px 20px;
+}
+
+.info-position {
+   padding-top: 140px;
+}
