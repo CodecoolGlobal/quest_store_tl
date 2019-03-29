@@ -9,9 +9,9 @@
 #primary-artifacts-container,
 #primary-quests-container {
     display: flex;
-    align-items: center;
+    /* align-items: center;
     justify-content: space-evenly;
-    flex-flow: wrap;
+    flex-flow: wrap; */
     height: 100%;
 }
 

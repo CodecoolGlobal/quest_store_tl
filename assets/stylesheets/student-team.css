@@ -57,13 +57,17 @@
   float: left;
   width: 30%;
   padding: 20px;
+  margin-right: 5px;
 }
-.artifacts-quests {
+.artifacts-quests,
+.artifacts-quests-team {
   float: left;
   padding: 35px;
   width: 70%;
+  margin: 0 150px;
 }
-.artifacts-quests p {
+.artifacts-quests p,
+.artifacts-quests-team p {
   margin: auto;
   font-size: 30px;
   font-weight: bold;
@@ -84,7 +88,8 @@ section:after {
   }
 } 
 
-.flex-container-content {
+.flex-container-content,
+.flex-team-container {
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -215,4 +220,48 @@ div.student-photo-container img {
   Team Content
   ========================================
 */
+.student {
+  padding-top: 20px;
+}
+
+.first-student-background img {
+  -webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(270deg);
+}
+
+.second-student-background img {
+  -webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(90deg);
+}
+
+.artifacts-quests-team {
+  margin-right: 5px;
+  float: left;
+  padding: 55px;
+  width: 70%;
+}
+
+/*
+  ========================================
+  Artifacts and Quests of Student!
+  ========================================
+*/
+.small-card-artifact {
+  transform: scale(0.4, 0.4);
+  -webkit-transform: scale(0.4, 0.4);
+}
+
+.small-card-artifact {
+  border: 0px;
+    padding:0; 
+    margin:0;
+    border-collapse: collapse;
+}
+
+.artifacts-quests {
+  float: left;
+  padding: 35px;
+  width: 70%;
+  margin: 0 150px;
+}
 

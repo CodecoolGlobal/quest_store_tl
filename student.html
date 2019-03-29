@@ -10,6 +10,7 @@
         <title>Quest store</title>
         <link rel="stylesheet" href="assets/stylesheets/main.css"/>
         <link rel="stylesheet" href="assets/stylesheets/student-team.css"/>
+        <link rel="stylesheet" href="assets/stylesheets/item-card.css"/>
     </head>
 
     <body>
@@ -59,7 +60,7 @@
 
                  <!--Information about student-->
 
-                <div class="student-content col-1-3">
+                <div class="student-content">
 
                     <div class="information-student-container">
 
@@ -95,32 +96,191 @@
                 
                 <!--Artifacts and quests-->
 
-                <div class="artifacts-quests col-2-3">
-                       
+                <div class="artifacts-quests">
+
+                    <!--Artifacts-->
+
+                    <div>
+
                         <p>My Artifacts</p>
+
+                        <div id="primary-artifacts-container">
+
+                            <div id="primary-artifacts-container">
+
+                                <!--Normal Card-->
                         
-                            
-                        <div>
-                            <img src="#" alt="Artifact photo first"/>
-                            <img src="#" alt="Artifact photo second"/>
-                            <img src="#" alt="Artifact photo third"/>
-                        </div>
+                                <div class="small-card-artifact artifact-container basic-artifact">
+
+                                    <div class="artifact-image-container">
+                                        <img src="assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
+                                    </div>
+                        
+                                    <div class="artifact-price-container">
+                                        <span>9999</span>
+                                        <img src="assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+                                    </div>
+                        
+                                    <div class="artifact-title-container">
+                                        <p>Title</p>
+                                    </div>
+                        
+                                    <div class="artifact-description-container">
+                                        <p>Description of artifact</p>
+                                    </div>
+                        
+                                    <div class="artifact-purchase-button-container">
+                                        <button>Artifact! Get your artifact here!</button>
+                                    </div>
+                        
+                                </div>
+                        
+                    
+                            <!--Team Artifact-->
+                    
+                            <div class="small-card-artifact artifact-container magic-artifact">
+
+                                <div class="artifact-image-container">
+                                    <img src="assets/images/artifact-icons/artifact2.png" alt="Artifact Image"/>
+                                </div>
+                    
+                                <div class="artifact-price-container">
+                                    <span>9999</span>
+                                    <img src="assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+                                </div>
+                    
+                                <div class="artifact-title-container">
+                                    <p>Title</p>
+                                </div>
+                    
+                                <div class="artifact-description-container">
+                                    <p>Description of artifact</p>
+                                </div>
+                    
+                                <div class="artifact-purchase-button-container">
+                                    <button>Artifact! Get your artifact here!</button>
+                                </div>
+                    
+                            </div>
+                    
+                        </div><!---->
+                        
+                    </div>
+
+                    <!--Quests-->
+
+                    <div>
 
                         <p>My Quest</p>
+                        
+                        <div id="primary-quests-container">
 
-                        <div>
-                            <img src="#" alt="Quest photo first"/>
-                            <img src="#" alt="Quest photo second"/>
-                            <img src="#" alt="Quest photo third"/>
+                            <!--Basic Quest-->
+                    
+                            <div class="small-card-artifact quest-container basic-quest">
+                    
+                                <div class="quest-image-container">
+                                    <div class="bag-of-coins">
+                                        <img src="assets/images/quest-icons/basic-quest.png" alt="Quest Image"/>
+                                    </div>
+                    
+                                    <div class="pile-of-coins">
+                                        <img src="assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                                    </div>
+                                </div>
+                    
+                                <div class="quest-reward-container">
+                                    <p>9999</p>
+                                </div>
+                    
+                                <div class="quest-title-container">
+                                    <p>Title</p>
+                                </div>
+                    
+                                <div class="quest-description-container">
+                                    <p>Description</p>
+                                </div>
+                    
+                                <div class="quest-claim-button-container">
+                                    <button>I did it!</button>
+                                </div>
+                    
+                            </div>
+                        
+                            <!--Extra Quest-->
+                    
+                            <div class="small-card-artifact quest-container extra-quest">
+                    
+                                <div class="quest-image-container">
+                                    <div class="bag-of-coins">
+                                        <img src="assets/images/quest-icons/extra-quest.png" alt="Quest Image"/>
+                                    </div>
+                    
+                                    <div class="pile-of-coins">
+                                        <img src="assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                                    </div>
+                                </div>
+                    
+                                <div class="quest-reward-container">
+                                    <p>9999</p>
+                                </div>
+                    
+                                <div class="quest-title-container">
+                                    <p>Title</p>
+                                </div>
+                    
+                                <div class="quest-description-container">
+                                    <p>Description</p>
+                                </div>
+                    
+                                <div class="quest-claim-button-container">
+                                    <button>I did it!</button>
+                                </div>
+                    
+                            </div>
+                        
                         </div>
+                    </div>
+
+                    
+
+                    <div>
 
                         <p>Pending Quests</p>
 
-                        <div>
-                            <img src="#" alt="Pending quest photo first"/>
-                            <img src="#" alt="Pending quest photo second"/>
-                            <img src="#" alt="Pending quest photo third"/>
+                        <!--Extra Quest-->
+                    
+                        <div class="small-card-artifact quest-container extra-quest">
+                    
+                            <div class="quest-image-container">
+                                <div class="bag-of-coins">
+                                    <img src="assets/images/quest-icons/extra-quest.png" alt="Quest Image"/>
+                                </div>
+                
+                                <div class="pile-of-coins">
+                                    <img src="assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                                </div>
+                            </div>
+                
+                            <div class="quest-reward-container">
+                                <p>9999</p>
+                            </div>
+                
+                            <div class="quest-title-container">
+                                <p>Title</p>
+                            </div>
+                
+                            <div class="quest-description-container">
+                                <p>Description</p>
+                            </div>
+                
+                            <div class="quest-claim-button-container">
+                                <button>I did it!</button>
+                            </div>
+
                         </div>
+
+                    </div>
 
                 </div>
 
