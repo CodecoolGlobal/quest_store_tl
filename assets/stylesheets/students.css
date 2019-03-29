@@ -1,0 +1,11 @@
+.flex-students-container{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+.margins-student {
+    margin: 90px 20px 20px 20px;
+}

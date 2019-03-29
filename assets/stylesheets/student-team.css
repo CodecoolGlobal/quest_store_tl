@@ -247,8 +247,8 @@ div.student-photo-container img {
   ========================================
 */
 .small-card-artifact {
-  transform: scale(0.4, 0.4);
-  -webkit-transform: scale(0.4, 0.4);
+  transform: scale(0.6, 0.6);
+  -webkit-transform: scale(0.6, 0.6);
 }
 
 .small-card-artifact {
