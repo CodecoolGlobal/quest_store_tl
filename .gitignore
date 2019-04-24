@@ -1,3 +1,14 @@
+# System Files
+
+.DS_Store
+
+# IDE specific files
+
 .idea
 .vscode
-.DS_Store
+.iml
+
+# Maven files
+
+/target
+/test
