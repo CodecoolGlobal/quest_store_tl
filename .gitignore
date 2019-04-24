@@ -11,4 +11,6 @@
 # Maven files
 
 /target
-/test
+*/test
+.classpath
+.project
