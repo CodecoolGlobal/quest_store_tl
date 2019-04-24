@@ -1,4 +1,4 @@
-package com.codecool.quest-store.main;
+package com.codecool.quest_store.main;
 
 
 public class Main {
