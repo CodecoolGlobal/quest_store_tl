@@ -15,6 +15,7 @@
   color: #57033b;
   letter-spacing: .5px;
   text-transform: uppercase;
+  background-color: rgba(10, 10, 10, 0.17);
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
@@ -43,7 +44,8 @@
 
 .dropdown:hover .dropdown-content {
   display: block;
-} */
+}
+
 .dropdown {
   z-index: 1;
 }

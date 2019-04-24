@@ -1,0 +1,81 @@
+/*
+  ========================================
+  Configuration Menus
+  ========================================
+*/
+
+/* centering */
+
+.primary-main-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: wrap;
+    height: 100%;
+}
+
+/* main container */
+
+.take-action-container {
+    margin: 90px 0;
+    width: 360px;
+    height: 290px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #57033b;
+}
+
+.take-action-container div {
+    padding: 10px;
+}
+
+.take-action-container h2,
+.take-action-container span,
+.take-action-container p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+}
+
+.take-action-container img {
+    display: block;
+    margin: auto;
+    padding: 10px;
+    filter: grayscale(100%);
+}
+
+.take-action-container h2 {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+span.action-separator {
+    color: #f8c218;
+}
+
+/* hover effect */
+
+.take-action-container:hover,
+.take-action-container:hover .action-separator,
+.take-action-container:hover .action-image {
+    background-color: #f8c218;
+    color: #ffffff;
+    filter: grayscale(0%);
+}
+
+/* text */
+
+p.action-description {
+    line-height: 1.2;
+}
+
+/* action form container */
+
+div.action-form-container {
+    background-color: #020100;
+    color: #f3f3f3;
+}
+
