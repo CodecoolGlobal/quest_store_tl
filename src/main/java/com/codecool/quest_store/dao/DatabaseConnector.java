@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-class DatabaseConnector {
+public class DatabaseConnector {
 
     private static BasicDataSource ds = new BasicDataSource();
 
@@ -36,5 +36,9 @@ class DatabaseConnector {
 
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
+    }
+
+    public static BasicDataSource getDs() {
+        return ds;
     }
 }
