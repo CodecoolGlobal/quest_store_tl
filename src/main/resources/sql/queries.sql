@@ -80,6 +80,7 @@ CREATE TABLE users
   phone_number text,
   email text,
   password text,
+  photo text,
   id_user_type int,
   id_team int,
   id_room int,
