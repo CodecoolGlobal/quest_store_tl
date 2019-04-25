@@ -8,8 +8,9 @@ public class User {
     private String email;
     private String password;
     private String photo;
-    private String type;
-    private String room;
+    private int typeId;
+    private int roomId;
+    private int teamId;
 
 
     public User(Builder builder) {
@@ -20,8 +21,9 @@ public class User {
         this.email = builder.email;
         this.password = builder.password;
         this.photo = builder.photo;
-        this.type = builder.type;
-        this.room = builder.room;
+        this.typeId = builder.typeId;
+        this.roomId = builder.roomId;
+        this.teamId = builder.teamId;
     }
 
     public int getId(){
@@ -52,12 +54,16 @@ public class User {
         return photo;
     }
 
-    public String getType() {
-        return type;
+    public int getTypeId() {
+        return typeId;
     }
 
-    public String getRoom() {
-        return room;
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public int getTeamId() {
+        return teamId;
     }
 
     public void setName(String name) {
@@ -84,12 +90,16 @@ public class User {
         this.photo = photo;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     public static class Builder {
@@ -100,8 +110,9 @@ public class User {
         private String email;
         private String password;
         private String photo;
-        private String type;
-        private String room;
+        private int typeId;
+        private int roomId;
+        private int teamId;
 
         public Builder withId(int id) {
             this.id = id;
@@ -138,13 +149,18 @@ public class User {
             return this;
         }
 
-        public Builder withType(String type) {
-            this.type = type;
+        public Builder withTypeId(int typeId) {
+            this.typeId = typeId;
             return this;
         }
 
-        public Builder withRoom(String room) {
-            this.room = room;
+        public Builder withRoomId(int roomId) {
+            this.roomId = roomId;
+            return this;
+        }
+
+        public Builder withTeamId(int teamId) {
+            this.teamId = teamId;
             return this;
         }
 
