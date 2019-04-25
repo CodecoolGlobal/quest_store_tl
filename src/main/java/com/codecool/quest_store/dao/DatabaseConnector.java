@@ -1,38 +1,30 @@
 package com.codecool.quest_store.dao;
 
+import org.apache.commons.dbcp.BasicDataSource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseConnector {
+class DatabaseConnector {
 
-    private static final String dbUrl = "jdbc:postgresql://localhost:5432/queststore"; //TODO:config file needed
-    private static final String user = "marek";
-    private static final String password = "polapola";
+    private static final String URL = "jdbc:postgresql://localhost:5432/queststore"; //TODO:config file needed
+    private static final String USER = "marek";
+    private static final String PASSWORD = "polapola";
 
-    private static Connection connectionInstance = null;
+    private static BasicDataSource ds = new BasicDataSource();
 
+    private DatabaseConnector(){ }
 
-    private DatabaseConnector() {
+    static {
+        ds.setUrl(URL);
+        ds.setUsername(USER);
+        ds.setPassword(PASSWORD);
+        ds.setMinIdle(5);
+        ds.setMaxIdle(10);
+        ds.setMaxOpenPreparedStatements(100);
     }
 
-    public static Connection getConnection() {
-        try {
-            if (connectionInstance == null) {
-                connectionInstance = DriverManager.getConnection(dbUrl, user, password);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return connectionInstance;
+    public static Connection getConnection() throws SQLException {
+        return ds.getConnection();
     }
-
-    public static void releaseConnection(Connection connection) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
