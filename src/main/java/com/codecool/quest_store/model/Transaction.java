@@ -2,24 +2,24 @@ package com.codecool.quest_store.model;
 
 import java.time.LocalDate;
 
-import com.codecool.quest_store.model.Team;
-import com.codecool.quest_store.model.TransactionStatus;
-import com.codecool.quest_store.model.User;
-
 public class Transaction {
 
     private int id;
-    private User user;
-    private Team team;
-    private Enum status;
+    private int idFunding;
+    private int userId;
+    private int teamId;
+    private int itemId;
+    private int statusId;
     private LocalDate timestamp;
     private int paidAmount;
 
-    public Transaction(Builder builder) {
+    private Transaction(Builder builder) {
         this.id = builder.id;
-        this.user = builder.user;
-        this.team = builder.team;
-        this.status = builder.status;
+        this.idFunding = builder.idFunding;
+        this.userId = builder.userId;
+        this.teamId = builder.teamId;
+        this.itemId = builder.itemId;
+        this.statusId = builder.statusId;
         this.timestamp = builder.timestamp;
         this.paidAmount = builder.paidAmount;
     }
@@ -28,16 +28,24 @@ public class Transaction {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public int getIdFunding() {
+        return idFunding;
     }
 
-    public Team getTeam() {
-        return team;
+    public int getUserId() {
+        return userId;
     }
 
-    public Enum getStatus() {
-        return status;
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public int getStatusId() {
+        return statusId;
     }
 
     public LocalDate getTimestamp() {
@@ -50,9 +58,11 @@ public class Transaction {
 
     public static class Builder {
         private int id;
-        private User user;
-        private Team team;
-        private Enum status;
+        private int idFunding;
+        private int userId;
+        private int teamId;
+        private int itemId;
+        private int statusId;
         private LocalDate timestamp;
         private int paidAmount;
 
@@ -61,18 +71,28 @@ public class Transaction {
             return this;
         }
 
-        public Builder withUser(User user) {
-            this.user = user;
+        public Builder withIdFunding(int idFunding) {
+            this.idFunding = idFunding;
             return this;
         }
 
-        public Builder withTeam(Team team) {
-            this.team = team;
+        public Builder withUserId(int userId) {
+            this.userId = userId;
             return this;
         }
 
-        public Builder withStatus(Enum status) {
-            this.status = status;
+        public Builder withTeamId(int teamId) {
+            this.teamId = teamId;
+            return this;
+        }
+
+        public Builder withItemId(int itemId) {
+            this.itemId = itemId;
+            return this;
+        }
+
+        public Builder withStatusId(int statusId) {
+            this.statusId = statusId;
             return this;
         }
 
