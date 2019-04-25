@@ -23,9 +23,11 @@ public class DatabaseConnector {
             ds.setUrl(URL);
             ds.setUsername(USER);
             ds.setPassword(PASSWORD);
-
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             System.out.println("Config file connection failed");
+            e.printStackTrace();
+        } catch (ParseException e){
+            System.out.println("Unable to parse config file");
             e.printStackTrace();
         }
 
@@ -34,8 +36,8 @@ public class DatabaseConnector {
         ds.setMaxOpenPreparedStatements(100);
     }
 
-    public static Connection getConnection() throws SQLException {
-        return ds.getConnection();
+    public static Connection getConnection() throws SQLException{
+            return ds.getConnection();
     }
 
     public static BasicDataSource getDs() {
