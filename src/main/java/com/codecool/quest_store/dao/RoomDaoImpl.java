@@ -16,6 +16,7 @@ public class RoomDaoImpl implements RoomDao {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(SQL)) {
             pstmt.setString(1, room.getRoomName());
+
             System.out.println("added " + room.getRoomName() + " to rooms");
         } catch (SQLException e) {
             e.printStackTrace();
