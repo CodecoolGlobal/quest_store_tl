@@ -80,14 +80,18 @@ CREATE TABLE users
   phone_number text,
   email text,
   password text,
+  photo text,
   id_user_type int,
-  id_team int,
   id_room int,
+  id_team int,
   PRIMARY KEY (id),
   FOREIGN KEY (id_user_type) REFERENCES user_types (id),
   FOREIGN KEY (id_team) REFERENCES teams (id),
   FOREIGN KEY (id_room) REFERENCES rooms (id)
 );
+
+INSERT INTO users(name, surname, phone_number, email, password, photo, id_user_type, id_team, id_room)
+VALUES('Tatiana', 'Slonimskaia', '881', '@123', '123', '', 1, 1, 1);
 
 --map_of_rooms
 CREATE TABLE map_of_rooms
@@ -164,7 +168,7 @@ CREATE TABLE transactions
   id_item int,
   id_status int,
   timestamp text,
-  amount int,
+  coins_amount int,
   PRIMARY KEY (id),
   FOREIGN KEY (id_user) REFERENCES users (id),
   FOREIGN KEY (id_team) REFERENCES teams (id),
