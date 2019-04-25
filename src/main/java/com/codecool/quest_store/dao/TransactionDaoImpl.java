@@ -18,10 +18,10 @@ public class TransactionDaoImpl implements TransactionDao {
     private String query;
 
     @Override
-    public void createTransaction(Codecooler codecooler, Item item, int status, int coinsAmount) {
+    public void createTransaction(Codecooler codecooler, Item item, int status, int paidAmount) {
         connection = DatabaseConnector.getConnection();
 
-        query = "INSERT INTO transactions (id_user, id_team, id_item, id_status, timestamp, coins_amount) "
+        query = "INSERT INTO transactions (id_user, id_team, id_item, id_status, timestamp, paid_amount) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
 
         String timestamp = LocalDate.now().toString();
@@ -33,7 +33,7 @@ public class TransactionDaoImpl implements TransactionDao {
             preparedStatement.setInt(3, item.getId());
             preparedStatement.setInt(4, status);
             preparedStatement.setString(5, timestamp);
-            preparedStatement.setInt(6, coinsAmount);
+            preparedStatement.setInt(6, paidAmount);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
