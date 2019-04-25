@@ -1,38 +1,46 @@
 package com.codecool.quest_store.dao;
 
+import com.codecool.quest_store.utility.ConfigFileParser;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
 
-    private static final String dbUrl = "jdbc:postgresql://localhost:5432/queststore"; //TODO:config file needed
-    private static final String user = "marek";
-    private static final String password = "polapola";
-
-    private static Connection connectionInstance = null;
+    private static BasicDataSource ds = new BasicDataSource();
 
 
-    private DatabaseConnector() {
-    }
+    private DatabaseConnector(){ }
 
-    public static Connection getConnection() {
-        try {
-            if (connectionInstance == null) {
-                connectionInstance = DriverManager.getConnection(dbUrl, user, password);
-            }
-        } catch (SQLException e) {
+    static {
+        try{
+            final String URL = ConfigFileParser.getDatabaseURL(); //TODO:config file needed
+            final String USER = ConfigFileParser.getDatabaseUser();
+            final String PASSWORD = ConfigFileParser.getDatabasePassword();
+            ds.setUrl(URL);
+            ds.setUsername(USER);
+            ds.setPassword(PASSWORD);
+        } catch (IOException e) {
+            System.out.println("Config file connection failed");
+            e.printStackTrace();
+        } catch (ParseException e){
+            System.out.println("Unable to parse config file");
             e.printStackTrace();
         }
-        return connectionInstance;
+
+        ds.setMinIdle(5);
+        ds.setMaxIdle(10);
+        ds.setMaxOpenPreparedStatements(100);
     }
 
-    public static void releaseConnection(Connection connection) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static Connection getConnection() throws SQLException{
+            return ds.getConnection();
     }
 
+    public static BasicDataSource getDs() {
+        return ds;
+    }
 }
