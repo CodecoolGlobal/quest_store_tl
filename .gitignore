@@ -14,10 +14,7 @@
 */test
 .classpath
 .project
-<<<<<<< HEAD
 .settings
-=======
 
 # Utility files
 */config.json
->>>>>>> e91b46ac6eb50fe89dffe33c9997d5187383bcb7
