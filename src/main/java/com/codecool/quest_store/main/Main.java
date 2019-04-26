@@ -8,12 +8,3 @@ public class Main {
         FlywayMigration.migrateDatabase();
     }
 }
-
-// import com.codecool.quest_store.dao.TransactionDaoImpl;
-
-// public class Main {
-//     public static void main( String[] args ) {
-//         TransactionDaoImpl dao = new TransactionDaoImpl();
-//         System.out.println(dao.getPriceSumOfPurchasedArtifacts(3));
-//     }
-// }
