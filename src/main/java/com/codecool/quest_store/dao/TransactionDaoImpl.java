@@ -12,63 +12,64 @@ import com.codecool.quest_store.model.Item;
 
 public class TransactionDaoImpl implements TransactionDao {
 
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
     private String query;
 
     @Override
-    public void createTransaction(Codecooler codecooler, Item item, int status, int paidAmount) {
-        connection = DatabaseConnector.getConnection();
-
-        query = "INSERT INTO transactions (id_user, id_team, id_item, id_status, timestamp, paid_amount) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
-
+    public void createTransaction(int idFunding, Codecooler codecooler, Item item, int status, int paidAmount) throws DaoException {
         String timestamp = LocalDate.now().toString();
+        query = "INSERT INTO transactions (id_funding, id_user, id_team, id_item, id_status, timestamp, paid_amount) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, codecooler.getId());
-            preparedStatement.setInt(2, codecooler.getTeamId());
-            preparedStatement.setInt(3, item.getId());
-            preparedStatement.setInt(4, status);
-            preparedStatement.setString(5, timestamp);
-            preparedStatement.setInt(6, paidAmount);
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, idFunding);
+            preparedStatement.setInt(2, codecooler.getId());
+            preparedStatement.setInt(3, codecooler.getTeamId());
+            preparedStatement.setInt(4, item.getId());
+            preparedStatement.setInt(5, status);
+            preparedStatement.setString(6, timestamp);
+            preparedStatement.setInt(7, paidAmount);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException("Failed to create a transaction\n" + e);
         }
     }
 
     /**
+     *
      * @param column (id_user or id_team)
+     * @param columnId (id of user or id of team)
      */
 
     @Override
-    public void updateTransactionStatus(String column, int status, int idFunding) {
-        connection = DatabaseConnector.getConnection();
+    public void updateTransactionStatus(String column, int columnId, int status, int idFunding) throws DaoException {
 
         query = "UPDATE transactions "
                 + "SET id_status = ? "
-                + "WHERE " + column + " AND id_funding = ?";
+                + "WHERE " + column + " = ? AND id_funding = ?";
 
-        try {
-            preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
             preparedStatement.setInt(1, status);
-            preparedStatement.setInt(2, idFunding);
+            preparedStatement.setInt(2, columnId);
+            preparedStatement.setInt(3, idFunding);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException("Failed to update the transaction's status\n" + e);
         }
     }
 
     @Override
-    public int getPriceSumOfRealizedQuests(int userId) {
+    public int getPriceSumOfRealizedQuests(int userId) throws DaoException {
         query = "SELECT SUM(price) FROM items "
                 + "INNER JOIN transactions "
                 + "ON transactions.id_item = items.id "
                 + "INNER JOIN item_types "
-                + "ON items.id = item_types.id "
+                + "ON items.item_type = item_types.id "
                 + "INNER JOIN statuses "
                 + "ON transactions.id_status = statuses.id "
                 + "WHERE transactions.id_user = ? "
@@ -78,12 +79,12 @@ public class TransactionDaoImpl implements TransactionDao {
     }
 
     @Override
-    public int getPriceSumOfPurchasedArtifacts(int userId) {
+    public int getPriceSumOfPurchasedArtifacts(int userId) throws DaoException {
         query = "SELECT SUM(price) FROM items "
                 + "INNER JOIN transactions "
                 + "ON transactions.id_item = items.id "
                 + "INNER JOIN item_types "
-                + "ON items.id = item_types.id "
+                + "ON items.item_type = item_types.id "
                 + "INNER JOIN statuses "
                 + "ON transactions.id_status = statuses.id "
                 + "WHERE transactions.id_user = ? "
@@ -93,19 +94,22 @@ public class TransactionDaoImpl implements TransactionDao {
         return getSumOfPrices(userId);
     }
 
-    private int getSumOfPrices(int userId) {
-        connection = DatabaseConnector.getConnection();
+    private int getSumOfPrices(int userId) throws DaoException {
         int sumOfPrices = 0;
 
-        try {
-            preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
             preparedStatement.setInt(1, userId);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                sumOfPrices = ((Number) resultSet.getObject(1)).intValue();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                if (resultSet.next()) {
+                    sumOfPrices = ((Number) resultSet.getObject(1)).intValue();
+                }
             }
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException("Failed to calculate the price sum of items\n" + e);
         }
         return sumOfPrices;
     }
