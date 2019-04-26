@@ -1,7 +1,7 @@
 {
   "databaseCredentials": {
-    "url" : "jdbc:postgresql://localhost:5432/queststore",
-    "user" : "marek",
-    "password" : "polapola"
+    "url" : "jdbc:postgresql://localhost:5432/quest_store",
+    "user" : "postgres",
+    "password" : "123"
   }
 }

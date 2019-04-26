@@ -169,7 +169,7 @@ CREATE TABLE transactions
   id_item int,
   id_status int,
   timestamp text,
-  coins_amount int,
+  paid_amount int,
   PRIMARY KEY (id),
   FOREIGN KEY (id_user) REFERENCES users (id),
   FOREIGN KEY (id_team) REFERENCES teams (id),
