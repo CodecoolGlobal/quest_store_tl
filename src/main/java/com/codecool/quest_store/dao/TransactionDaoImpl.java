@@ -7,15 +7,14 @@ import java.sql.SQLException;
 
 import java.time.LocalDate;
 
-import com.codecool.quest_store.model.Codecooler;
-import com.codecool.quest_store.model.Item;
+import com.codecool.quest_store.model.Transaction;
 
 public class TransactionDaoImpl implements TransactionDao {
 
     private String query;
 
     @Override
-    public void createTransaction(int idFunding, Codecooler codecooler, Item item, int status, int paidAmount) throws DaoException {
+    public void createTransaction(Transaction transaction) throws DaoException {
         String timestamp = LocalDate.now().toString();
         query = "INSERT INTO transactions (id_funding, id_user, id_team, id_item, id_status, timestamp, paid_amount) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -23,13 +22,13 @@ public class TransactionDaoImpl implements TransactionDao {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, idFunding);
-            preparedStatement.setInt(2, codecooler.getId());
-            preparedStatement.setInt(3, codecooler.getTeamId());
-            preparedStatement.setInt(4, item.getId());
-            preparedStatement.setInt(5, status);
+            preparedStatement.setInt(1, transaction.getIdFunding());
+            preparedStatement.setInt(2, transaction.getUserId());
+            preparedStatement.setInt(3, transaction.getTeamId());
+            preparedStatement.setInt(4, transaction.getItemId());
+            preparedStatement.setInt(5, transaction.getStatusId());
             preparedStatement.setString(6, timestamp);
-            preparedStatement.setInt(7, paidAmount);
+            preparedStatement.setInt(7, transaction.getPaidAmount());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
