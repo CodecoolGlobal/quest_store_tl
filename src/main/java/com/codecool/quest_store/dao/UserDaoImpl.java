@@ -9,22 +9,22 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private User user;
-    private List<User> users;
-    private Connection connection;
-    PreparedStatement pStatement;
-    //Statement statement;
-    ResultSet resultSet;
 
+    /**
+     *
+     * @param userType
+     * This function only for programmers, user won't use it
+     * for this reason this function without Prepared Statement
+     */
+    @Override
+    public List<User> getUsersByType(int userType){
+        List<User> users = new ArrayList<>();
 
-    public UserDaoImpl() {
-        users = new ArrayList<>();
-    }
+        String query = "SELECT * FROM users WHERE id_user_type = " + userType;
 
-    private List<User> getUsersByType(){
-        String query = "SELECT * FROM usersg WHERE ";
         try (Connection connection = DatabaseConnector.getConnection();
-             Statement statement = connection.createStatement()) {
-            try(ResultSet resultSet = statement.executeQuery(query)) {
+             Statement st = connection.createStatement();
+             ResultSet resultSet = st.executeQuery(query)) {
 
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
@@ -34,9 +34,9 @@ public class UserDaoImpl implements UserDao {
                     String email = resultSet.getString("email");
                     String password = resultSet.getString("password");
                     String photo = resultSet.getString("id_user_type");
-                    int type = resultSet.getInt("id_team");
-                    int room = resultSet.getInt("id_room");
-                    int team = resultSet.getInt("id_team");
+                    int typeId = resultSet.getInt("id_team");
+                    int roomId = resultSet.getInt("id_room");
+                    int teamId = resultSet.getInt("id_team");
                     user = new User.Builder()
                             .withId(id)
                             .withName(name)
@@ -45,35 +45,68 @@ public class UserDaoImpl implements UserDao {
                             .withEmail(email)
                             .withPassword(password)
                             .withPhoto(photo)
-                            .withTypeId(type)
-                            .withRoomId(room)
-                            .withTeamId(team)
+                            .withTypeId(typeId)
+                            .withRoomId(roomId)
+                            .withTeamId(teamId)
                             .build();
                     users.add(user);
-                    System.out.println("user added");
                 }
-            }
+
         } catch(SQLException error){
             error.printStackTrace();
         }
         return users;
     }
 
-    public List<User> getUsers(String userType) {
-        getUsers(userType);
-        return users;
+    //If I need object of user in parameter instead of parameters
+    @Override
+    public void createUser(String name, String surname, String phoneNumber, String email,
+                           String password, String photo, int typeId, int roomId, int teamId) {
+        String query = "INSERT INTO users(name, surname, phone_number, email, password, " +
+                "photo, id_user_type, id_room, id_team) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, name);
+            statement.setString(2, surname);
+            statement.setString(3, phoneNumber);
+            statement.setString(4, email);
+            statement.setString(5, password);
+            statement.setString(6, photo);
+            statement.setInt(7, typeId);
+            statement.setInt(8, roomId);
+            statement.setInt(9, teamId);
+            statement.executeUpdate();
+
+        } catch(SQLException error){
+            error.printStackTrace();
+        }
     }
 
-    public void createUser() {
-
+    @Override
+    public void updateUserEmail(User user, String email) {
+        String query = "UPDATE users SET email = ? WHERE id = ?";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, email);
+            statement.setInt(2, user.getId());
+            statement.executeUpdate();
+        } catch(SQLException error){
+            error.printStackTrace();
+        }
     }
 
-    public void updateUser() {
-
-    }
-
-    public static void main(String[] args) {
-        UserDaoImpl dao = new UserDaoImpl();
-        dao.getUsers("Codecooler");
+    @Override
+    public void updateUserRoom(User user, int room) {
+        String query = "UPDATE users SET id_room = ? WHERE id = ?";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, room);
+            statement.setInt(2, user.getId());
+            statement.executeUpdate();
+        } catch(SQLException error){
+            error.printStackTrace();
+        }
     }
 }
