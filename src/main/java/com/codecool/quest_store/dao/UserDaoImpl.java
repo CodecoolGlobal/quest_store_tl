@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
      * for this reason this function without Prepared Statement
      */
     @Override
-    public List<User> getUsersByType(int userType){
+    public List<User> getUsersByType(int userType) throws DaoException {
         List<User> users = new ArrayList<>();
 
         String query = "SELECT * FROM users WHERE id_user_type = " + userType;
@@ -53,39 +53,39 @@ public class UserDaoImpl implements UserDao {
                 }
 
         } catch(SQLException error){
-            error.printStackTrace();
+            //error.printStackTrace();
+            throw new DaoException("Failed get users by user type", error);
         }
         return users;
     }
 
     //If I need object of user in parameter instead of parameters
     @Override
-    public void createUser(String name, String surname, String phoneNumber, String email,
-                           String password, String photo, int typeId, int roomId, int teamId) {
+    public void createUser(User user) throws DaoException {
         String query = "INSERT INTO users(name, surname, phone_number, email, password, " +
                 "photo, id_user_type, id_room, id_team) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, name);
-            statement.setString(2, surname);
-            statement.setString(3, phoneNumber);
-            statement.setString(4, email);
-            statement.setString(5, password);
-            statement.setString(6, photo);
-            statement.setInt(7, typeId);
-            statement.setInt(8, roomId);
-            statement.setInt(9, teamId);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getSurname());
+            statement.setString(3, user.getPhoneNumber());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPassword());
+            statement.setString(6, user.getPhoto());
+            statement.setInt(7, user.getTypeId());
+            statement.setInt(8, user.getRoomId());
+            statement.setInt(9, user.getTeamId());
             statement.executeUpdate();
 
         } catch(SQLException error){
-            error.printStackTrace();
+            throw new DaoException("Your have some mistake during creation a new user", error);
         }
     }
 
     @Override
-    public void updateUserEmail(User user, String email) {
+    public void updateUserEmail(User user, String email) throws DaoException {
         String query = "UPDATE users SET email = ? WHERE id = ?";
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -93,20 +93,23 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(2, user.getId());
             statement.executeUpdate();
         } catch(SQLException error){
-            error.printStackTrace();
+            throw new DaoException("You can't update a user", error);
         }
     }
 
     @Override
-    public void updateUserRoom(User user, int room) {
+    public void updateUserRoom(User user, int room) throws DaoException {
         String query = "UPDATE users SET id_room = ? WHERE id = ?";
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, room);
             statement.setInt(2, user.getId());
             statement.executeUpdate();
+
         } catch(SQLException error){
-            error.printStackTrace();
+            throw new DaoException("You can't update a user", error);
         }
     }
+
 }
+
