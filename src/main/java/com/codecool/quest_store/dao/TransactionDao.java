@@ -5,8 +5,11 @@ import com.codecool.quest_store.model.Item;
 
 public interface TransactionDao {
 
-    public void createTransaction(Codecooler codecooler, Item item, int status, int coinsAmount);
-    public void updateTransactionStatus(String column, int status, int idFunding);
-    public int getPriceSumOfRealizedQuests(int userId);
-    public int getPriceSumOfPurchasedArtifacts(int userId);
+    public void createTransaction(int idFunding, Codecooler codecooler, Item item, int status, int coinsAmount) throws DaoException;
+
+    public void updateTransactionStatus(String column, int columnId, int status, int idFunding) throws DaoException;
+
+    public int getPriceSumOfRealizedQuests(int userId) throws DaoException;
+
+    public int getPriceSumOfPurchasedArtifacts(int userId) throws DaoException;
 }
