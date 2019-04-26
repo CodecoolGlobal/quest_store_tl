@@ -12,8 +12,13 @@ public class DatabaseConnector {
 
     private static BasicDataSource ds = new BasicDataSource();
 
+<<<<<<< Updated upstream
 
     private DatabaseConnector(){ }
+=======
+    private DatabaseConnector() {
+    }
+>>>>>>> Stashed changes
 
     static {
         try{
@@ -39,8 +44,11 @@ public class DatabaseConnector {
     public static Connection getConnection() throws SQLException{
             return ds.getConnection();
     }
+<<<<<<< Updated upstream
 
     public static BasicDataSource getDs() {
         return ds;
     }
+=======
+>>>>>>> Stashed changes
 }
