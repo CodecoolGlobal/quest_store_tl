@@ -5,9 +5,8 @@ import com.codecool.quest_store.model.User;
 import java.util.List;
 
 public interface UserDao {
-    List<User> getUsersByType(int userType);
-    void createUser(String name, String surname, String phoneNumber, String email,
-               String password, String photo, int typeId, int roomId, int teamId);
-    void updateUserEmail(User user, String email);
-    void updateUserRoom(User user, int room);
+    List<User> getUsersByType(int userType) throws DaoException;
+    void createUser(User user) throws DaoException;
+    void updateUserEmail(User user, String email) throws DaoException;
+    void updateUserRoom(User user, int room) throws DaoException;
 }
