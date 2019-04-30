@@ -17,4 +17,4 @@
 .settings
 
 # Utility files
-*/config.json
+src/main/resources/config.json

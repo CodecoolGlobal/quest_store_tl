@@ -53,7 +53,6 @@ public class UserDaoImpl implements UserDao {
                 }
 
         } catch(SQLException error){
-            //error.printStackTrace();
             throw new DaoException("Failed get users by user type", error);
         }
         return users;
