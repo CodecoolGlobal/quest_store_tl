@@ -1,41 +1,28 @@
 package com.codecool.quest_store.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Team {
 
     private int id;
-    private List<Codecooler> codecoolers;
-    private List<Item> artifacts;
-    private List<Item> quests;
-    private String name;
+    private String teamName;
     private String projectName;
 
-    public Team() {
-        codecoolers = new ArrayList<>();
-        artifacts = new ArrayList<>();
-        quests = new ArrayList<>();
+    public Team(int id, String name, String projectName) {
+        this.id = id;
+        this.teamName = name;
+        this.projectName = projectName;
+    }
+
+    public Team(String name, String projectName) {
+        this.teamName = name;
+        this.projectName = projectName;
     }
 
     public int getId() {
         return id;
     }
 
-    public List<Codecooler> getCodecoolers() {
-        return codecoolers;
-    }
-
-    public List<Item> getArtifacts() {
-        return artifacts;
-    }
-
-    public List<Item> getQuests() {
-        return quests;
-    }
-
-    public String getName() {
-        return name;
+    public String getTeamName() {
+        return teamName;
     }
 
     public String getProjectName() {
