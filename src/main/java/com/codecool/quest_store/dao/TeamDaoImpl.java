@@ -2,10 +2,7 @@ package com.codecool.quest_store.dao;
 
 import com.codecool.quest_store.model.Team;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class TeamDaoImpl implements Dao<Team> {
 
@@ -45,5 +42,31 @@ public class TeamDaoImpl implements Dao<Team> {
         } catch (SQLException e){
             throw new DaoException("failed to update team " + newTeamName, e);
         }
+    }
+
+    @Override
+    public Team extractFromResultSet(ResultSet resultSet) throws DaoException {
+        try {
+            int id = resultSet.getInt("id");
+            String teamName = resultSet.getString("name");
+            String projectName = resultSet.getString("project_name");
+
+            return new Team(id, teamName, projectName);
+        } catch (SQLException e){
+            throw new DaoException("failed to extract team from result set", e);
+        }
+    }
+
+    public Team getById(int id) throws DaoException{
+        String SQL = "SELECT * FROM teams WHERE id = " + id;
+
+        try (Connection connection = DatabaseConnector.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet resultSet = stmt.executeQuery(SQL)){
+                return getListByResultSet(resultSet).get(0);
+        } catch (SQLException e){
+            throw new DaoException("failed to get team by id " + id, e);
+        }
+
     }
 }
