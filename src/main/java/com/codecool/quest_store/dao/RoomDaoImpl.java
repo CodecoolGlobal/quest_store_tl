@@ -2,10 +2,7 @@ package com.codecool.quest_store.dao;
 
 import com.codecool.quest_store.model.Room;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class RoomDaoImpl implements Dao<Room> {
 
@@ -38,6 +35,18 @@ public class RoomDaoImpl implements Dao<Room> {
             stmt.executeUpdate(SQL);
         } catch (SQLException e){
             throw new DaoException("failed to update room " + newName, e);
+        }
+    }
+
+    @Override
+    public Room extractFromResultSet(ResultSet resultSet) throws DaoException {
+        try{
+            int id = resultSet.getInt("id");
+            String name = resultSet.getString("name");
+
+            return new Room(id, name);
+        } catch (SQLException e){
+            throw new DaoException("failed to extract team from result set", e);
         }
     }
 }
