@@ -4,105 +4,105 @@ import java.time.LocalDate;
 
 public class Transaction {
 
-    private int id;
-    private int idFunding;
-    private int userId;
-    private int teamId;
-    private int itemId;
-    private int statusId;
-    private LocalDate timestamp;
-    private int paidAmount;
+    private final int ID;
+    private final int FUNDING_ID;
+    private final int USER_ID;
+    private final int TEAM_ID;
+    private final int ITEM_ID;
+    private final int STATUS_ID;
+    private final LocalDate TIMESTAMP;
+    private final int PAID_AMOUNT;
 
     private Transaction(Builder builder) {
-        this.id = builder.id;
-        this.idFunding = builder.idFunding;
-        this.userId = builder.userId;
-        this.teamId = builder.teamId;
-        this.itemId = builder.itemId;
-        this.statusId = builder.statusId;
-        this.timestamp = builder.timestamp;
-        this.paidAmount = builder.paidAmount;
+        this.ID = builder.ID;
+        this.FUNDING_ID = builder.FUNDING_ID;
+        this.USER_ID = builder.USER_ID;
+        this.TEAM_ID = builder.TEAM_ID;
+        this.ITEM_ID = builder.ITEM_ID;
+        this.STATUS_ID = builder.STATUS_ID;
+        this.TIMESTAMP = builder.TIMESTAMP;
+        this.PAID_AMOUNT = builder.PAID_AMOUNT;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public int getIdFunding() {
-        return idFunding;
+    public int getFUNDING_ID() {
+        return FUNDING_ID;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUSER_ID() {
+        return USER_ID;
     }
 
-    public int getTeamId() {
-        return teamId;
+    public int getTEAM_ID() {
+        return TEAM_ID;
     }
 
-    public int getItemId() {
-        return itemId;
+    public int getITEM_ID() {
+        return ITEM_ID;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public int getSTATUS_ID() {
+        return STATUS_ID;
     }
 
-    public LocalDate getTimestamp() {
-        return timestamp;
+    public LocalDate getTIMESTAMP() {
+        return TIMESTAMP;
     }
 
-    public int getPaidAmount() {
-        return paidAmount;
+    public int getPAID_AMOUNT() {
+        return PAID_AMOUNT;
     }
 
     public static class Builder {
-        private int id;
-        private int idFunding;
-        private int userId;
-        private int teamId;
-        private int itemId;
-        private int statusId;
-        private LocalDate timestamp;
-        private int paidAmount;
+        private int ID;
+        private int FUNDING_ID;
+        private int USER_ID;
+        private int TEAM_ID;
+        private int ITEM_ID;
+        private int STATUS_ID;
+        private LocalDate TIMESTAMP;
+        private int PAID_AMOUNT;
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withID(int ID) {
+            this.ID = ID;
             return this;
         }
 
-        public Builder withIdFunding(int idFunding) {
-            this.idFunding = idFunding;
+        public Builder withFUNDING_ID(int FUNDING_ID) {
+            this.FUNDING_ID = FUNDING_ID;
             return this;
         }
 
-        public Builder withUserId(int userId) {
-            this.userId = userId;
+        public Builder withUSER_ID(int USER_ID) {
+            this.USER_ID = USER_ID;
             return this;
         }
 
-        public Builder withTeamId(int teamId) {
-            this.teamId = teamId;
+        public Builder withTEAM_ID(int TEAM_ID) {
+            this.TEAM_ID = TEAM_ID;
             return this;
         }
 
-        public Builder withItemId(int itemId) {
-            this.itemId = itemId;
+        public Builder withITEM_ID(int ITEM_ID) {
+            this.ITEM_ID = ITEM_ID;
             return this;
         }
 
-        public Builder withStatusId(int statusId) {
-            this.statusId = statusId;
+        public Builder withSTAUS_ID(int STATUS_ID) {
+            this.STATUS_ID = STATUS_ID;
             return this;
         }
 
-        public Builder withTimestamp(LocalDate timestamp) {
-            this.timestamp = timestamp;
+        public Builder withTIMESTAMP(LocalDate TIMESTAMP) {
+            this.TIMESTAMP = TIMESTAMP;
             return this;
         }
 
-        public Builder withPaidAmount(int paidAmount) {
-            this.paidAmount = paidAmount;
+        public Builder withPAID_AMOUNT(int PAID_AMOUNT) {
+            this.PAID_AMOUNT = PAID_AMOUNT;
             return this;
         }
 
