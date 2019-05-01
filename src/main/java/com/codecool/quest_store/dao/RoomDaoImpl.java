@@ -16,7 +16,7 @@ public class RoomDaoImpl implements Dao<Room> {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(SQL)) {
             pstmt.setString(1, thing.getRoomName());
-            System.out.println("added " + thing.getRoomName() + " to rooms");
+            pstmt.executeUpdate();
         } catch (SQLException e){
             throw new DaoException("failed to create room " + thing.getRoomName(), e);
         }
