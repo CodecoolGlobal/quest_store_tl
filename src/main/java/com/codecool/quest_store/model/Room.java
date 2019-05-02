@@ -2,12 +2,12 @@ package com.codecool.quest_store.model;
 
 public class Room {
 
+    private final int id;
     private String roomName;
-    private int id;
 
-    public Room(String roomName, int id) {
-        this.roomName = roomName;
+    public Room(int id, String roomName) {
         this.id = id;
+        this.roomName = roomName;
     }
 
     public Room(String roomName) {

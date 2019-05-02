@@ -15,25 +15,25 @@ public class TransactionDaoImpl implements TransactionDao {
 
     @Override
     public void createTransaction(Transaction transaction) throws DaoException {
-        String timestamp = LocalDate.now().toString();
-        query = "INSERT INTO transactions (id_funding, id_user, id_team, id_item, id_status, timestamp, paid_amount) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setInt(1, transaction.getIdFunding());
-            preparedStatement.setInt(2, transaction.getUserId());
-            preparedStatement.setInt(3, transaction.getTeamId());
-            preparedStatement.setInt(4, transaction.getItemId());
-            preparedStatement.setInt(5, transaction.getStatusId());
-            preparedStatement.setString(6, timestamp);
-            preparedStatement.setInt(7, transaction.getPaidAmount());
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new DaoException("Failed to create a transaction\n" + e);
-        }
+//        String timestamp = LocalDate.now().toString();
+//        query = "INSERT INTO transactions (id_funding, id_user, id_team, id_item, id_status, timestamp, paid_amount) "
+//                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+//
+//        try (Connection connection = DatabaseConnector.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//
+//            preparedStatement.setInt(1, transaction.getIdFunding());
+//            preparedStatement.setInt(2, transaction.getUserId());
+//            preparedStatement.setInt(3, transaction.getTeamId());
+//            preparedStatement.setInt(4, transaction.getItemId());
+//            preparedStatement.setInt(5, transaction.getStatusId());
+//            preparedStatement.setString(6, timestamp);
+//            preparedStatement.setInt(7, transaction.getPaidAmount());
+//            preparedStatement.executeUpdate();
+//
+//        } catch (SQLException e) {
+//            throw new DaoException("Failed to create a transaction\n" + e);
+//        }
     }
 
     /**
