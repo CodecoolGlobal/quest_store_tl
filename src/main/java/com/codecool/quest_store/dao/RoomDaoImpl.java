@@ -27,12 +27,13 @@ public class RoomDaoImpl implements Dao<Room> {
         String newName = thing.getRoomName();
 
         String SQL =
-                "UPDATE rooms SET name = " + newName
-                + " WHERE id = " + id;
+                "UPDATE rooms SET name = ? WHERE id = ?;";
 
         try (Connection connection = DatabaseConnector.getConnection();
-             Statement stmt = connection.createStatement()){
-            stmt.executeUpdate(SQL);
+             PreparedStatement pstmt = connection.prepareStatement(SQL)){
+            pstmt.setString(1, newName);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate(SQL);
         } catch (SQLException e){
             throw new DaoException("failed to update room " + newName, e);
         }

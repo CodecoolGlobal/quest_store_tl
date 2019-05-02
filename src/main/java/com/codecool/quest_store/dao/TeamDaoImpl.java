@@ -31,14 +31,14 @@ public class TeamDaoImpl implements Dao<Team> {
         String newTeamName = thing.getTeamName();
         String newProjectName = thing.getProjectName();
 
-        String SQL = "UPDATE teams SET"
-                + " name = " + newTeamName
-                + " project_name = " + newProjectName
-                + " WHERE id = " + id;
+        String SQL = "UPDATE teams SET name = ?, project_name = ? WHERE id = ?;";
 
         try (Connection connection = DatabaseConnector.getConnection();
-             Statement stmt = connection.createStatement()){
-            stmt.executeUpdate(SQL);
+             PreparedStatement pstmt = connection.prepareStatement(SQL)){
+            pstmt.setString(1, newTeamName);
+            pstmt.setString(2, newProjectName);
+            pstmt.setInt(3, id);
+            pstmt.executeUpdate();
         } catch (SQLException e){
             throw new DaoException("failed to update team " + newTeamName, e);
         }
@@ -51,7 +51,11 @@ public class TeamDaoImpl implements Dao<Team> {
             String teamName = resultSet.getString("name");
             String projectName = resultSet.getString("project_name");
 
-            return new Team(id, teamName, projectName);
+            return new Team.TeamBuilder()
+                    .withId(id)
+                    .withTeamName(teamName)
+                    .withProjectName(projectName)
+                    .build();
         } catch (SQLException e){
             throw new DaoException("failed to extract team from result set", e);
         }
