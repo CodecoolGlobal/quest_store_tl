@@ -2,7 +2,7 @@ package com.codecool.quest_store.model;
 
 public class Room {
 
-    private int id;
+    private final int id;
     private String roomName;
 
     public Room(int id, String roomName) {

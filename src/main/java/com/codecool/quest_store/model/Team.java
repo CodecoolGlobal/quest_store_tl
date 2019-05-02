@@ -2,7 +2,7 @@ package com.codecool.quest_store.model;
 
 public class Team {
 
-    private int id;
+    private final int id;
     private String teamName;
     private String projectName;
 
