@@ -5,13 +5,9 @@ public class Room {
     private final int id;
     private String roomName;
 
-    public Room(int id, String roomName) {
-        this.id = id;
-        this.roomName = roomName;
-    }
-
-    public Room(String roomName) {
-        this.roomName = roomName;
+    public Room(RoomBuilder roomBuilder) {
+        this.id = roomBuilder.id;
+        this.roomName = roomBuilder.roomName;
     }
 
     public int getId() {
@@ -20,5 +16,24 @@ public class Room {
 
     public String getRoomName() {
         return roomName;
+    }
+
+    public static class RoomBuilder {
+        private int id;
+        private String roomName;
+
+        public RoomBuilder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public RoomBuilder withRoomName(String roomName) {
+            this.roomName = roomName;
+            return this;
+        }
+
+        public Room build() {
+            return new Room(this);
+        }
     }
 }

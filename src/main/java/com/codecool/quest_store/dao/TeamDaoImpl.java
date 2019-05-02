@@ -51,7 +51,11 @@ public class TeamDaoImpl implements Dao<Team> {
             String teamName = resultSet.getString("name");
             String projectName = resultSet.getString("project_name");
 
-            return new Team(id, teamName, projectName);
+            return new Team.TeamBuilder()
+                    .withId(id)
+                    .withTeamName(teamName)
+                    .withProjectName(projectName)
+                    .build();
         } catch (SQLException e){
             throw new DaoException("failed to extract team from result set", e);
         }
