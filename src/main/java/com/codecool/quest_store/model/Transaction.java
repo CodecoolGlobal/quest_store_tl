@@ -7,9 +7,6 @@ public class Transaction {
     private final int ID;
     private final int FUNDING_ID;
     private final int USER_ID;
-    private final int TEAM_ID;
-    private final int ITEM_ID;
-    private final int STATUS_ID;
     private final LocalDate TIMESTAMP;
     private final int PAID_AMOUNT;
 
@@ -17,9 +14,6 @@ public class Transaction {
         this.ID = builder.ID;
         this.FUNDING_ID = builder.FUNDING_ID;
         this.USER_ID = builder.USER_ID;
-        this.TEAM_ID = builder.TEAM_ID;
-        this.ITEM_ID = builder.ITEM_ID;
-        this.STATUS_ID = builder.STATUS_ID;
         this.TIMESTAMP = builder.TIMESTAMP;
         this.PAID_AMOUNT = builder.PAID_AMOUNT;
     }
@@ -36,18 +30,6 @@ public class Transaction {
         return USER_ID;
     }
 
-    public int getTEAM_ID() {
-        return TEAM_ID;
-    }
-
-    public int getITEM_ID() {
-        return ITEM_ID;
-    }
-
-    public int getSTATUS_ID() {
-        return STATUS_ID;
-    }
-
     public LocalDate getTIMESTAMP() {
         return TIMESTAMP;
     }
@@ -60,9 +42,6 @@ public class Transaction {
         private int ID;
         private int FUNDING_ID;
         private int USER_ID;
-        private int TEAM_ID;
-        private int ITEM_ID;
-        private int STATUS_ID;
         private LocalDate TIMESTAMP;
         private int PAID_AMOUNT;
 
@@ -78,21 +57,6 @@ public class Transaction {
 
         public Builder withUSER_ID(int USER_ID) {
             this.USER_ID = USER_ID;
-            return this;
-        }
-
-        public Builder withTEAM_ID(int TEAM_ID) {
-            this.TEAM_ID = TEAM_ID;
-            return this;
-        }
-
-        public Builder withITEM_ID(int ITEM_ID) {
-            this.ITEM_ID = ITEM_ID;
-            return this;
-        }
-
-        public Builder withSTAUS_ID(int STATUS_ID) {
-            this.STATUS_ID = STATUS_ID;
             return this;
         }
 
