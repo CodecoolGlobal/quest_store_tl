@@ -2,7 +2,7 @@ package com.codecool.quest_store.model;
 
 public class Item {
 
-    private int id;
+    private final int ID;
     private int price;
     private String title;
     private String description;
@@ -10,7 +10,7 @@ public class Item {
     private String grade;
 
     private Item(Builder builder) {
-        this.id = builder.id;
+        this.ID = builder.ID;
         this.price = builder.price;
         this.title = builder.title;
         this.description = builder.description;
@@ -18,8 +18,8 @@ public class Item {
         this.grade = builder.grade;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
     public int getPrice() {
@@ -43,15 +43,15 @@ public class Item {
     }
 
     public static class Builder {
-        private int id;
+        private int ID;
         private int price;
         private String title;
         private String description;
         private String type;
         private String grade;
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withID(int ID) {
+            this.ID = ID;
             return this;
         }
 
