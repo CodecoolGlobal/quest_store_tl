@@ -1,6 +1,0 @@
-#primary-artifacts-container,
-#primary-quests-container {
-    align-items: center;
-    justify-content: space-evenly;
-    flex-flow: wrap;
-}
