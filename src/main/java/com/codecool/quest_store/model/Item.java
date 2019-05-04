@@ -6,8 +6,7 @@ public class Item {
     private int price;
     private String title;
     private String description;
-    private String type;
-    private String grade;
+    private int type;
 
     private Item(Builder builder) {
         this.ID = builder.ID;
@@ -15,7 +14,6 @@ public class Item {
         this.title = builder.title;
         this.description = builder.description;
         this.type = builder.type;
-        this.grade = builder.grade;
     }
 
     public int getID() {
@@ -34,12 +32,8 @@ public class Item {
         return description;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
-    }
-
-    public String getGrade() {
-        return grade;
     }
 
     public static class Builder {
@@ -47,8 +41,7 @@ public class Item {
         private int price;
         private String title;
         private String description;
-        private String type;
-        private String grade;
+        private int type;
 
         public Builder withID(int ID) {
             this.ID = ID;
@@ -70,14 +63,13 @@ public class Item {
             return this;
         }
 
-        public Builder withType(String type) {
+        public Builder withType(int type) {
             this.type = type;
             return this;
         }
 
-        public Builder withGrade(String grade) {
-            this.grade = grade;
-            return this;
+        public Item build() {
+            return new Item(this);
         }
     }
 }
