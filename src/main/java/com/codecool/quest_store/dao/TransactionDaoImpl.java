@@ -47,6 +47,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
             preparedStatement.setInt(2, transaction.getUSER_ID());
             preparedStatement.setDate(3, Date.valueOf(transaction.getTIMESTAMP()));
             preparedStatement.setInt(4, transaction.getPAID_AMOUNT());
+            preparedStatement.setInt(5, transaction.getID());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
