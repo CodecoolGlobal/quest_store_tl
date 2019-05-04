@@ -2,24 +2,22 @@ package com.codecool.quest_store.model;
 
 public class Item {
 
-    private int id;
+    private final int ID;
     private int price;
     private String title;
     private String description;
-    private String type;
-    private String grade;
+    private int type;
 
     private Item(Builder builder) {
-        this.id = builder.id;
+        this.ID = builder.ID;
         this.price = builder.price;
         this.title = builder.title;
         this.description = builder.description;
         this.type = builder.type;
-        this.grade = builder.grade;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
     public int getPrice() {
@@ -34,24 +32,19 @@ public class Item {
         return description;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public String getGrade() {
-        return grade;
-    }
-
     public static class Builder {
-        private int id;
+        private int ID;
         private int price;
         private String title;
         private String description;
-        private String type;
-        private String grade;
+        private int type;
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withID(int ID) {
+            this.ID = ID;
             return this;
         }
 
@@ -70,14 +63,13 @@ public class Item {
             return this;
         }
 
-        public Builder withType(String type) {
+        public Builder withType(int type) {
             this.type = type;
             return this;
         }
 
-        public Builder withGrade(String grade) {
-            this.grade = grade;
-            return this;
+        public Item build() {
+            return new Item(this);
         }
     }
 }
