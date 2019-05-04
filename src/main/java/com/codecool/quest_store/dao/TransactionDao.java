@@ -6,7 +6,7 @@ public interface TransactionDao {
 
     public void createTransaction(Transaction transaction) throws DaoException;
 
-    public void updateTransactionStatus(String column, int columnId, int status, int idFunding) throws DaoException;
+    public void updateTransaction(Transaction transaction) throws DaoException;
 
     public int getPriceSumOfRealizedQuests(int userId) throws DaoException;
 

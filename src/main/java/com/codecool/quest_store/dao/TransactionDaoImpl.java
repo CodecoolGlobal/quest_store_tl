@@ -15,25 +15,21 @@ public class TransactionDaoImpl implements TransactionDao {
 
     @Override
     public void createTransaction(Transaction transaction) throws DaoException {
-//        String timestamp = LocalDate.now().toString();
-//        query = "INSERT INTO transactions (id_funding, id_user, id_team, id_item, id_status, timestamp, paid_amount) "
-//                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-//
-//        try (Connection connection = DatabaseConnector.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//
-//            preparedStatement.setInt(1, transaction.getIdFunding());
-//            preparedStatement.setInt(2, transaction.getUserId());
-//            preparedStatement.setInt(3, transaction.getTeamId());
-//            preparedStatement.setInt(4, transaction.getItemId());
-//            preparedStatement.setInt(5, transaction.getStatusId());
-//            preparedStatement.setString(6, timestamp);
-//            preparedStatement.setInt(7, transaction.getPaidAmount());
-//            preparedStatement.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            throw new DaoException("Failed to create a transaction\n" + e);
-//        }
+        String query = "INSERT INTO transactions (funding_id, user_id, timestamp, paid_amount) "
+                + "VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, transaction.getFUNDING_ID());
+            preparedStatement.setInt(2, transaction.getUSER_ID());
+            preparedStatement.setDate(3, Date.valueOf(transaction.getTIMESTAMP()));
+            preparedStatement.setInt(4, transaction.getPAID_AMOUNT());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DaoException("Failed to create a transaction\n" + e);
+        }
     }
 
     /**
@@ -43,28 +39,27 @@ public class TransactionDaoImpl implements TransactionDao {
      */
 
     @Override
-    public void updateTransactionStatus(String column, int columnId, int status, int idFunding) throws DaoException {
+    public void updateTransaction(Transaction transaction) throws DaoException {
 
-        query = "UPDATE transactions "
-                + "SET id_status = ? "
-                + "WHERE " + column + " = ? AND id_funding = ?";
-
-        try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setInt(1, status);
-            preparedStatement.setInt(2, columnId);
-            preparedStatement.setInt(3, idFunding);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new DaoException("Failed to update the transaction's status\n" + e);
-        }
+//        String query = "UPDATE transactions "
+//                + "SET funding_id = ? "; //Update the whole transaction (multiple sets)
+//
+//        try (Connection connection = DatabaseConnector.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//
+//            preparedStatement.setInt(1, status);
+//            preparedStatement.setInt(2, columnId);
+//            preparedStatement.setInt(3, idFunding);
+//            preparedStatement.executeUpdate();
+//
+//        } catch (SQLException e) {
+//            throw new DaoException("Failed to update the transaction's status\n" + e);
+//        }
     }
 
     @Override
     public int getPriceSumOfRealizedQuests(int userId) throws DaoException {
-        query = "SELECT SUM(price) FROM items "
+        String query = "SELECT SUM(price) FROM items "
                 + "INNER JOIN transactions "
                 + "ON transactions.id_item = items.id "
                 + "INNER JOIN item_types "
@@ -74,12 +69,12 @@ public class TransactionDaoImpl implements TransactionDao {
                 + "WHERE transactions.id_user = ? "
                 + "AND item_types.type='Quest' AND statuses.type='Realized'";
 
-        return getSumOfPrices(userId);
+        return getSumOfPrices(userId, query);
     }
 
     @Override
     public int getPriceSumOfPurchasedArtifacts(int userId) throws DaoException {
-        query = "SELECT SUM(price) FROM items "
+        String query = "SELECT SUM(price) FROM items "
                 + "INNER JOIN transactions "
                 + "ON transactions.id_item = items.id "
                 + "INNER JOIN item_types "
@@ -90,10 +85,10 @@ public class TransactionDaoImpl implements TransactionDao {
                 + "AND item_types.type='Artifact' "
                 + "AND (statuses.type='Realized' OR statuses.type='Pending')";
 
-        return getSumOfPrices(userId);
+        return getSumOfPrices(userId, query);
     }
 
-    private int getSumOfPrices(int userId) throws DaoException {
+    private int getSumOfPrices(int userId, String query) throws DaoException {
         int sumOfPrices = 0;
 
         try (Connection connection = DatabaseConnector.getConnection();
