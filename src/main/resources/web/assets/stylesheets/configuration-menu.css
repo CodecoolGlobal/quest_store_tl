@@ -17,7 +17,7 @@
 /* main container */
 
 .take-action-container {
-    margin: 15% 0;
+    margin: 5% 0 15% 0;
     width: 300px;
     height: 250px;
     border-radius: 2%;
@@ -72,7 +72,7 @@ p.action-description {
 /* action form container */
 
 .action-form-container {
-    margin-top: 10%;
+    margin-top: 18%;
     display: none;
 }
 
@@ -113,4 +113,12 @@ p.action-description {
     color: #57033b;
     font-weight: bolder;
     background-color: #f3f3f3;
+}
+
+/*review options*/
+
+.review-data {
+    color: #f3f3f3;
+    background-color: #57033b;
+    border-radius: 7%;
 }
