@@ -45,7 +45,10 @@ public class RoomDaoImpl implements Dao<Room> {
             int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
 
-            return new Room(id, name);
+            return new Room.RoomBuilder()
+                    .withId(id)
+                    .withRoomName(name)
+                    .build();
         } catch (SQLException e){
             throw new DaoException("failed to extract team from result set", e);
         }
