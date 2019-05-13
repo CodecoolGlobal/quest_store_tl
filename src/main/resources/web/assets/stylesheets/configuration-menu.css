@@ -1,0 +1,124 @@
+/*
+  ========================================
+  Configuration Menus
+  ========================================
+*/
+
+/* centering */
+
+.primary-main-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: wrap;
+    height: 100%;
+}
+
+/* main container */
+
+.take-action-container {
+    margin: 5% 0 15% 0;
+    width: 300px;
+    height: 250px;
+    border-radius: 2%;
+    background-color: #ffffff;
+    color: #57033b;
+    cursor: pointer;
+}
+
+.take-action-container h2,
+.take-action-container span,
+.take-action-container p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2%;
+}
+
+.take-action-container img {
+    display: block;
+    margin: auto;
+    padding: 2%;
+    filter: grayscale(100%);
+}
+
+.take-action-container h2 {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+span.action-separator {
+    color: #f8c218;
+}
+
+/* hover effect */
+
+.take-action-container:hover,
+.take-action-container:hover .action-separator,
+.take-action-container:hover .action-image {
+    background-color: #f8c218;
+    color: #ffffff;
+    filter: grayscale(0%);
+}
+
+/* text */
+
+p.action-description {
+    line-height: 1.2;
+}
+
+/* action form container */
+
+.action-form-container {
+    margin-top: 18%;
+    display: none;
+}
+
+.action-form-container label {
+    display: none;
+}
+
+.action-form-container input {
+    display: block;
+    margin: 2% auto;
+    text-align: center;
+    width: 100%;
+    color: #f8c218;
+    border-radius: 5%;
+    outline-color: #f8c218;
+    padding: 3% 0;
+}
+
+.action-form-container input::placeholder {
+    color: #57033b;
+}
+
+.action-form-container [type="submit"] {
+    background-color: #f8c218;
+    color: #f3f3f3;
+    box-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.5),
+            0 1px 0 rgba(255, 255, 255, 0.25) inset,
+            0 0 0 rgba(0, 0, 0, 0.25) inset,
+            0 20px 0 rgba(255, 255, 255, 0.03) inset,
+            0 -20px 20px rgba(0, 0, 0, 0.15) inset,
+            0 20px 20px rgba(255, 255, 255, 0.05) inset;
+    transition: all 0.4s linear 0s;
+}
+
+.action-form-container input[type="submit"]:hover {
+    cursor: pointer;
+    color: #57033b;
+    font-weight: bolder;
+    background-color: #f3f3f3;
+}
+
+/*review options*/
+
+.review-data {
+    color: #f3f3f3;
+    background-color: #57033b;
+    border-radius: 7%;
+}

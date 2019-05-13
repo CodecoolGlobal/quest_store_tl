@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Mentor's Watch Tower</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="assets/stylesheets/main.css"/>
+    <link rel="stylesheet" href="assets/stylesheets/configuration-menu.css"/>
+    <script src="scripts/configuration-menu.js" async></script>
+
+</head>
+
+<body>
+
+<header>
+    <div class="primary-header flex-container-header">
+        <div>
+            <img src="assets/images/logo/logo.png" alt="Website Logo" id="main-logo"/>
+        </div>
+
+        <div>
+            <ul class="nav primary-nav">
+                <li class="flex-item-header"><a href="creepy-guy.html">HOME</a></li>
+                <li class="flex-item-header"><a href="#">Do Something</a></li>
+                <li class="flex-item-header"><a href="login.html">LOGOUT</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="primary-header">
+        <input class="search-field" type="text" placeholder="Search..." id="main-page-search"/>
+    </div>
+</header>
+
+<section class="employees-main-page-section content">
+
+    <div class="primary-main-page-container">
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/recruit-student.png" alt="Create Student" class="action-image"/>
+                <h2 class="action-title">Create Student</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">It's time to recruit a courageous warrior... or a DPSer... you know the
+                    drill.</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="post" action="#">
+                    <label for="new-codecooler-name">Name</label>
+                    <input type="text" name="cc-name" placeholder="Codecooler's Name" required="required"
+                           id="new-codecooler-name"/>
+
+                    <label for="new-codecooler-surname">Surname</label>
+                    <input type="text" name="cc-surname" placeholder="Codecooler's Surname" required="required"
+                           id="new-codecooler-surname"/>
+
+                    <label for="new-codecooler-email">E-mail</label>
+                    <input type="text" name="cc-email" placeholder="Codecooler's E-mail" required="required"
+                           id="new-codecooler-email"/>
+
+                    <input type="submit" value="Recruit Codecooler" id="recruit-codecooler-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/create-quest.png" alt="Create Quest" class="action-image"/>
+                <h2 class="action-title">Create Quest</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">It's ADVENTURE TIME!</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="post" action="#">
+                    <label for="new-quest-name">Name</label>
+                    <input type="text" name="quest-name" placeholder="Name your quest" required="required"
+                           id="new-quest-name"/>
+
+                    <label for="new-quest-task">Task</label>
+                    <input type="text" name="quest-task" placeholder="Task description" required="required"
+                           id="new-quest-task"/>
+
+                    <label for="new-quest-coins">Coins</label>
+                    <input type="number" name="quest-coins" placeholder="Coins given upon completion"
+                           required="required" id="new-quest-coins"/>
+
+                    <input type="submit" value="No, it's not hard" id="create-quest-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/create-artifact.png" alt="Create Artifact" class="action-image"/>
+                <h2 class="action-title">Create Artifact</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Make sure to close the door before leaving.</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="post" action="#">
+                    <label for="new-artifact-name">Name</label>
+                    <input type="text" name="artifact-name" placeholder="Name your artifact" required="required"
+                           id="new-artifact-name"/>
+
+                    <label for="new-artifact-description">Description</label>
+                    <input type="text" name="artifact-description" placeholder="Artifact's description"
+                           required="required" id="new-artifact-description"/>
+
+                    <label for="new-artifact-coins">Coins</label>
+                    <input type="number" name="artifact-coins" placeholder="Price of the precious artifact"
+                           required="required" id="new-artifact-coins"/>
+
+                    <input type="submit" value="No, it's not expensive" id="create-artifact-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/create-team.png" alt="Create Team" class="action-image"/>
+                <h2 class="action-title">Create Team</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">So it begins.</p>
+            </div>
+
+            <div class="action-form-container">
+
+                <form class="action-form" method="post" action="#">
+                    <label for="new-team-name">Name</label>
+                    <input type="text" name="team-name" placeholder="Team's Name" required="required"
+                           id="new-team-name"/>
+
+                    <input type="search" name="search-student" placeholder="Add a Codecooler" required="required"
+                           id="search-student"/>
+
+                    <input type="submit" value="Add to the team" id="add-member-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <span>I am notification of pending quests</span>
+            <div class="action-button">
+                <img src="assets/images/mentor/review-quests.png" alt="Review Quests" class="action-image"/>
+                <h2 class="action-title">Review Quests</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Feeling like an NPC in MMO yet?</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="post" action="#">
+                    <span class="review-data">Codecooler's Name</span>
+                    <span class="review-data">Quest's Title</span>
+                    <input type="submit" value="Accept"/>
+                    <input type="submit" value="Reject"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <span>I am notification of purchased artifacts</span>
+            <div class="action-button">
+                <img src="assets/images/mentor/review-artifacts.png" alt="Review Artifacts" class="action-image"/>
+                <h2 class="action-title">Review Artifacts</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Disable used artifacts.</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="post" action="#">
+                    <span class="review-data">Codecooler's Name / Team's Name</span>
+                    <span class="review-data">Artifact's Title</span>
+                    <input type="submit" value="Disable"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/view-students.png" alt="View Codecoolers" class="action-image"/>
+                <h2 class="action-title">View Codecoolers</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">We know you want to peek on Codecoolers... go on... we won't tell
+                    anyone.</p>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/view-quests.png" alt="View Quests" class="action-image"/>
+                <h2 class="action-title">View Quests</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Wonder what kind of challenges Codecoolers face?</p>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/view-artifacts.png" alt="View Artifacts" class="action-image"/>
+                <h2 class="action-title">View Artifacts</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Available for Indiana Jones ancestors only.</p>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="assets/images/mentor/view-teams.png" alt="View Teams" class="action-image"/>
+                <h2 class="action-title">View Teams</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Assess the gathered power that has a potential to make you do something
+                    unintelligent.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <div class="flex-container-footer">
+        <div id="copyright">
+            <small>Copyright &copy; 2019 Quest Store</small>
+        </div>
+
+        <div id="icon-github" class="icons">
+            <a href="#"><img src="assets/images/navigation-icons/icon-github.png" alt="GitHub"/></a>
+        </div>
+
+        <div>
+            <ul class="icons nav">
+                <li class="flex-item-footer"><a href="#"><img src="assets/images/navigation-icons/icon-home.png"
+                                                              alt="Home"/></a></li>
+                <li class="flex-item-footer"><a href="#"><img src="assets/images/navigation-icons/icon-logout.png"
+                                                              alt="Logout"/></a></li>
+                <li class="flex-item-footer"><label for="main-page-search"><img
+                        src="assets/images/navigation-icons/icon-search.png" alt="Search"/></label></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>
