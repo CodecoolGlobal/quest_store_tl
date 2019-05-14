@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.codecool.quest_store.model.Item;
 
-public class ItemDaoImpl implements Dao<Item> {
+public class ItemDaoImpl implements ItemDao {
 
     @Override
     public void create(Item item) throws DaoException {
@@ -66,7 +68,7 @@ public class ItemDaoImpl implements Dao<Item> {
             price = resultSet.getInt("price");
             title = resultSet.getString("title");
             description = resultSet.getString("description");
-            type = resultSet.getInt("type");
+            type = resultSet.getInt("item_type");
         } catch (SQLException e) {
             throw new DaoException("Failed to get item from result set\n" + e);
         }
@@ -80,5 +82,20 @@ public class ItemDaoImpl implements Dao<Item> {
                 .build();
 
         return item;
+    }
+
+    public List<Item> getAllArtifacts() throws DaoException{
+        String query =
+                "SELECT * FROM items WHERE item_type = 1 OR item_type = 2;";
+        List<Item> allArtifacts;
+
+        try (Connection connection = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery()){
+                allArtifacts = getListByResultSet(rs);
+        } catch (SQLException e){
+            throw new DaoException("Failed to get all artifacts\n", e);
+        }
+        return allArtifacts;
     }
 }
