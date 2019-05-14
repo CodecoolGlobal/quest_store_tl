@@ -16,6 +16,8 @@ public class Main {
 
         server.createContext("/static", new Static());
         server.createContext("/login", new LoginController());
+        server.createContext("/student", new StudentController());
+        server.createContext("/mentor", new MentorController());
         server.createContext("/creepy-guy", new CreepyGuyController());
         server.setExecutor(null);
 

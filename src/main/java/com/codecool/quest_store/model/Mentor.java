@@ -7,13 +7,13 @@ public class Mentor extends User {
 
     private List<Codecooler> codecoolers;
     private List<Item> questsToReview;
-    private List<Item> artifactsToRiview;
+    private List<Item> artifactsToRieview;
 
-    public Mentor(Builder builder) {
+    public Mentor(UserBuilder builder) {
         super(builder);
         codecoolers = new ArrayList<>();
         questsToReview = new ArrayList<>();
-        artifactsToRiview = new ArrayList<>();
+        artifactsToRieview = new ArrayList<>();
     }
 
     public List<Codecooler> getCodecoolers() {
@@ -25,6 +25,6 @@ public class Mentor extends User {
     }
 
     public List<Item> getArtifactsToRiview() {
-        return artifactsToRiview;
+        return artifactsToRieview;
     }
 }
