@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Creepy Guy's Lair</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/configuration-menu.css"/>
+    <script src="../static/scripts/configuration-menu.js" async></script>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="primary-header flex-container-header">
+
+        <div>
+            <img src="../static/assets/images/logo/logo.png" alt="Website Logo" id="main-logo"/>
+        </div>
+
+        <div>
+            <ul class="nav primary-nav">
+                <li class="flex-item-header"><a href="/creepy-guy">HOME</a></li>
+                <li class="flex-item-header"><a href="/mentors">VIEW MENTORS</a></li>
+                <li class="flex-item-header"><a href="/login">LOGOUT</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="primary-header">
+        <input class="search-field" type="text" placeholder="Search..." id="main-page-search"/>
+    </div>
+
+</header>
+
+<section class="employees-main-page-section content">
+
+    <div class="primary-main-page-container">
+
+        <div class="take-action-container" id="create-mentor-button">
+
+            <div class="action-button">
+                <img src="../static/assets/images/creepy-guy/recruit-mentor.png" alt="Create Mentor"
+                     class="action-image"/>
+                <h2 class="action-title">Recruit Mentor</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Recruit a new soul, for there are not enough mentors to take care of the
+                    Quest Store.</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="POST" id="create-mentor-form">
+                    <label for="new-mentor-name">Name</label>
+                    <input type="text" name="mentor-name" placeholder="Mentor's Name" required="required"
+                           id="new-mentor-name"/>
+
+                    <label for="new-mentor-surname">Surname</label>
+                    <input type="text" name="mentor-surname" placeholder="Mentor's Surname" required="required"
+                           id="new-mentor-surname"/>
+
+                    <label for="new-mentor-email">E-mail</label>
+                    <input type="text" name="mentor-email" placeholder="Mentor's E-mail" required="required"
+                           id="new-mentor-email"/>
+
+                    <input type="submit" value="Recruit Mentor" id="recruit-mentor-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="../static/assets/images/creepy-guy/create-room.png" alt="Create Room" class="action-image"/>
+                <h2 class="action-title">Create Room</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">You have a chance to design a new cozy Room for the future fellow
+                    programmers!</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="POST" id="create-room-form">
+                    <label for="new-room-name">Name</label>
+                    <input type="text" name="room-name" placeholder="Room's Name" required="required"
+                           id="new-room-name"/>
+
+                    <input type="submit" value="Create Room" id="create-room-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button">
+                <img src="../static/assets/images/creepy-guy/edit-levels.png" alt="Edit Levels" class="action-image"/>
+                <h2 class="action-title">Edit Levels</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Want make levels harder or lower the plank? You are looking at the right
+                    button.</p>
+            </div>
+
+            <div class="action-form-container">
+                <form class="action-form" method="POST" id="edit-levels-form">
+                    <p>Some Levels</p>
+                    <span class="edit-levels">Some level interaction goes here</span>
+
+                    <input type="submit" value="Make it so" id="accept-edit-levels-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container" id="view-mentors-button">
+
+            <div class="action-button">
+                <img src="../static/assets/images/creepy-guy/creep-on-mentors.png" alt="View Mentors"
+                     class="action-image"/>
+                <h2 class="action-title">View Mentors</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">We know you want to peek on mentors... go on... we won't tell anyone.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <div class="flex-container-footer">
+        <div id="copyright">
+            <small>Copyright &copy; 2019 Quest Store</small>
+        </div>
+
+        <div id="icon-github" class="icons">
+            <a href="https://github.com/CodecoolGlobal/quest_store_tl"><img
+                        src="../static/assets/images/navigation-icons/icon-github.png" alt="GitHub"/></a>
+        </div>
+
+        <div>
+            <ul class="icons nav">
+                <li class="flex-item-footer"><a href="/creepy-guy"><img
+                                src="../static/assets/images/navigation-icons/icon-home.png" alt="Home"/></a></li>
+                <li class="flex-item-footer"><a href="/login"><img
+                                src="../static/assets/images/navigation-icons/icon-logout.png" alt="Logout"/></a></li>
+                <li class="flex-item-footer"><label for="main-page-search"><img
+                                src="../static/assets/images/navigation-icons/icon-search.png" alt="Search"/></label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>
