@@ -10,7 +10,7 @@ public class CreepyGuy extends User{
     private List<Level> levels;
 
 
-    public CreepyGuy(Builder builder) {
+    public CreepyGuy(UserBuilder builder) {
         super(builder);
         mentors = new ArrayList<>();
         rooms = new ArrayList<>();
