@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Artifacts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/item-card.css"/>
+
+</head>
+
+<body>
+
+<section class="artifacts-section content">
+
+    <div id="primary-artifacts-container">
+
+        <!--Normal Card-->
+
+        {% for artifact in normal_artifacts %}
+
+            <div class="artifact-container basic-artifact">
+
+                <div class="artifact-image-container">
+                    <img src="../static/assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
+                </div>
+
+                <div class="artifact-price-container">
+                    <span>{{ artifact.getPrice }}</span>
+                    <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+                </div>
+
+                <div class="artifact-title-container">
+                    <p>{{ artifact.getTitle }}</p>
+                </div>
+
+                <div class="artifact-description-container">
+                    <p>{{ artifact.getDescription }}</p>
+                </div>
+
+                <div class="artifact-purchase-button-container">
+                    <button>Artifact! Get your artifact here!</button>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+        {% for artifact in magic_artifacts %}
+
+        <!--Team Artifact-->
+
+        <div class="artifact-container magic-artifact">
+
+            <div class="artifact-image-container">
+                <img src="../static/assets/images/artifact-icons/artifact2.png" alt="Artifact Image"/>
+            </div>
+
+            <div class="artifact-price-container">
+                <span>{{ artifact.getPrice }}</span>
+                <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+            </div>
+
+            <div class="artifact-title-container">
+                <p>{{ artifact.getTitle }}</p>
+            </div>
+
+            <div class="artifact-description-container">
+                <p>{{ artifact.getDescription }}</p>
+            </div>
+
+            <div class="artifact-purchase-button-container">
+                <button>Artifact! Get your artifact here!</button>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+</body>
+
+</html>
