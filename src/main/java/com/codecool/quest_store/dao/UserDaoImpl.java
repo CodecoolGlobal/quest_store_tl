@@ -175,7 +175,7 @@ public class UserDaoImpl implements UserDao, Dao<User> {
     }
 
     public void createSession(int session, int userId) throws DaoException {
-        String query = "INSERT INTO session(session, user_id) VALUES(?, ?);";
+        String query = "INSERT INTO sessions(session, user_id) VALUES(?, ?);";
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, session);
@@ -187,7 +187,7 @@ public class UserDaoImpl implements UserDao, Dao<User> {
     }
 
     public void updateSession(int session, int userId) throws DaoException {
-        String query = "UPDATE session SET session = ? WHERE user_id = ?;";
+        String query = "UPDATE sessions SET session = ? WHERE user_id = ?;";
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, session);
@@ -199,7 +199,7 @@ public class UserDaoImpl implements UserDao, Dao<User> {
     }
 
     public Integer getSession(int userId) throws DaoException {//
-        String query = "SELECT * FROM session WHERE user_id = ?";
+        String query = "SELECT * FROM sessions WHERE user_id = ?";
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, userId);
