@@ -11,7 +11,7 @@ public class Codecooler extends User {
     private int level;//?
 
 
-    public Codecooler(Builder builder) {
+    public Codecooler(UserBuilder builder) {
         super(builder);
         quests = new ArrayList<>();
         artifacts = new ArrayList<>();

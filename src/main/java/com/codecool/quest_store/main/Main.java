@@ -1,8 +1,6 @@
 package com.codecool.quest_store.main;
 
-import com.codecool.quest_store.controllers.ArtifactsController;
-import com.codecool.quest_store.controllers.LoginController;
-import com.codecool.quest_store.controllers.Static;
+import com.codecool.quest_store.controllers.*;
 import com.codecool.quest_store.utility.FlywayMigration;
 import com.sun.net.httpserver.HttpServer;
 
@@ -16,6 +14,9 @@ public class Main {
 
         server.createContext("/static", new Static());
         server.createContext("/login", new LoginController());
+        server.createContext("/student", new StudentController());
+        server.createContext("/mentor", new MentorController());
+        server.createContext("/creepy-guy", new CreepyGuyController());
         server.createContext("/artifacts", new ArtifactsController());
         server.setExecutor(null);
 
