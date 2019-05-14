@@ -1,5 +1,6 @@
 package com.codecool.quest_store.main;
 
+import com.codecool.quest_store.controllers.CreepyGuyController;
 import com.codecool.quest_store.controllers.LoginController;
 import com.codecool.quest_store.controllers.Static;
 import com.codecool.quest_store.utility.FlywayMigration;
@@ -15,6 +16,7 @@ public class Main {
 
         server.createContext("/static", new Static());
         server.createContext("/login", new LoginController());
+        server.createContext("/creepy-guy", new CreepyGuyController());
         server.setExecutor(null);
 
         server.start();
