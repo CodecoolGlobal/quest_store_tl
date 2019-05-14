@@ -6,21 +6,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao, Dao<User> {
 
-    private User user;
-
-    /**
-     *
-     * @param userType
-     * This function only for programmers, user won't use it
-     * for this reason this function without Prepared Statement
-     */
     @Override
     public List<User> getUsersByType(int userType) throws DaoException {
+        User user;
         List<User> users = new ArrayList<>();
 
-        String query = "SELECT * FROM users WHERE id_user_type = " + userType;
+        String query = "SELECT * FROM users WHERE user_type_id = " + userType;
 
         try (Connection connection = DatabaseConnector.getConnection();
              Statement st = connection.createStatement();
@@ -37,7 +30,7 @@ public class UserDaoImpl implements UserDao {
                     int typeId = resultSet.getInt("id_team");
                     int roomId = resultSet.getInt("id_room");
                     int teamId = resultSet.getInt("id_team");
-                    user = new User.Builder()
+                    user = new User.UserBuilder()
                             .withId(id)
                             .withName(name)
                             .withSurname(surname)
@@ -58,11 +51,10 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    //If I need object of user in parameter instead of parameters
     @Override
-    public void createUser(User user) throws DaoException {
+    public void create(User user) throws DaoException {
         String query = "INSERT INTO users(name, surname, phone_number, email, password, " +
-                "photo, id_user_type, id_room, id_team) " +
+                "photo, user_type_id, room_id, team_id) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection connection = DatabaseConnector.getConnection();
@@ -83,31 +75,103 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    @Override
-    public void updateUserEmail(User user, String email) throws DaoException {
-        String query = "UPDATE users SET email = ? WHERE id = ?";
+    public void update(User user) throws DaoException {
+        String query = "UPDATE users SET name = ?, surname = ?, phone_number = ?, email = ?, password = ?, " +
+                "photo = ?, user_type_id = ?, room_id = ?, team_id = ? WHERE id = ?";
+
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, email);
-            statement.setInt(2, user.getId());
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getSurname());
+            statement.setString(3, user.getPhoneNumber());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPassword());
+            statement.setString(6, user.getPhoto());
+            statement.setInt(7, user.getTypeId());
+            statement.setInt(8, user.getRoomId());
+            statement.setInt(9, user.getTeamId());
+            statement.setInt(10, user.getId());
             statement.executeUpdate();
+
         } catch(SQLException error){
             throw new DaoException("You can't update a user", error);
         }
     }
 
     @Override
-    public void updateUserRoom(User user, int room) throws DaoException {
-        String query = "UPDATE users SET id_room = ? WHERE id = ?";
-        try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, room);
-            statement.setInt(2, user.getId());
-            statement.executeUpdate();
+    public User extractFromResultSet(ResultSet resultSet) throws DaoException {
+        int id;
+        String name;
+        String surname;
+        String phoneNumber;
+        String email;
+        String password;
+        String photo;
+        int userTypeId;
+        int roomId;
+        int teamId;
+        User user;
 
-        } catch(SQLException error){
-            throw new DaoException("You can't update a user", error);
+        try {
+            id = resultSet.getInt("id");
+            name = resultSet.getString("name");
+            surname = resultSet.getString("surname");
+            phoneNumber = resultSet.getString("phone_number");
+            email = resultSet.getString("email");
+            password = resultSet.getString("password");
+            photo = resultSet.getString("photo");
+            userTypeId = resultSet.getInt("user_type_id");
+            roomId = resultSet.getInt("room_id");
+            teamId = resultSet.getInt("team_id");
+
+        } catch (SQLException e) {
+            throw new DaoException("Failed to get item from result set\n" + e);
         }
+
+        user = new User.UserBuilder()
+                .withId(id)
+                .withName(name)
+                .withSurname(surname)
+                .withPhoneNumber(phoneNumber)
+                .withEmail(email)
+                .withPassword(password)
+                .withPhoto(photo)
+                .withTypeId(userTypeId)
+                .withRoomId(roomId)
+                .withTeamId(teamId)
+                .build();
+
+        return user;
+    }
+
+
+    public User getIdAndUserType(String name, String password) throws DaoException {
+
+        User user;
+
+        String query =  "SELECT * FROM users WHERE name LIKE ? AND password LIKE ?;";
+
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setString(1, name);
+            statement.setString(1, password);
+            try (ResultSet rs = statement.executeQuery(query)) {
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    int userType = rs.getInt("user_type_id");
+
+                    user = new User.UserBuilder()
+                            .withId(id)
+                            .withTypeId(userType)
+                            .build();
+                    return user;
+                }
+            }
+
+        } catch(SQLException error) {
+            throw new DaoException("There isn't an applicant with data: " + name + " " + password);
+        }
+        return null;
     }
 
 }
