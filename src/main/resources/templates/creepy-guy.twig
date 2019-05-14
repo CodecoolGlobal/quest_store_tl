@@ -16,24 +16,7 @@
 
 <header>
 
-    <div class="primary-header flex-container-header">
-
-        <div>
-            <img src="../static/assets/images/logo/logo.png" alt="Website Logo" id="main-logo"/>
-        </div>
-
-        <div>
-            <ul class="nav primary-nav">
-                <li class="flex-item-header"><a href="/creepy-guy">HOME</a></li>
-                <li class="flex-item-header"><a href="/mentors">VIEW MENTORS</a></li>
-                <li class="flex-item-header"><a href="/login">LOGOUT</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="primary-header">
-        <input class="search-field" type="text" placeholder="Search..." id="main-page-search"/>
-    </div>
+    {% include "classpath:/templates/creepy-guy-header.twig" ignore missing %}
 
 </header>
 
@@ -132,28 +115,9 @@
 </section>
 
 <footer>
-    <div class="flex-container-footer">
-        <div id="copyright">
-            <small>Copyright &copy; 2019 Quest Store</small>
-        </div>
 
-        <div id="icon-github" class="icons">
-            <a href="https://github.com/CodecoolGlobal/quest_store_tl"><img
-                        src="../static/assets/images/navigation-icons/icon-github.png" alt="GitHub"/></a>
-        </div>
+    {% include "classpath:/templates/creepy-guy-footer.twig" ignore missing %}
 
-        <div>
-            <ul class="icons nav">
-                <li class="flex-item-footer"><a href="/creepy-guy"><img
-                                src="../static/assets/images/navigation-icons/icon-home.png" alt="Home"/></a></li>
-                <li class="flex-item-footer"><a href="/login"><img
-                                src="../static/assets/images/navigation-icons/icon-logout.png" alt="Logout"/></a></li>
-                <li class="flex-item-footer"><label for="main-page-search"><img
-                                src="../static/assets/images/navigation-icons/icon-search.png" alt="Search"/></label>
-                </li>
-            </ul>
-        </div>
-    </div>
 </footer>
 
 </body>
