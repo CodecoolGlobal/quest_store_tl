@@ -1,4 +1,4 @@
-CREATE TABLE session
+CREATE TABLE sessions
 (
   id serial,
   session int,
