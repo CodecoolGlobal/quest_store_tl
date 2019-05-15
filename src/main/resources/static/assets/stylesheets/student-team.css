@@ -57,7 +57,6 @@
 */
 .student-content {
   float: left;
-  width: 30%;
   padding: 20px;
   margin-right: 5px;
 }
@@ -65,7 +64,6 @@
 .artifacts-quests-team {
   float: left;
   padding: 35px;
-  width: 70%;
   margin: 0 150px;
 }
 .artifacts-quests p,
@@ -134,7 +132,7 @@ div.student-photo-container img {
 }
 
 .info-container p {
-  padding-bottom: 21px;
+  padding-bottom: 2px;
 }
 
 .student-coins-container {

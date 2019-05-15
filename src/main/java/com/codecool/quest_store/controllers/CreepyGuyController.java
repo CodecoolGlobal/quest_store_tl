@@ -9,6 +9,13 @@ import java.io.OutputStream;
 
 import java.nio.charset.StandardCharsets;
 
+import java.net.URLDecoder;
+
+import com.codecool.quest_store.model.User;
+import com.codecool.quest_store.service.CreepyGuyService;
+import com.codecool.quest_store.service.LoginService;
+import com.codecool.quest_store.service.ServiceUtility;
+import com.codecool.quest_store.service.UserService;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -22,10 +29,16 @@ public class CreepyGuyController implements HttpHandler {
 
     private CreepyGuyService creepyGuyService;
     private ServiceUtility serviceUtility;
+    private LoginService login;
+    private ServiceUtility utility;
+    private UserService userService;
 
     public CreepyGuyController() {
         creepyGuyService = new CreepyGuyService();
         serviceUtility = new ServiceUtility();
+        login = new LoginService();
+        utility = new ServiceUtility();
+        userService = new UserService();
     }
 
     @Override
@@ -38,6 +51,13 @@ public class CreepyGuyController implements HttpHandler {
         String response = "";
 
         if (method.equals("GET")) {
+            String cookie = httpExchange.getRequestHeaders().get("Cookie").get(0);
+
+            int session = Integer.valueOf(utility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
+                    .replace("\"", ""));
+
+            User student = userService.getUser(userService.getUserId(session));
+
             response = template.render(model);
             httpExchange.sendResponseHeaders(200, response.getBytes().length);
         }
@@ -46,9 +66,9 @@ public class CreepyGuyController implements HttpHandler {
             InputStreamReader inputStreamReader = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String data = bufferedReader.readLine();
-            Map<String, String> inputs = serviceUtility.parseData(data, ServiceUtility.AND);
+            Map<String, String> inputs = parse(data);
 
-            handlePOST(inputs, model);
+            handlePOST(inputs);
 
             response = template.render(model);
             httpExchange.getResponseHeaders().set("Location", "/creepy-guy");

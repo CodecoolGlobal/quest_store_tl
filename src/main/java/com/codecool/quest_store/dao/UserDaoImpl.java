@@ -98,6 +98,18 @@ public class UserDaoImpl implements UserDao, Dao<User> {
         }
     }
 
+    public User getUser(int userId) throws DaoException {
+        String query = "SELECT * FROM users WHERE id = ?";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            ResultSet rs = statement.executeQuery();
+            return getListByResultSet(rs).get(0);
+        } catch(SQLException error){
+            throw new DaoException("You can't update a user", error);
+        }
+    }
+
     @Override
     public User extractFromResultSet(ResultSet resultSet) throws DaoException {
         int id;
@@ -170,6 +182,15 @@ public class UserDaoImpl implements UserDao, Dao<User> {
             throw new DaoException("There isn't an applicant with data: " + name + " " + password);
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        UserDao dao = new UserDaoImpl();
+        try {
+            System.out.println(((UserDaoImpl) dao).getUser(1).getName());
+        } catch(DaoException error) {
+            error.printStackTrace();
+        }
     }
 }
 

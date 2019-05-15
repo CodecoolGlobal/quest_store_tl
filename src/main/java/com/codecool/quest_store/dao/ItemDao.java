@@ -7,4 +7,6 @@ import java.util.List;
 public interface ItemDao extends Dao<Item> {
 
     List<Item> getAllArtifacts() throws DaoException;
+    Item getItemById(int itemId) throws DaoException;
 }
+

@@ -15,8 +15,8 @@ import java.util.Map;
 
 public class LoginController implements HttpHandler {
 
-    LoginService login;
-    ServiceUtility utility;
+    private LoginService login;
+    private ServiceUtility utility;
 
     public LoginController() {
         login = new LoginService();
@@ -34,7 +34,7 @@ public class LoginController implements HttpHandler {
             JtwigModel model = JtwigModel.newModel();
 
             response = template.render(model);
-            httpExchange.sendResponseHeaders(200, response.length());
+            httpExchange.sendResponseHeaders(200, response.getBytes().length);
         }
 
         if (method.equals("POST")) {
@@ -69,7 +69,7 @@ public class LoginController implements HttpHandler {
             httpExchange.getResponseHeaders().add("Set-Cookie",
                     new HttpCookie("session", Integer.toString(session)).toString());
 
-            httpExchange.sendResponseHeaders(302, response.length());
+            httpExchange.sendResponseHeaders(302, response.getBytes().length);
         }
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.getBytes());
