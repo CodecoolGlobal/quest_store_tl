@@ -1,17 +1,17 @@
 "use strict";
 
 window.onload = function () {
-    EnableEventListenerToOpenAForm();
+    EnableEventListenerToggleHideShowForm();
 };
 
-function EnableEventListenerToOpenAForm() {
-    let takeActionContainers = document.getElementsByClassName("take-action-container");
+function EnableEventListenerToggleHideShowForm() {
+    let takeActionButtons = document.getElementsByClassName("action-button");
     let actionForms = document.getElementsByClassName("action-form-container");
 
-    for (let i = 0; i < takeActionContainers.length; i++) {
-        for (let i = 0; i < actionForms.length; i++) {
-            takeActionContainers[i].addEventListener("click", function () {
-                openActionForm(actionForms[i]);
+    for (let i = 0; i < takeActionButtons.length; i++) {
+        for (let j = 0; j < actionForms.length; j++) {
+            takeActionButtons[i].addEventListener("click", function () {
+                toggleHideShowActionForm(actionForms[i]);
             });
         }
     }
@@ -27,8 +27,8 @@ function openActionForm(actionForm) {
 
 function toggleHideShowActionForm(actionForm) {
     if (actionForm.style.display === "none") {
-        actionForm.style.display = "block";
+        openActionForm(actionForm);
     } else {
-        actionForm.style.display = "none";
+        closeActionForm(actionForm);
     }
 }
