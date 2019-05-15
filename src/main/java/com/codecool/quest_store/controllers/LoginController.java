@@ -15,8 +15,8 @@ import java.util.Map;
 
 public class LoginController implements HttpHandler {
 
-    LoginService login;
-    ServiceUtility utility;
+    private LoginService login;
+    private ServiceUtility utility;
 
     public LoginController() {
         login = new LoginService();
