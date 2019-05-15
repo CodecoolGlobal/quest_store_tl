@@ -152,14 +152,13 @@ public class UserDaoImpl implements UserDao, Dao<User> {
         String query =  "SELECT * FROM users WHERE name LIKE ? AND password LIKE ?;";
 
         try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)){
+             PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, name);
-            statement.setString(1, password);
-            try (ResultSet rs = statement.executeQuery(query)) {
+            statement.setString(2, password);
+            try(ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     int userType = rs.getInt("user_type_id");
-
                     user = new User.UserBuilder()
                             .withId(id)
                             .withTypeId(userType)
@@ -167,12 +166,62 @@ public class UserDaoImpl implements UserDao, Dao<User> {
                     return user;
                 }
             }
-
         } catch(SQLException error) {
             throw new DaoException("There isn't an applicant with data: " + name + " " + password);
         }
         return null;
     }
 
+    public void createSession(int session, int userId) throws DaoException {
+        String query = "INSERT INTO sessions(session, user_id) VALUES(?, ?);";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, session);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        }  catch(SQLException error) {
+        throw new DaoException("It's impossible to create a new session");
+        }
+    }
+
+    public void updateSession(int session, int userId) throws DaoException {
+        String query = "UPDATE sessions SET session = ? WHERE user_id = ?;";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, session);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        }  catch(SQLException error) {
+            throw new DaoException("It's impossible to update this session");
+        }
+    }
+
+    public Integer getSession(int userId) throws DaoException {//
+        String query = "SELECT * FROM sessions WHERE user_id = ?";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    int session = rs.getInt("session");
+                    System.out.println(session);
+                    return session;
+                }
+            }
+        } catch (SQLException error) {
+                throw new DaoException("It's impossible to update this session");
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        UserDaoImpl dao = new UserDaoImpl();
+        try {
+            dao.getSession(1);
+        } catch(DaoException error) {
+            error.printStackTrace();
+        }
+    }
 }
+
 
