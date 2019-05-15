@@ -31,7 +31,7 @@ public class SessionDaoImpl {
         }
     }
 
-    public Integer getSession(int userId) throws DaoException {//
+    public Integer getSession(int userId) throws DaoException {
         String query = "SELECT * FROM sessions WHERE user_id = ?";
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -41,6 +41,24 @@ public class SessionDaoImpl {
                     int session = rs.getInt("session");
                     System.out.println(session);
                     return session;
+                }
+            }
+        } catch (SQLException error) {
+            throw new DaoException("It's impossible to update this session");
+        }
+        return null;
+    }
+
+    public Integer getUserId(int session) throws DaoException {
+        String query = "SELECT user_id FROM sessions WHERE session = ?";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, session);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    int user_id = rs.getInt("user_id");
+                    System.out.println(session);
+                    return user_id;
                 }
             }
         } catch (SQLException error) {
