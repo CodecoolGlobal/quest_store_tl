@@ -7,18 +7,26 @@ import java.sql.SQLException;
 
 import com.codecool.quest_store.model.Funding;
 
-public class FundingDaoImpl implements Dao<Funding> {
+public class FundingDaoImpl implements FundingDao {
 
     @Override
     public void create(Funding funding) throws DaoException {
-        String query = "INSERT INTO fundings (item_id, team_id) "
+        String query;
+        if (funding.getTEAM_ID() != 0) {
+            query = "INSERT INTO fundings (item_id, team_id) "
                 + "VALUES (?, ?)";
+        } else {
+            query = "INSERT INTO fundings (item_id) "
+                + "VALUES (?)";
+        }
 
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, funding.getITEM_ID());
-            preparedStatement.setInt(4, funding.getTEAM_ID());
+            if (funding.getTEAM_ID() != 0) {
+                preparedStatement.setInt(2, funding.getTEAM_ID());
+            }
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -67,5 +75,19 @@ public class FundingDaoImpl implements Dao<Funding> {
                 .build();
 
         return funding;
+    }
+
+    public int getFundingSequenceNextVal() throws DaoException{
+        String query =
+                "SELECT nextval('fundings_id_seq')";
+
+        try(Connection connection = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery()){
+            rs.next();
+            return rs.getInt("nextval");
+        }catch (SQLException e){
+            throw new DaoException("Failed to get next Fundings sequence number", e);
+        }
     }
 }

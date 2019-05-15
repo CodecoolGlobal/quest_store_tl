@@ -20,7 +20,8 @@ public class ArtifactsController implements HttpHandler {
 
     public ArtifactsController() {
         this.artifactsService = new ArtifactsService();
-//        this.activeUser =
+        this.activeUser = new User.UserBuilder()
+                .withId(3).build();
     }
 
     @Override
