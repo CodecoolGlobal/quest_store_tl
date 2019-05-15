@@ -17,7 +17,7 @@
 /* main container */
 
 .take-action-container {
-    margin: 5% 0 15% 0;
+    margin: 1% 0 15% 0;
     width: 300px;
     height: 250px;
     border-radius: 2%;
@@ -115,10 +115,32 @@ p.action-description {
     background-color: #f3f3f3;
 }
 
-/*review options*/
+/* review options */
 
 .review-data {
     color: #f3f3f3;
     background-color: #57033b;
     border-radius: 7%;
+}
+
+/* notification with status update */
+
+#creepy-guy-notification-message {
+    margin: 0.5% auto;
+    width:50%;
+    height: 8%;
+    position: sticky;
+    background-color: rgba(200, 198, 198, 0.63);
+    box-shadow:
+            0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#creepy-guy-notification-message p {
+    color: #57033b;
+    font-weight: bolder;
+    font-size: 20px;
 }
