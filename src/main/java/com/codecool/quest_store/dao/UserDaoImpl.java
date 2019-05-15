@@ -54,11 +54,21 @@ public class UserDaoImpl implements UserDao, Dao<User> {
     @Override
     public void create(User user) throws DaoException {
         String query = "INSERT INTO users(name, surname, phone_number, email, password, " +
-                "photo, user_type_id, room_id, team_id) " +
-                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                "photo, user_type_id, room_id) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
+            setRequiredStatements(statement, user);
+            statement.executeUpdate();
+
+        } catch(SQLException error){
+            throw new DaoException("Your have some mistake during creation a new user", error);
+        }
+    }
+
+    private void setRequiredStatements(PreparedStatement statement, User user) throws DaoException {
+        try {
             statement.setString(1, user.getName());
             statement.setString(2, user.getSurname());
             statement.setString(3, user.getPhoneNumber());
@@ -67,11 +77,8 @@ public class UserDaoImpl implements UserDao, Dao<User> {
             statement.setString(6, user.getPhoto());
             statement.setInt(7, user.getTypeId());
             statement.setInt(8, user.getRoomId());
-            statement.setInt(9, user.getTeamId());
-            statement.executeUpdate();
-
-        } catch(SQLException error){
-            throw new DaoException("Your have some mistake during creation a new user", error);
+        } catch (SQLException e) {
+            throw new DaoException("Failed to set user's statements");
         }
     }
 
@@ -81,14 +88,7 @@ public class UserDaoImpl implements UserDao, Dao<User> {
 
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getSurname());
-            statement.setString(3, user.getPhoneNumber());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPassword());
-            statement.setString(6, user.getPhoto());
-            statement.setInt(7, user.getTypeId());
-            statement.setInt(8, user.getRoomId());
+            setRequiredStatements(statement, user);
             statement.setInt(9, user.getTeamId());
             statement.setInt(10, user.getId());
             statement.executeUpdate();
@@ -152,14 +152,13 @@ public class UserDaoImpl implements UserDao, Dao<User> {
         String query =  "SELECT * FROM users WHERE name LIKE ? AND password LIKE ?;";
 
         try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)){
+             PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, name);
-            statement.setString(1, password);
-            try (ResultSet rs = statement.executeQuery(query)) {
+            statement.setString(2, password);
+            try(ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     int userType = rs.getInt("user_type_id");
-
                     user = new User.UserBuilder()
                             .withId(id)
                             .withTypeId(userType)
@@ -167,12 +166,11 @@ public class UserDaoImpl implements UserDao, Dao<User> {
                     return user;
                 }
             }
-
         } catch(SQLException error) {
             throw new DaoException("There isn't an applicant with data: " + name + " " + password);
         }
         return null;
     }
-
 }
+
 

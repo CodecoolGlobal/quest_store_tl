@@ -1,16 +1,27 @@
 package com.codecool.quest_store.controllers;
+import com.codecool.quest_store.model.User;
 
+import com.codecool.quest_store.service.LoginService;
+import com.codecool.quest_store.service.ServiceUtility;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.io.*;
-import java.net.URLDecoder;
-import java.util.HashMap;
+import java.net.HttpCookie;
 import java.util.Map;
 
 public class LoginController implements HttpHandler {
+
+    LoginService login;
+    ServiceUtility utility;
+
+    public LoginController() {
+        login = new LoginService();
+        utility = new ServiceUtility();
+    }
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
@@ -31,21 +42,37 @@ public class LoginController implements HttpHandler {
             InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
             String formData = br.readLine();
-            Map inputs = parseFormData(formData);
+            Map inputs = utility.parseData(formData, ServiceUtility.AND);
+
+            String nextUrl = "";
+
+            User user = login.getUser(inputs.get("name").toString(), inputs.get("password").toString());
+            int userType = user.getTypeId();
+
+            if (!user.equals(null) && userType == 1) {
+                nextUrl = "http://localhost:8000/student";
+            }
+            if (!user.equals(null) && userType == 2) {
+                nextUrl = "http://localhost:8000/mentor";
+            }
+            if (!user.equals(null) && userType == 3) {
+                nextUrl = "http://localhost:8000/creepy-guy";
+            }
+
+            int session = login.generateNewSessionId();
+
+            System.out.println(session);
+
+            login.getSession(session, user.getId());
+
+            httpExchange.getResponseHeaders().add("Location", nextUrl);
+            httpExchange.getResponseHeaders().add("Set-Cookie",
+                    new HttpCookie("session", Integer.toString(session)).toString());
+
+            httpExchange.sendResponseHeaders(302, response.length());
         }
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
-    }
-
-    private static Map<String, String> parseFormData(String formData) throws UnsupportedEncodingException {
-        Map<String, String> map = new HashMap<>();
-        String[] pairs = formData.split("&");
-        for(String pair : pairs){
-            String[] keyValue = pair.split("=");
-            String value = new URLDecoder().decode(keyValue[1], "UTF-8");
-            map.put(keyValue[0], value);
-        }
-        return map;
     }
 }
