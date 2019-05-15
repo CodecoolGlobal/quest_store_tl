@@ -13,7 +13,11 @@ import java.nio.charset.StandardCharsets;
 
 import java.net.URLDecoder;
 
+import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.CreepyGuyService;
+import com.codecool.quest_store.service.LoginService;
+import com.codecool.quest_store.service.ServiceUtility;
+import com.codecool.quest_store.service.UserService;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -23,9 +27,15 @@ import com.sun.net.httpserver.HttpHandler;
 public class CreepyGuyController implements HttpHandler {
 
     private CreepyGuyService creepyGuyService;
+    private LoginService login;
+    private ServiceUtility utility;
+    private UserService userService;
 
     public CreepyGuyController() {
         creepyGuyService = new CreepyGuyService();
+        login = new LoginService();
+        utility = new ServiceUtility();
+        userService = new UserService();
     }
 
     @Override
@@ -38,6 +48,13 @@ public class CreepyGuyController implements HttpHandler {
         String response = "";
 
         if (method.equals("GET")) {
+            String cookie = httpExchange.getRequestHeaders().get("Cookie").get(0);
+
+            int session = Integer.valueOf(utility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
+                    .replace("\"", ""));
+
+            User student = userService.getUser(userService.getUserId(session));
+
             response = template.render(model);
             httpExchange.sendResponseHeaders(200, response.getBytes().length);
         }
