@@ -38,10 +38,12 @@ public class CreepyGuyService {
         mentor = new Mentor.UserBuilder()
                 .withName(name)
                 .withSurname(surname)
+                .withPhoneNumber(null)
                 .withEmail(email)
                 .withPassword(password)
                 .withPhoto(photo)
                 .withTypeId(USER_TYPE_ID)
+                .withRoomId(1)
                 .build();
 
         try {
