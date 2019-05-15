@@ -1,11 +1,9 @@
 package com.codecool.quest_store.controllers;
 
-import com.codecool.quest_store.dao.DaoException;
-import com.codecool.quest_store.dao.SessionDaoImpl;
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.LoginService;
 import com.codecool.quest_store.service.ServiceUtility;
-import com.codecool.quest_store.service.StudentService;
+import com.codecool.quest_store.service.UserService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.jtwig.JtwigModel;
@@ -16,14 +14,14 @@ import java.io.OutputStream;
 
 public class StudentController implements HttpHandler {
 
-    LoginService login;
-    ServiceUtility utility;
-    StudentService studentService;
+    private LoginService login;
+    private ServiceUtility utility;
+    private UserService userService;
 
     public StudentController() {
         login = new LoginService();
         utility = new ServiceUtility();
-        studentService = new StudentService();
+        userService = new UserService();
     }
 
     @Override
@@ -43,7 +41,7 @@ public class StudentController implements HttpHandler {
                     .replace("\"", ""));
 
 
-            User student = studentService.getUser(studentService.getUserId(session));
+            User student = userService.getUser(userService.getUserId(session));
             model.with("name", student.getName());
             model.with("surname", student.getSurname());
             model.with("email", student.getEmail());

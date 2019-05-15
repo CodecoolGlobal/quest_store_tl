@@ -5,11 +5,11 @@ import com.codecool.quest_store.dao.SessionDaoImpl;
 import com.codecool.quest_store.dao.UserDaoImpl;
 import com.codecool.quest_store.model.User;
 
-public class StudentService {
+public class UserService {
     UserDaoImpl userDao;
     SessionDaoImpl sessionDao;
 
-    public StudentService() {
+    public UserService() {
         userDao = new UserDaoImpl();
         sessionDao = new SessionDaoImpl();
     }
