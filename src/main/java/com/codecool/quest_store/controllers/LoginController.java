@@ -2,6 +2,7 @@ package com.codecool.quest_store.controllers;
 import com.codecool.quest_store.model.User;
 
 import com.codecool.quest_store.service.LoginService;
+import com.codecool.quest_store.service.ServiceUtility;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -15,9 +16,11 @@ import java.util.Map;
 public class LoginController implements HttpHandler {
 
     LoginService login;
+    ServiceUtility utility;
 
     public LoginController() {
         login = new LoginService();
+        utility = new ServiceUtility();
     }
 
     @Override
@@ -39,7 +42,7 @@ public class LoginController implements HttpHandler {
             InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
             String formData = br.readLine();
-            Map inputs = login.parseFormData(formData);
+            Map inputs = utility.parseData(formData, ServiceUtility.AND);
 
             String nextUrl = "";
 
@@ -64,7 +67,7 @@ public class LoginController implements HttpHandler {
 
             httpExchange.getResponseHeaders().add("Location", nextUrl);
             httpExchange.getResponseHeaders().add("Set-Cookie",
-                    new HttpCookie("sessionId", Integer.toString(session)).toString());
+                    new HttpCookie("session", Integer.toString(session)).toString());
 
             httpExchange.sendResponseHeaders(302, response.length());
         }

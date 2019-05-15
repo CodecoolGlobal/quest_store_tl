@@ -158,9 +158,7 @@ public class UserDaoImpl implements UserDao, Dao<User> {
             try(ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("id");
-                    //System.out.println(id);
                     int userType = rs.getInt("user_type_id");
-                    //System.out.println(userType);
                     user = new User.UserBuilder()
                             .withId(id)
                             .withTypeId(userType)
