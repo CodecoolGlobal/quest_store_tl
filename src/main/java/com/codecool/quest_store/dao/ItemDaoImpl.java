@@ -98,4 +98,21 @@ public class ItemDaoImpl implements ItemDao {
         }
         return allArtifacts;
     }
+
+    public Item getItemById(int itemId) throws DaoException{
+        String query =
+                "SELECT * FROM items WHERE id=?;";
+        try(Connection connection = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query)){
+            pstmt.setInt(1, itemId);
+            try{
+                ResultSet rs = pstmt.executeQuery();
+                return getListByResultSet(rs).get(0);
+            } catch (SQLException e){
+                throw new DaoException("Failed to get item by id", e);
+            }
+        } catch (SQLException e){
+            throw new DaoException("Failed to get item by id", e);
+        }
+    }
 }
