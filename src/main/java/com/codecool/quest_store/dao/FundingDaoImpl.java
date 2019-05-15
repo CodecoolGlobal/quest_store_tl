@@ -109,7 +109,7 @@ public class FundingDaoImpl implements FundingDao {
             pstmt.setInt(1, funding.getID());
             pstmt.setInt(2, statusId);
             pstmt.setObject(3, OffsetDateTime.now(ZoneOffset.UTC));
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException e){
             throw new DaoException("Failed to update funding status", e);
         }
