@@ -1,6 +1,7 @@
 package com.codecool.quest_store.service;
 
 import com.codecool.quest_store.dao.DaoException;
+import com.codecool.quest_store.dao.SessionDaoImpl;
 import com.codecool.quest_store.dao.UserDaoImpl;
 import com.codecool.quest_store.model.User;
 
@@ -8,7 +9,13 @@ import java.security.SecureRandom;
 
 public class LoginService {
 
-    UserDaoImpl userDao = new UserDaoImpl();
+    UserDaoImpl userDao;
+    SessionDaoImpl sessionDao;
+
+    public LoginService() {
+        userDao = new UserDaoImpl();
+        sessionDao = new SessionDaoImpl();
+    }
 
     public User getUser(String name, String password) {
         try {
@@ -21,7 +28,7 @@ public class LoginService {
 
     private void createSession(int session, int userId) {
         try {
-            userDao.createSession(session, userId);
+            sessionDao.createSession(session, userId);
         } catch (DaoException error) {
             error.printStackTrace();
         }
@@ -29,7 +36,7 @@ public class LoginService {
 
     private void updateSession(int session, int userId) {
         try {
-            userDao.updateSession(session, userId);
+            sessionDao.updateSession(session, userId);
         } catch (DaoException error) {
             error.printStackTrace();
         }
@@ -37,7 +44,7 @@ public class LoginService {
 
     private Integer checkSession(int userId) {
         try {
-            return userDao.getSession(userId);
+            return sessionDao.getSession(userId);
         } catch (DaoException error) {
             error.printStackTrace();
         }
