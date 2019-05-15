@@ -2,6 +2,8 @@
 
 window.onload = function () {
     EnableEventListenerToggleHideShowForm();
+    hideNotificationMessageContainer();
+    addEventListenerForViewMentorsButton();
 };
 
 function EnableEventListenerToggleHideShowForm() {
@@ -31,4 +33,17 @@ function toggleHideShowActionForm(actionForm) {
     } else {
         closeActionForm(actionForm);
     }
+}
+
+function hideNotificationMessageContainer() {
+    document.getElementById("creepy-guy-notification-message").style.visibility = "hidden";
+}
+
+function redirectToMentorsPage() {
+    window.location.href="http://localhost:8000/mentors"
+}
+
+function addEventListenerForViewMentorsButton() {
+    let viewMentorsButton = document.getElementById("view-mentors-button");
+    viewMentorsButton.addEventListener("click", redirectToMentorsPage);
 }
