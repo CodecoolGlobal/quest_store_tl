@@ -16,8 +16,8 @@ public class UserDaoImpl implements UserDao, Dao<User> {
         String query = "SELECT * FROM users WHERE user_type_id = " + userType;
 
         try (Connection connection = DatabaseConnector.getConnection();
-             Statement st = connection.createStatement();
-             ResultSet resultSet = st.executeQuery(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
@@ -26,10 +26,10 @@ public class UserDaoImpl implements UserDao, Dao<User> {
                     String phoneNumber = resultSet.getString("phone_number");
                     String email = resultSet.getString("email");
                     String password = resultSet.getString("password");
-                    String photo = resultSet.getString("id_user_type");
-                    int typeId = resultSet.getInt("id_team");
-                    int roomId = resultSet.getInt("id_room");
-                    int teamId = resultSet.getInt("id_team");
+                    String photo = resultSet.getString("user_type_id");
+                    int typeId = resultSet.getInt("team_id");
+                    int roomId = resultSet.getInt("room_id");
+                    int teamId = resultSet.getInt("team_id");
                     user = new User.UserBuilder()
                             .withId(id)
                             .withName(name)
