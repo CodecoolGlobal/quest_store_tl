@@ -5,12 +5,12 @@ window.onload = function () {
 };
 
 function EnableEventListenerToggleHideShowForm() {
-    let takeActionContainers = document.getElementsByClassName("take-action-container");
+    let takeActionButtons = document.getElementsByClassName("action-button");
     let actionForms = document.getElementsByClassName("action-form-container");
 
-    for (let i = 0; i < takeActionContainers.length; i++) {
+    for (let i = 0; i < takeActionButtons.length; i++) {
         for (let j = 0; j < actionForms.length; j++) {
-            takeActionContainers[i].addEventListener("click", function () {
+            takeActionButtons[i].addEventListener("click", function () {
                 toggleHideShowActionForm(actionForms[i]);
             });
         }
