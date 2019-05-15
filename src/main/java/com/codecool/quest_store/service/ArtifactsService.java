@@ -84,10 +84,15 @@ public class ArtifactsService {
         if (canAffordPurchase(user, artifact)) {
             Funding newFunding = registerNewFunding(user, artifact);
             registerNewTransaction(newFunding, user);
+            updateFundingStatusAsComplete(newFunding);
             return "Artifact purchased";
 //            need to update funding status? or can it auto-update
         }
         return insufficientFundsResponse();
+    }
+
+    private void updateFundingStatusAsComplete(Funding funding) throws DaoException {
+        ((FundingDao) fundingDao).updateFundingStatus(funding, 2);
     }
 
     private String insufficientFundsResponse() {
@@ -107,7 +112,7 @@ public class ArtifactsService {
 
     private Funding registerNewFunding(User user, Item artifact) throws DaoException {
         int newFundingId = fundingDao.getFundingSequenceNextVal();
-//        System.out.println("new Funding Id = " + newFundingId);
+        System.out.println("funding next val = " + newFundingId);
         Funding newFunding;
         if (user.getTeamId() != 0) {
             newFunding = new Funding.Builder()
