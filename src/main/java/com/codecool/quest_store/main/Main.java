@@ -18,6 +18,7 @@ public class Main {
         server.createContext("/mentor", new MentorController());
         server.createContext("/creepy-guy", new CreepyGuyController());
         server.createContext("/artifacts", new ArtifactsController());
+        server.createContext("/mentors", new MentorsController());
         server.setExecutor(null);
 
         server.start();
