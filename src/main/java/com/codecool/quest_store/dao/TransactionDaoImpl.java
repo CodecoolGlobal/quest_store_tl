@@ -1,12 +1,11 @@
 package com.codecool.quest_store.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 import com.codecool.quest_store.model.Transaction;
 
@@ -22,7 +21,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
 
             preparedStatement.setInt(1, transaction.getFUNDING_ID());
             preparedStatement.setInt(2, transaction.getUSER_ID());
-            preparedStatement.setDate(3, Date.valueOf(transaction.getTIMESTAMP()));
+            preparedStatement.setObject(3, transaction.getTIMESTAMP());
             preparedStatement.setInt(4, transaction.getPAID_AMOUNT());
             preparedStatement.executeUpdate();
 
@@ -45,7 +44,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
 
             preparedStatement.setInt(1, transaction.getFUNDING_ID());
             preparedStatement.setInt(2, transaction.getUSER_ID());
-            preparedStatement.setDate(3, Date.valueOf(transaction.getTIMESTAMP()));
+            preparedStatement.setObject(3, transaction.getTIMESTAMP());
             preparedStatement.setInt(4, transaction.getPAID_AMOUNT());
             preparedStatement.setInt(5, transaction.getID());
             preparedStatement.executeUpdate();
@@ -60,7 +59,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
         int ID;
         int FUNDING_ID;
         int USER_ID;
-        LocalDate TIMESTAMP;
+        OffsetDateTime TIMESTAMP;
         int PAID_AMOUNT;
         Transaction transaction;
 
@@ -68,7 +67,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
             ID = resultSet.getInt("id");
             FUNDING_ID = resultSet.getInt("funding_id");
             USER_ID = resultSet.getInt("user_id");
-            TIMESTAMP = resultSet.getDate("timestamp").toLocalDate();
+            TIMESTAMP = resultSet.getObject("timestamp", OffsetDateTime.class);
             PAID_AMOUNT = resultSet.getInt("paid_amount");
         } catch (SQLException e) {
             throw new DaoException("Failed to get transaction from result set\n" + e);
