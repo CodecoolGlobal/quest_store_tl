@@ -45,17 +45,14 @@ public class ArtifactsController implements HttpHandler {
 
 
         JtwigTemplate template;
-        if (user.getTypeId() == 1) {
-            template = JtwigTemplate.classpathTemplate("templates/student-artifacts.twig");
-        } else {
-            template = JtwigTemplate.classpathTemplate("templates/mentor-artifacts.twig");
-        }
+        template = JtwigTemplate.classpathTemplate("templates/artifacts.twig");
 
         JtwigModel model = JtwigModel.newModel();
 
         model.with("normal_artifacts", normalArtifacts);
         model.with("magic_artifacts", magicArtifacts);
         model.with("discount", discount);
+        model.with("user", user);
 
         String response = template.render(model);
 

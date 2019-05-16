@@ -12,9 +12,14 @@
 </head>
 
 <body>
-
+{% set userType = user.getTypeId %}
 <header>
-
+    {% if 1 in userType %}
+        {% include "classpath:/templates/student-header.twig" ignore missing %}
+    {% endif %}
+    {% if 2 in userType %}
+        {% include "classpath:/templates/mentor-footer.twig" ignore missing %}
+    {% endif %}
 </header>
 
 <section class="quests-section content">
@@ -102,7 +107,12 @@
 </section>
 
 <footer>
-
+    {% if 1 in userType %}
+        {% include "classpath:/templates/student-footer.twig" ignore missing %}
+    {% endif %}
+    {% if 2 in userType %}
+        {% include "classpath:/templates/mentor-footer.twig" ignore missing %}
+    {% endif %}
 </footer>
 
 </body>
