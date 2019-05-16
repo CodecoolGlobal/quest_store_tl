@@ -1,8 +1,6 @@
 package com.codecool.quest_store.controllers;
 
 import com.codecool.quest_store.model.User;
-import com.codecool.quest_store.service.LoginService;
-import com.codecool.quest_store.service.ServiceUtility;
 import com.codecool.quest_store.service.UserService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -14,13 +12,9 @@ import java.io.OutputStream;
 
 public class StudentController implements HttpHandler {
 
-    private LoginService login;
-    private ServiceUtility utility;
     private UserService userService;
 
     public StudentController() {
-        login = new LoginService();
-        utility = new ServiceUtility();
         userService = new UserService();
     }
 
@@ -35,18 +29,13 @@ public class StudentController implements HttpHandler {
             JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/student.twig");
             JtwigModel model = JtwigModel.newModel();
 
-            String cookie = httpExchange.getRequestHeaders().get("Cookie").get(0);
+            User student = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
 
-            int session = Integer.valueOf(utility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
-                    .replace("\"", ""));
-
-
-            User student = userService.getUser(userService.getUserId(session));
             model.with("name", student.getName());
             model.with("surname", student.getSurname());
             model.with("email", student.getEmail());
             model.with("phone", student.getPhoneNumber());
-            System.out.println(session);
+            //System.out.println(session);
 
             response = template.render(model);
 
@@ -60,6 +49,7 @@ public class StudentController implements HttpHandler {
         os.write(response.getBytes());
         os.close();
     }
+
 }
 //Create table with user item
 //Show Artifacts on User page
