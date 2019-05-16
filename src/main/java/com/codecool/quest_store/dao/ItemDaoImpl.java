@@ -111,7 +111,7 @@ public class ItemDaoImpl implements ItemDao {
                 return getListByResultSet(rs).get(0);
             } catch (SQLException e){
                 throw new DaoException("Failed to get item by id", e);
-            }System
+            }
         } catch (SQLException e){
             throw new DaoException("Failed to get item by id", e);
         }
