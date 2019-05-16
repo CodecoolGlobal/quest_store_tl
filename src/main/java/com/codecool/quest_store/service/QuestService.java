@@ -1,6 +1,7 @@
 package com.codecool.quest_store.service;
 
 import com.codecool.quest_store.dao.*;
+import com.codecool.quest_store.model.Funding;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.sun.net.httpserver.HttpExchange;
@@ -42,7 +43,10 @@ public class QuestService {
 
     }
 
-    private String handleQuestClaim(User user, Item itemById) throws DaoException {
+    private String handleQuestClaim(User user, Item quest) throws DaoException {
+        Funding newFunding = itemService.registerNewFunding(user, quest);
+        itemService.registerNewTransaction(newFunding, user);
+        itemService.updateFundingStatusAsPending(newFunding);
         return "";
     }
 
