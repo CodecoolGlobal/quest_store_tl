@@ -4,8 +4,6 @@ import java.util.List;
 
 import java.io.IOException;
 
-import com.codecool.quest_store.service.CreepyGuyService;
-import com.codecool.quest_store.service.ServiceUtility;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -13,16 +11,21 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import com.codecool.quest_store.model.User;
+
+import com.codecool.quest_store.model.UserType;
+
+import com.codecool.quest_store.service.EmployeeService;
+import com.codecool.quest_store.service.ServiceUtility;
 import com.codecool.quest_store.service.UserService;
 
 public class MentorsController implements HttpHandler {
 
     private UserService userService;
-    private CreepyGuyService creepyGuyService;
+    private EmployeeService employeeService;
 
     public MentorsController() {
         userService = new UserService();
-        creepyGuyService = new CreepyGuyService();
+        employeeService = new EmployeeService();
     }
 
     @Override
@@ -43,7 +46,7 @@ public class MentorsController implements HttpHandler {
     }
 
     private void createGETModel(JtwigModel model) {
-        List<User> mentors = creepyGuyService.getMentors();
+        List<User> mentors = employeeService.getUsers(UserType.MENTOR);
         model.with("mentors", mentors);
     }
 }
