@@ -8,8 +8,8 @@ import java.net.InetSocketAddress;
 
 public class Main {
     public static void main( String[] args ) throws Exception {
-//        FlywayMigration.migrateDatabase();
-//        http://localhost:8000/login
+        FlywayMigration.migrateDatabase();
+        //http://localhost:8000/login
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
 
         server.createContext("/static", new Static());
@@ -18,6 +18,8 @@ public class Main {
         server.createContext("/mentor", new MentorController());
         server.createContext("/creepy-guy", new CreepyGuyController());
         server.createContext("/artifacts", new ArtifactsController());
+        server.createContext("/quests", new QuestsController());
+        server.createContext("/mentors", new MentorController());
         server.setExecutor(null);
 
         server.start();
