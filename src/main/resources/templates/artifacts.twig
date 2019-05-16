@@ -47,7 +47,9 @@
 
             <div class="artifact-price-container">
                 <span>{{ artifact.getPrice }}</span>
+                {% if discount != 0 %}
                 <span>{{ newPrice }}</span>
+                {% endif %}
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 
@@ -81,7 +83,9 @@
 
             <div class="artifact-price-container">
                 <span>{{ artifact.getPrice }}</span>
+                {% if discount != 0 %}
                 <span>{{ newPrice }}</span>
+                {% endif %}
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 
