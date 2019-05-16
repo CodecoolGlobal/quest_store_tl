@@ -17,7 +17,7 @@
 /* main container */
 
 .take-action-container {
-    margin: 1% 0 15% 0;
+    margin: 1% 0 18% 0;
     width: 300px;
     height: 250px;
     border-radius: 2%;
@@ -137,6 +137,7 @@ p.action-description {
     display: flex;
     justify-content: center;
     align-items: center;
+    visibility: hidden;
 }
 
 #creepy-guy-notification-message p {

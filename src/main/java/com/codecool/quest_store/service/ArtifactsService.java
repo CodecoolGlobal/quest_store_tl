@@ -20,7 +20,6 @@ public class ArtifactsService {
     private ItemDao itemDAO;
     private TransactionDao transactionDao;
     private FundingDao fundingDao;
-    private ServiceUtility serviceUtility;
     private ItemService itemService;
     private static final int NORMAL_ARTIFACT_TYPE = 1;
     private static final int MAGIC_ARTIFACT_TYPE = 2;
@@ -30,7 +29,6 @@ public class ArtifactsService {
         this.itemDAO = new ItemDaoImpl();
         this.transactionDao = new TransactionDaoImpl();
         this.fundingDao = new FundingDaoImpl();
-        this.serviceUtility = new ServiceUtility();
         this.itemService = new ItemService();
     }
 
@@ -45,7 +43,7 @@ public class ArtifactsService {
 
     public String respondToPostMethod(HttpExchange httpExchange, User user) throws IOException{
         String postData = new BufferedReader(new InputStreamReader(httpExchange.getRequestBody())).readLine();
-        Map<String, String> postMap = serviceUtility.parseData(postData, "&");
+        Map<String, String> postMap = ServiceUtility.parseData(postData, "&");
         int artifactId = Integer.parseInt(postMap.get("artifactId"));
         try {
             return handleArtifactPurchase(user, itemDAO.getItemById(artifactId));

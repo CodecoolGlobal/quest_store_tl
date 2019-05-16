@@ -4,6 +4,7 @@ import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.ArtifactsService;
 import com.codecool.quest_store.service.ServiceUtility;
+import com.codecool.quest_store.service.UserService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.jtwig.JtwigModel;
@@ -16,17 +17,17 @@ public class ArtifactsController implements HttpHandler {
 
     private static final String ARTIFACT_CONTEXT_PATH = "/artifacts";
     private ArtifactsService artifactsService;
-    private User activeUser;
+    private UserService userService;
 
     public ArtifactsController() {
         this.artifactsService = new ArtifactsService();
-        this.activeUser = new User.UserBuilder()
-                .withId(3).build();
+        this.userService = new UserService();
     }
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
 
+        User activeUser = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
 
         String method = httpExchange.getRequestMethod();
         if (method.equals("GET")){
