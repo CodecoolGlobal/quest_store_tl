@@ -16,7 +16,6 @@ public class ArtifactsService {
 
     private ItemDao itemDAO;
     private TransactionDao transactionDao;
-    private FundingDao fundingDao;
     private ItemService itemService;
     private static final int NORMAL_ARTIFACT_TYPE = 1;
     private static final int MAGIC_ARTIFACT_TYPE = 2;
@@ -25,8 +24,12 @@ public class ArtifactsService {
     public ArtifactsService() {
         this.itemDAO = new ItemDaoImpl();
         this.transactionDao = new TransactionDaoImpl();
-        this.fundingDao = new FundingDaoImpl();
         this.itemService = new ItemService();
+        try {
+            System.out.println(itemDAO.getDiscount());
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Item> getNormalArtifacts(){
@@ -86,5 +89,16 @@ public class ArtifactsService {
 
     private String handleTeamPurchase() {
         return "";
+    }
+
+    public int getDiscount() {
+        int discount;
+        try {
+            discount = itemDAO.getDiscount();
+        } catch (DaoException e) {
+            discount = 0;
+            e.printStackTrace();
+        }
+        return discount;
     }
 }

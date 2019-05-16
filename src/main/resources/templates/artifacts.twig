@@ -20,7 +20,7 @@
         <!--Normal Card-->
 
         {% for artifact in normal_artifacts %}
-
+        {% set var = artifact.getDiscountedPrice(discount) %}
         <div class="artifact-container basic-artifact">
 
             <div class="artifact-image-container">
@@ -28,7 +28,7 @@
             </div>
 
             <div class="artifact-price-container">
-                <span>{{ artifact.getPrice }}</span>
+                <span>{{ var }}</span>
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 
@@ -50,9 +50,9 @@
 
         {% endfor %}
 
-        {% for artifact in magic_artifacts %}
-
         <!--Team Artifact-->
+        {% for artifact in magic_artifacts %}
+        {% set var = artifact.getDiscountedPrice(discount) %}
 
         <div class="artifact-container magic-artifact">
 
@@ -61,7 +61,7 @@
             </div>
 
             <div class="artifact-price-container">
-                <span>{{ artifact.getPrice }}</span>
+                <span>{{ var }}</span>
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 

@@ -1,5 +1,6 @@
 package com.codecool.quest_store.controllers;
 
+import com.codecool.quest_store.dao.DaoException;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.ArtifactsService;
@@ -41,12 +42,14 @@ public class ArtifactsController implements HttpHandler {
     private void renderArtifacts(HttpExchange httpExchange) throws IOException {
         List<Item> normalArtifacts = artifactsService.getNormalArtifacts();
         List<Item> magicArtifacts = artifactsService.getMagicArtifacts();
+        int discount = artifactsService.getDiscount();
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/artifacts.twig");
         JtwigModel model = JtwigModel.newModel();
 
         model.with("normal_artifacts", normalArtifacts);
         model.with("magic_artifacts", magicArtifacts);
+        model.with("discount", discount);
 
         String response = template.render(model);
 

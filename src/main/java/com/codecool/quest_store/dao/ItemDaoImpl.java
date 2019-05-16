@@ -118,7 +118,7 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public float getDiscount() throws DaoException {
+    public int getDiscount() throws DaoException {
         String query =
                 "SELECT discount FROM discount;";
 
