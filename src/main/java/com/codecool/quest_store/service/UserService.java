@@ -24,22 +24,12 @@ public class UserService {
         itemService = new ItemService();
     }
 
-    private User getUser(int userId) {
-        try {
+    private User getUser(int userId) throws DaoException {
             return userDao.getUser(userId);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-        return null;
     }
 
-    private Integer getUserId(int session) {
-        try {
-            return sessionDao.getUserId(session);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-        return null;
+    private Integer getUserId(int session) throws DaoException {
+        return sessionDao.getUserId(session);
     }
 
     public User getUserByCookie(String cookie) {
@@ -50,7 +40,7 @@ public class UserService {
             User student = getUser(getUserId(session));
             return student;
         }
-        catch(UnsupportedEncodingException e){
+        catch(UnsupportedEncodingException | DaoException e){
             e.printStackTrace();
         }
         return null;
@@ -69,17 +59,13 @@ public class UserService {
         return itemService.getItemsByType(ArtifactsService.NORMAL_ARTIFACT_TYPE, getUserItems(userId));
     }
 
-    public List<Item> getUserQuests(int userId)  {
-        List<Item> basicQuest = itemService.getItemsByType(QuestService.BASIC_QUEST_TYPE, getUserItems(userId));
-        List<Item> extraQuest = itemService.getItemsByType(QuestService.EXTRA_QUEST_TYPE, getUserItems(userId));
-        List<Item> quests = new ArrayList<>();
-        for (Item quest : basicQuest) {
-            quests.add(quest);
-        }
-        for (Item quest : extraQuest) {
-            quests.add(quest);
-        }
-        return quests;
+    public List<Item> getUserBasicQuests(int userId)  {
+        return itemService.getItemsByType(QuestService.BASIC_QUEST_TYPE, getUserItems(userId));
     }
+
+    public List<Item> getUserExtraQuests(int userId) {
+        return itemService.getItemsByType(QuestService.EXTRA_QUEST_TYPE, getUserItems(userId));
+    }
+
 
 }
