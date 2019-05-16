@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../static/assets/stylesheets/configuration-menu.css"/>
 
     <script src="../static/scripts/configuration-menu.js" async></script>
+    <script src="../static/scripts/mentor.js" async></script>
 
 </head>
 
@@ -82,6 +83,15 @@
                     <input type="number" name="quest-coins" placeholder="Coins given upon completion"
                            required="required" id="new-quest-coins"/>
 
+                    <label for="quest-type-choice">>Quest's Type</label>
+                    <input list="quest-types" id="quest-type-choice" name="quest-type-choice" pattern="Basic|Extra"
+                           title="Must be Extra or Basic" placeholder="Choose Quest's Type"/>
+
+                    <datalist id="quest-types">
+                        <option value="Basic" name="basic-quest-option">Basic</option>
+                        <option value="Extra" name="extra-quest-option">Extra</option>
+                    </datalist>
+
                     <input type="submit" name="create-quest-button" value="No, it's not hard" id="create-quest-button"/>
                 </form>
             </div>
@@ -110,6 +120,16 @@
                     <label for="new-artifact-coins">Coins</label>
                     <input type="number" name="artifact-coins" placeholder="Price of the precious artifact"
                            required="required" id="new-artifact-coins"/>
+
+                    <label for="artifact-type-choice">>Atrifact's Type</label>
+                    <input list="artifact-types" id="artifact-type-choice" name="artifact-type-choice"
+                           pattern="Normal|Magic"
+                           title="Must be Normal or Magic" placeholder="Choose Artifact's Type"/>
+
+                    <datalist id="artifact-types">
+                        <option value="Normal" name="normal-artifact-option">Normal</option>
+                        <option value="Magic" name="magic-artifact-option">Magic</option>
+                    </datalist>
 
                     <input type="submit" name="create-artifact-button" value="No, it's not expensive" id="create-artifact-button"/>
                 </form>
