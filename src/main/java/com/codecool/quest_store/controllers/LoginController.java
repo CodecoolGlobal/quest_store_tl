@@ -61,8 +61,6 @@ public class LoginController implements HttpHandler {
 
             int session = login.generateNewSessionId();
 
-            System.out.println(session);
-
             login.getSession(session, user.getId());
 
             httpExchange.getResponseHeaders().add("Location", nextUrl);
