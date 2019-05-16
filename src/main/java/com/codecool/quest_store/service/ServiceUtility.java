@@ -15,7 +15,7 @@ public class ServiceUtility {
     public static final String AND = "&";
     public static final String SEMICOLON = "; ";
 
-    public Map<String, String> parseData(String formData, String parsingSign) throws UnsupportedEncodingException {
+    public static  Map<String, String> parseData(String formData, String parsingSign) throws UnsupportedEncodingException {
         Map<String, String> map = new HashMap<>();
         String[] pairs = formData.split(parsingSign);
         for(String pair : pairs){
