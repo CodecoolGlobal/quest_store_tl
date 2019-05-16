@@ -56,7 +56,7 @@ public class ArtifactsService {
                 e.printStackTrace();
                 return e.getMessage();
             }
-        } else return "Invalid request";
+        } return "Invalid request";
     }
 
     private String handleDiscountChange(int newDiscount) throws DaoException {

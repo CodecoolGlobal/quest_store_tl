@@ -48,13 +48,13 @@
             <div class="artifact-description-container">
                 <p>{{ artifact.getDescription }}</p>
             </div>
-
+            {% if 1 in userType %}
             <div class="artifact-purchase-button-container">
                 <form method="post">
                     <button name="artifactId" value={{ artifact.getID }}>Artifact! Get your artifact here!</button>
                 </form>
             </div>
-
+            {% endif %}
         </div>
 
         {% endfor %}
@@ -82,13 +82,13 @@
             <div class="artifact-description-container">
                 <p>{{ artifact.getDescription }}</p>
             </div>
-
+            {% if 1 in userType %}
             <div class="artifact-purchase-button-container">
                 <form method="post">
                     <button name="artifactId" value={{ artifact.getID }}>Artifact! Get your artifact here!</button>
                 </form>
             </div>
-
+            {% endif %}
         </div>
 
         {% endfor %}
