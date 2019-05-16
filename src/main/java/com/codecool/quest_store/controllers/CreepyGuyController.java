@@ -5,7 +5,6 @@ import java.util.Map;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 
 import java.nio.charset.StandardCharsets;
 
@@ -15,7 +14,6 @@ import org.jtwig.JtwigTemplate;
 import com.codecool.quest_store.model.User;
 
 import com.codecool.quest_store.service.CreepyGuyService;
-import com.codecool.quest_store.service.LoginService;
 import com.codecool.quest_store.service.ServiceUtility;
 import com.codecool.quest_store.service.UserService;
 
@@ -25,12 +23,10 @@ import com.sun.net.httpserver.HttpHandler;
 public class CreepyGuyController implements HttpHandler {
 
     private CreepyGuyService creepyGuyService;
-    private LoginService login;
     private UserService userService;
 
     public CreepyGuyController() {
         creepyGuyService = new CreepyGuyService();
-        login = new LoginService();
         userService = new UserService();
     }
 
@@ -41,16 +37,12 @@ public class CreepyGuyController implements HttpHandler {
         JtwigModel model = JtwigModel.newModel();
 
         String method = httpExchange.getRequestMethod();
-        String response = "";
+        String response;
 
         if (method.equals("GET")) {
-            String cookie = httpExchange.getRequestHeaders().get("Cookie").get(0);
-            int session = Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
-                    .replace("\"", ""));
-            User student = userService.getUser(userService.getUserId(session));
-
+            User student = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
             response = template.render(model);
-            httpExchange.sendResponseHeaders(200, response.getBytes().length);
+            ServiceUtility.sendResponse(httpExchange, response);
         }
 
         if (method.equals("POST")) {
@@ -62,13 +54,8 @@ public class CreepyGuyController implements HttpHandler {
             handlePOST(inputs);
 
             response = template.render(model);
-            httpExchange.getResponseHeaders().set("Location", "/creepy-guy");
-            httpExchange.sendResponseHeaders(303, response.getBytes().length);
+            ServiceUtility.redirectToContext(httpExchange, response, "/creepy-guy");
         }
-
-        OutputStream outputStream = httpExchange.getResponseBody();
-        outputStream.write(response.getBytes());
-        outputStream.close();
     }
 
     private void handlePOST(Map<String, String> inputs) {
