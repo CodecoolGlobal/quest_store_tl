@@ -1,5 +1,6 @@
 package com.codecool.quest_store.controllers;
 
+import com.codecool.quest_store.dao.DaoException;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.QuestService;

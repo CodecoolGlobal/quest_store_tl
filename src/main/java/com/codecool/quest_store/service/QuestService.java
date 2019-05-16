@@ -1,12 +1,16 @@
 package com.codecool.quest_store.service;
 
 import com.codecool.quest_store.dao.*;
+import com.codecool.quest_store.model.Funding;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.sun.net.httpserver.HttpExchange;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
 
 public class QuestService {
 
@@ -27,7 +31,22 @@ public class QuestService {
         this.itemService = new ItemService();
     }
 
-    public String respondToPostMethod(HttpExchange httpExchange, User activeUser) {
+    public String respondToPostMethod(HttpExchange httpExchange, User user) throws IOException {
+        String postData = new BufferedReader(new InputStreamReader(httpExchange.getRequestBody())).readLine();
+        Map<String, String> postMap = serviceUtility.parseData(postData, "&");
+        int questId = Integer.parseInt(postMap.get("questId"));
+        try {
+            return handleQuestClaim(user, itemDAO.getItemById(questId));
+        } catch (DaoException e) {
+            e.printStackTrace();
+        } return postMap.toString();
+
+    }
+
+    private String handleQuestClaim(User user, Item quest) throws DaoException {
+        Funding newFunding = itemService.registerNewFunding(user, quest);
+        itemService.registerNewTransaction(newFunding, user);
+        itemService.updateFundingStatusAsPending(newFunding);
         return "";
     }
 

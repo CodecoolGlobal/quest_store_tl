@@ -8,5 +8,7 @@ public interface ItemDao extends Dao<Item> {
 
     List<Item> getAllItems() throws DaoException;
     Item getItemById(int itemId) throws DaoException;
+
+    float getDiscount() throws DaoException;
 }
 
