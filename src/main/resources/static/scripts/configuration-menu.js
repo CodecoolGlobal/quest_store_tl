@@ -42,7 +42,7 @@ function showMentorNotification() {
 }
 
 function redirectToMentorsPage() {
-    window.location.href="http://localhost:8000/mentors";
+    window.location.href="/mentors";
 }
 
 function addEventListenerForViewMentorsButton() {
