@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Creepy Guy's Lair</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="icon" type="image/x-icon" href="../static/assets/images/logo/favicon.ico"/>
+
+    <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/user-team.css"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/mentors.css"/>
+
+
+    <script src="../static/scripts/configuration-menu.js" async></script>
+
+</head>
+
+<body>
+
+<header>
+
+    {% include "classpath:/templates/creepy-guy-header.twig" ignore missing %}
+
+</header>
+
+<section class="content">
+
+    <div class="flex-mentors-container">
+
+        {% for mentor in mentors %}
+            <div class="margins-mentors information-user-container">
+
+                <div class="user-photo-container">
+                    <img alt="Mentor's Photo" src={{ mentor.getPhoto }}>
+                </div>
+
+                <div class="info-position info-container">
+                    <p>Name:<br/>{{ mentor.getName }}</p>
+                    <p>Surname:<br/>{{ mentor.getSurname }}</p>
+                    <p>E-mail:<br/>{{ mentor.getEmail }}</p>
+                    <p>Phone number:<br/>{{ mentor.getPhoneNumber }}</p>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<footer>
+
+    {% include "classpath:/templates/creepy-guy-footer.twig" ignore missing %}
+
+</footer>
+
+</body>
+
+</html>

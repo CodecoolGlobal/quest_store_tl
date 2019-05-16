@@ -19,7 +19,7 @@ public class Main {
         server.createContext("/creepy-guy", new CreepyGuyController());
         server.createContext("/artifacts", new ArtifactsController());
         server.createContext("/quests", new QuestsController());
-        server.createContext("/mentors", new MentorController());
+        server.createContext("/mentors", new MentorsController());
         server.setExecutor(null);
 
         server.start();

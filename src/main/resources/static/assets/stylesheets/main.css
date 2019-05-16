@@ -66,6 +66,58 @@ a {
 
 /*
   ========================================
+  Dropdown MENU
+  ========================================
+*/
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: #57033b;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  background-color: rgba(10, 10, 10, 0.17);
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: #fb9d06;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fb9d0671;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: #57033b;
+  padding: 0 12px 0 12px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown {
+  z-index: 1;
+}
+
+/*
+  ========================================
   Primary header
   ========================================
 */
