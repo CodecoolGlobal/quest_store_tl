@@ -55,7 +55,7 @@
   Student Content
   ========================================
 */
-.student-content {
+.user-content {
   float: left;
   padding: 20px;
   margin-right: 5px;
@@ -96,7 +96,7 @@ section:after {
   flex-direction: row;
 }
 
-div.student-photo-container img {
+div.user-photo-container img {
   display: block;
   margin-left: 10px;
   padding-top: 4px;
@@ -110,7 +110,7 @@ div.student-photo-container img {
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.information-student-container {
+.information-user-container {
   margin: 80px 30px 10px 30px;
   width: 350px;
   height: 180px;
