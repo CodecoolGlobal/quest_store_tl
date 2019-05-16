@@ -84,9 +84,10 @@ public class ItemDaoImpl implements ItemDao {
         return item;
     }
 
-    public List<Item> getAllArtifacts() throws DaoException{
+    public List<Item> getAllItems() throws DaoException{
         String query =
-                "SELECT * FROM items WHERE item_type = 1 OR item_type = 2;";
+                "SELECT * FROM items";
+//                "SELECT * FROM items WHERE item_type = 1 OR item_type = 2;";
         List<Item> allArtifacts;
 
         try (Connection connection = DatabaseConnector.getConnection();
@@ -94,7 +95,7 @@ public class ItemDaoImpl implements ItemDao {
             ResultSet rs = pstmt.executeQuery()){
                 allArtifacts = getListByResultSet(rs);
         } catch (SQLException e){
-            throw new DaoException("Failed to get all artifacts\n", e);
+            throw new DaoException("Failed to get all items\n", e);
         }
         return allArtifacts;
     }

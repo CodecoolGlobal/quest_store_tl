@@ -21,32 +21,32 @@
 
         {% for artifact in normal_artifacts %}
 
-            <div class="artifact-container basic-artifact">
+        <div class="artifact-container basic-artifact">
 
-                <div class="artifact-image-container">
-                    <img src="../static/assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
-                </div>
-
-                <div class="artifact-price-container">
-                    <span>{{ artifact.getPrice }}</span>
-                    <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
-                </div>
-
-                <div class="artifact-title-container">
-                    <p>{{ artifact.getTitle }}</p>
-                </div>
-
-                <div class="artifact-description-container">
-                    <p>{{ artifact.getDescription }}</p>
-                </div>
-
-                <div class="artifact-purchase-button-container">
-                    <form method="post">
-                        <button name="artifactId" value={{ artifact.getID }}>Artifact! Get your artifact here!</button>
-                    </form>
-                </div>
-
+            <div class="artifact-image-container">
+                <img src="../static/assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
             </div>
+
+            <div class="artifact-price-container">
+                <span>{{ artifact.getPrice }}</span>
+                <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+            </div>
+
+            <div class="artifact-title-container">
+                <p>{{ artifact.getTitle }}</p>
+            </div>
+
+            <div class="artifact-description-container">
+                <p>{{ artifact.getDescription }}</p>
+            </div>
+
+            <div class="artifact-purchase-button-container">
+                <form method="post">
+                    <button name="artifactId" value={{ artifact.getID }}>Artifact! Get your artifact here!</button>
+                </form>
+            </div>
+
+        </div>
 
         {% endfor %}
 

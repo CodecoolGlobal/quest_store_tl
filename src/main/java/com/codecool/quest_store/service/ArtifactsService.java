@@ -22,6 +22,7 @@ public class ArtifactsService {
     private TransactionDao transactionDao;
     private FundingDao fundingDao;
     private ServiceUtility serviceUtility;
+    private ItemService itemService;
     private static final int NORMAL_ARTIFACT_TYPE = 1;
     private static final int MAGIC_ARTIFACT_TYPE = 2;
 
@@ -31,33 +32,16 @@ public class ArtifactsService {
         this.transactionDao = new TransactionDaoImpl();
         this.fundingDao = new FundingDaoImpl();
         this.serviceUtility = new ServiceUtility();
+        this.itemService = new ItemService();
     }
 
     public List<Item> getNormalArtifacts(){
-      return getAllArtifactsOfType(NORMAL_ARTIFACT_TYPE);
+      return itemService.getAllItemsOfType(NORMAL_ARTIFACT_TYPE);
     }
 
 
     public List<Item> getMagicArtifacts(){
-        return getAllArtifactsOfType(MAGIC_ARTIFACT_TYPE);
-    }
-
-    private List<Item> getAllArtifactsOfType(int artifactType) {
-        List<Item> artifactsOfType = new ArrayList<>();
-        List<Item> allArtifacts = new ArrayList<>();
-        try {
-            allArtifacts = itemDAO.getAllArtifacts();
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
-        for(Item artifact : allArtifacts){
-            if (artifact.getType() == artifactType) artifactsOfType.add(artifact);
-        }
-        return artifactsOfType;
-    }
-
-    public Item getItemById(int id) throws DaoException{
-            return itemDAO.getItemById(id);
+        return itemService.getAllItemsOfType(MAGIC_ARTIFACT_TYPE);
     }
 
     public String respondToPostMethod(HttpExchange httpExchange, User user) throws IOException{
@@ -65,7 +49,7 @@ public class ArtifactsService {
         Map<String, String> postMap = serviceUtility.parseData(postData, "&");
         int artifactId = Integer.parseInt(postMap.get("artifactId"));
         try {
-            return handleArtifactPurchase(user, getItemById(artifactId));
+            return handleArtifactPurchase(user, itemDAO.getItemById(artifactId));
         } catch (DaoException e) {
             e.printStackTrace();
         } return postMap.toString();

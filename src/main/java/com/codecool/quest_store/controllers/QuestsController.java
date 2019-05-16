@@ -10,8 +10,6 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.List;
 
 public class QuestsController implements HttpHandler {
@@ -36,16 +34,6 @@ public class QuestsController implements HttpHandler {
             ServiceUtility.redirectToContext(httpExchange, response, QUEST_CONTEXT_PATH);
         }
     }
-
-//    private void redirectToQuestContext(HttpExchange httpExchange, String response) {
-//        httpExchange.getResponseHeaders().set("Location", "/quests");
-//
-//        httpExchange.sendResponseHeaders(302, response.getBytes().length);
-//
-//        OutputStream outputStream = httpExchange.getResponseBody();
-//        outputStream.write(response.getBytes(Charset.forName("UTF-8")));
-//        outputStream.close();
-//    }
 
     private void renderQuests(HttpExchange httpExchange) throws IOException{
         List<Item> basicQuests = questService.getBasicQuests();

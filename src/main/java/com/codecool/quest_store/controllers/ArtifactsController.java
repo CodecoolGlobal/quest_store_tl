@@ -10,8 +10,6 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.List;
 
 public class ArtifactsController implements HttpHandler {
@@ -38,18 +36,6 @@ public class ArtifactsController implements HttpHandler {
             ServiceUtility.redirectToContext(httpExchange, response, ARTIFACT_CONTEXT_PATH);
         }
     }
-//
-//    private void redirectToArtifactContext(HttpExchange httpExchange, String response) throws IOException {
-//        httpExchange.getResponseHeaders().set("Location", "/artifacts");
-//
-//        httpExchange.sendResponseHeaders(302, response.getBytes().length);
-//
-//        OutputStream outputStream = httpExchange.getResponseBody();
-//        outputStream.write(response.getBytes(Charset.forName("UTF-8")));
-//        outputStream.close();
-//    }
-
-
 
     private void renderArtifacts(HttpExchange httpExchange) throws IOException {
         List<Item> normalArtifacts = artifactsService.getNormalArtifacts();
@@ -65,11 +51,4 @@ public class ArtifactsController implements HttpHandler {
 
         ServiceUtility.sendResponse(httpExchange, response);
     }
-
-//    private void sendResponse(HttpExchange httpExchange, String response) throws IOException {
-//        httpExchange.sendResponseHeaders(200, response.getBytes().length);
-//        OutputStream os = httpExchange.getResponseBody();
-//        os.write(response.getBytes());
-//        os.close();
-//    }
 }
