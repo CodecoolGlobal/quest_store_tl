@@ -42,6 +42,7 @@ public class StudentController implements HttpHandler {
         model.with("surname", student.getSurname());
         model.with("email", student.getEmail());
         model.with("phone", student.getPhoneNumber());
+        model.with("wallet", userService.getBalance(student));
 
         List<Item> artifacts = userService.getUserArtifacts(student.getId());
         List<Item> basicQuests = userService.getUserBasicQuests(student.getId());

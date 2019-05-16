@@ -1,10 +1,8 @@
 package com.codecool.quest_store.service;
 
-import com.codecool.quest_store.dao.DaoException;
-import com.codecool.quest_store.dao.ItemDaoImpl;
-import com.codecool.quest_store.dao.SessionDaoImpl;
-import com.codecool.quest_store.dao.UserDaoImpl;
+import com.codecool.quest_store.dao.*;
 import com.codecool.quest_store.model.Item;
+import com.codecool.quest_store.model.Transaction;
 import com.codecool.quest_store.model.User;
 
 import java.io.UnsupportedEncodingException;
@@ -16,12 +14,14 @@ public class UserService {
     SessionDaoImpl sessionDao;
     ItemDaoImpl itemDao;
     ItemService itemService;
+    TransactionDaoImpl transactionDao;
 
     public  UserService() {
         userDao = new UserDaoImpl();
         sessionDao = new SessionDaoImpl();
         itemDao = new ItemDaoImpl();
         itemService = new ItemService();
+        transactionDao = new TransactionDaoImpl();
     }
 
     private User getUser(int userId) throws DaoException {
@@ -40,8 +40,8 @@ public class UserService {
             User student = getUser(getUserId(session));
             return student;
         }
-        catch(UnsupportedEncodingException | DaoException e){
-            e.printStackTrace();
+        catch(UnsupportedEncodingException | DaoException error){
+            error.printStackTrace();
         }
         return null;
     }
@@ -67,5 +67,14 @@ public class UserService {
         return itemService.getItemsByType(QuestService.EXTRA_QUEST_TYPE, getUserItems(userId));
     }
 
+    public Integer getBalance(User user) {
+        try {
+            return transactionDao.getPriceSumOfRealizedQuests(user)
+                    - transactionDao.getPriceSumOfPurchasedArtifacts(user);
+        } catch (DaoException error) {
+            error.printStackTrace();
+        }
+        return null;
+    }
 
 }
