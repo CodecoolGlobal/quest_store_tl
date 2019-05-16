@@ -3,6 +3,7 @@ package com.codecool.quest_store.controllers;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.ArtifactsService;
+import com.codecool.quest_store.service.ServiceUtility;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.jtwig.JtwigModel;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class ArtifactsController implements HttpHandler {
 
+    private static final String ARTIFACT_CONTEXT_PATH = "/artifacts";
     private ArtifactsService artifactsService;
     private User activeUser;
 
@@ -26,48 +28,48 @@ public class ArtifactsController implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+
+
         String method = httpExchange.getRequestMethod();
         if (method.equals("GET")){
             renderArtifacts(httpExchange);
         } else if (method.equals("POST")){
             String response = artifactsService.respondToPostMethod(httpExchange, activeUser);
-            redirectToArtifactContext(httpExchange, response);
+            ServiceUtility.redirectToContext(httpExchange, response, ARTIFACT_CONTEXT_PATH);
         }
     }
-
-    private void redirectToArtifactContext(HttpExchange httpExchange, String response) throws IOException {
-        httpExchange.getResponseHeaders().set("Location", "/artifacts");
-
-        httpExchange.sendResponseHeaders(302, response.getBytes().length);
-
-        OutputStream outputStream = httpExchange.getResponseBody();
-        outputStream.write(response.getBytes(Charset.forName("UTF-8")));
-        outputStream.close();
-    }
+//
+//    private void redirectToArtifactContext(HttpExchange httpExchange, String response) throws IOException {
+//        httpExchange.getResponseHeaders().set("Location", "/artifacts");
+//
+//        httpExchange.sendResponseHeaders(302, response.getBytes().length);
+//
+//        OutputStream outputStream = httpExchange.getResponseBody();
+//        outputStream.write(response.getBytes(Charset.forName("UTF-8")));
+//        outputStream.close();
+//    }
 
 
 
     private void renderArtifacts(HttpExchange httpExchange) throws IOException {
-        List<Item> allNormalArtifacts = artifactsService.getNormalArtifacts();
-        List<Item> allMagicArtifacts = artifactsService.getMagicArtifacts();
+        List<Item> normalArtifacts = artifactsService.getNormalArtifacts();
+        List<Item> magicArtifacts = artifactsService.getMagicArtifacts();
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/artifacts.twig");
         JtwigModel model = JtwigModel.newModel();
 
-        model.with("normal_artifacts", allNormalArtifacts);
-        model.with("magic_artifacts", allMagicArtifacts);
+        model.with("normal_artifacts", normalArtifacts);
+        model.with("magic_artifacts", magicArtifacts);
 
         String response = template.render(model);
 
-        sendResponse(httpExchange, response);
+        ServiceUtility.sendResponse(httpExchange, response);
     }
 
-    private void sendResponse(HttpExchange httpExchange, String response) throws IOException {
-        httpExchange.sendResponseHeaders(200, response.getBytes().length);
-        OutputStream os = httpExchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
-
-
+//    private void sendResponse(HttpExchange httpExchange, String response) throws IOException {
+//        httpExchange.sendResponseHeaders(200, response.getBytes().length);
+//        OutputStream os = httpExchange.getResponseBody();
+//        os.write(response.getBytes());
+//        os.close();
+//    }
 }

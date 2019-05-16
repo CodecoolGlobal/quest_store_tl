@@ -112,7 +112,7 @@ public class ArtifactsService {
 
     private Funding registerNewFunding(User user, Item artifact) throws DaoException {
         int newFundingId = fundingDao.getFundingSequenceNextVal();
-        System.out.println("funding next val = " + newFundingId);
+//        System.out.println("funding next val = " + newFundingId);
         Funding newFunding;
         if (user.getTeamId() != 0) {
             newFunding = new Funding.Builder()
