@@ -1,5 +1,6 @@
 package com.codecool.quest_store.controllers;
 
+import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.UserService;
 import com.sun.net.httpserver.HttpExchange;
@@ -9,10 +10,12 @@ import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class StudentController implements HttpHandler {
 
     private UserService userService;
+
 
     public StudentController() {
         userService = new UserService();
@@ -23,6 +26,8 @@ public class StudentController implements HttpHandler {
         String response = "";
         String method = httpExchange.getRequestMethod();
         System.out.println(method);
+        List<Item> artifacts;
+        List<Item> quests;
 
         if(method.equals("GET")) {
 
@@ -30,6 +35,9 @@ public class StudentController implements HttpHandler {
             JtwigModel model = JtwigModel.newModel();
 
             User student = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
+
+                artifacts = userService.getUserArtifacts(student.getId());
+            quests = userService.getUserQuests(student.getId());
 
             model.with("name", student.getName());
             model.with("surname", student.getSurname());
