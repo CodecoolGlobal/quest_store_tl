@@ -12,7 +12,9 @@
 </head>
 
 <body>
-
+<header>
+    {% include "classpath:/templates/student-header.twig" ignore missing %}
+</header>
 <section class="artifacts-section content">
 
     <div id="primary-artifacts-container">
@@ -88,7 +90,9 @@
     </div>
 
 </section>
-
+<footer>
+    {% include "classpath:/templates/student-footer.twig" ignore missing %}
+</footer>
 </body>
 
 </html>
