@@ -20,8 +20,8 @@ public class QuestService {
     private FundingDao fundingDao;
     private ServiceUtility serviceUtility;
     private ItemService itemService;
-    private static final int BASIC_QUEST_TYPE = 3;
-    private static final int EXTRA_QUEST_TYPE = 4;
+    public static final int BASIC_QUEST_TYPE = 3;
+    public static final int EXTRA_QUEST_TYPE = 4;
 
     public QuestService(){
         this.itemDAO = new ItemDaoImpl();

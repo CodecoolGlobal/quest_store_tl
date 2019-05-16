@@ -26,8 +26,8 @@ public class UserDaoImpl implements UserDao, Dao<User> {
                     String phoneNumber = resultSet.getString("phone_number");
                     String email = resultSet.getString("email");
                     String password = resultSet.getString("password");
-                    String photo = resultSet.getString("user_type_id");
-                    int typeId = resultSet.getInt("team_id");
+                    String photo = resultSet.getString("photo");
+                    int typeId = resultSet.getInt("user_type_id");
                     int roomId = resultSet.getInt("room_id");
                     int teamId = resultSet.getInt("team_id");
                     user = new User.UserBuilder()
@@ -182,15 +182,6 @@ public class UserDaoImpl implements UserDao, Dao<User> {
             throw new DaoException("There isn't an applicant with data: " + name + " " + password);
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        UserDao dao = new UserDaoImpl();
-        try {
-            System.out.println(((UserDaoImpl) dao).getUser(1).getName());
-        } catch(DaoException error) {
-            error.printStackTrace();
-        }
     }
 }
 

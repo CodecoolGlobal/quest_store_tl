@@ -17,8 +17,8 @@ public class ArtifactsService {
     private ItemDao itemDAO;
     private TransactionDao transactionDao;
     private ItemService itemService;
-    private static final int NORMAL_ARTIFACT_TYPE = 1;
-    private static final int MAGIC_ARTIFACT_TYPE = 2;
+    public static final int NORMAL_ARTIFACT_TYPE = 1;
+    public static final int MAGIC_ARTIFACT_TYPE = 2;
 
 
     public ArtifactsService() {

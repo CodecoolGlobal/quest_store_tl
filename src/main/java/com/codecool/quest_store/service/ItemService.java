@@ -37,6 +37,16 @@ public class ItemService {
         return itemsOfType;
     }
 
+    public List<Item> getItemsByType(int itemType, List<Item> items) {
+        List<Item> itemsOfType = new ArrayList<>();
+        List<Item> allItems = items;
+
+        for(Item item : allItems){
+            if (item.getType() == itemType) itemsOfType.add(item);
+        }
+        return itemsOfType;
+    }
+
     public Item getItemById(int id) throws DaoException{
         return itemDAO.getItemById(id);
     }

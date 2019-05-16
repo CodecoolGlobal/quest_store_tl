@@ -111,7 +111,7 @@ public class ItemDaoImpl implements ItemDao {
                 return getListByResultSet(rs).get(0);
             } catch (SQLException e){
                 throw new DaoException("Failed to get item by id", e);
-            }
+            }System
         } catch (SQLException e){
             throw new DaoException("Failed to get item by id", e);
         }
@@ -143,6 +143,36 @@ public class ItemDaoImpl implements ItemDao {
             pstmt.executeUpdate();
         } catch (SQLException e){
             throw new DaoException("Failed to update new discount", e);
+        }
+    }
+
+    public List<Item> getUserItems(int user_id) throws DaoException{
+        String query = "SELECT * FROM items " +
+                "INNER JOIN fundings ON items.id = fundings.item_id " +
+                "INNER JOIN transactions ON transactions.funding_id = fundings.id " +
+                "INNER JOIN status_history ON status_history.funding_id = fundings.id " +
+                "INNER JOIN statuses ON statuses.id = status_history.status_id " +
+                "WHERE transactions.user_id = ? AND statuses.type = 'Pending';";
+        try(Connection connection = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query)){
+            pstmt.setInt(1, user_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            return getListByResultSet(rs);
+
+        } catch (SQLException e){
+            throw new DaoException("Failed to get item by id", e);
+        }
+    }
+
+    public static void main(String[] args) {
+        ItemDaoImpl dao = new ItemDaoImpl();
+        try {
+            for(Item item : dao.getUserItems(1)) {
+                System.out.println(item.getType());
+            }
+        } catch(DaoException error) {
+            error.printStackTrace();
         }
     }
 }
