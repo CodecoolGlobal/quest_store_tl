@@ -69,51 +69,19 @@ public class ArtifactsService {
         return insufficientFundsResponse();
     }
 
-//    private void updateFundingStatusAsPending(Funding funding) throws DaoException {
-//        ((FundingDao) fundingDao).updateFundingStatus(funding, 2);
-//    }
 
     private String insufficientFundsResponse() {
         System.out.println("Insufficient funds");
         return "Insufficient funds";
     }
 
-//    private void registerNewTransaction(Funding funding, User user) throws DaoException{
-//        Transaction newTransaction = new Transaction.Builder()
-//                .withFUNDING_ID(funding.getID())
-//                .withUSER_ID(user.getId())
-//                .withTIMESTAMP(OffsetDateTime.now(ZoneOffset.UTC))
-//                .withPAID_AMOUNT(itemDAO.getItemById(funding.getITEM_ID()).getPrice())
-//                .build();
-//        ((Dao<Transaction>) transactionDao).create(newTransaction);
-//    }
-
-//    private Funding registerNewFunding(User user, Item item) throws DaoException {
-//        int newFundingId = fundingDao.getFundingSequenceNextVal();
-////        System.out.println("funding next val = " + newFundingId);
-//        Funding newFunding;
-//        if (user.getTeamId() != 0) {
-//            newFunding = new Funding.Builder()
-//                .withID(newFundingId)
-//                .withITEM_ID(item.getID())
-//                .withTEAM_ID(user.getTeamId())
-//                .build();
-//        } else {
-//        newFunding = new Funding.Builder()
-//                .withID(newFundingId)
-//                .withITEM_ID(item.getID())
-//                .build();
-//        }
-//        fundingDao.create(newFunding);
-//        return newFunding;
-//    }
 
     private boolean canAffordPurchase(User user, Item artifact) throws DaoException {
         int balance =
                 transactionDao.getPriceSumOfRealizedQuests(user)
                 - transactionDao.getPriceSumOfPurchasedArtifacts(user);
 //        System.out.println("Balance = " + balance + ", price = " + artifact.getPrice());
-        return balance > artifact.getPrice();
+        return balance > artifact.getDiscountedPrice(itemDAO.getDiscount());
     }
 
     private String handleTeamPurchase() {

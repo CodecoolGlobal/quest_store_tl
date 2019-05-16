@@ -46,7 +46,7 @@ public class ItemService {
                 .withFUNDING_ID(funding.getID())
                 .withUSER_ID(user.getId())
                 .withTIMESTAMP(OffsetDateTime.now(ZoneOffset.UTC))
-                .withPAID_AMOUNT(itemDAO.getItemById(funding.getITEM_ID()).getPrice())
+                .withPAID_AMOUNT(itemDAO.getItemById(funding.getITEM_ID()).getDiscountedPrice(itemDAO.getDiscount()))
                 .build();
         ((Dao<Transaction>) transactionDao).create(newTransaction);
     }
@@ -72,6 +72,6 @@ public class ItemService {
     }
 
     public void updateFundingStatusAsPending(Funding funding) throws DaoException {
-        ((FundingDao) fundingDao).updateFundingStatus(funding, 2);
+        fundingDao.updateFundingStatus(funding, 2);
     }
 }

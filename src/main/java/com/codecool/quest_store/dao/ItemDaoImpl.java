@@ -116,4 +116,19 @@ public class ItemDaoImpl implements ItemDao {
             throw new DaoException("Failed to get item by id", e);
         }
     }
+
+    @Override
+    public float getDiscount() throws DaoException {
+        String query =
+                "SELECT discount FROM discount;";
+
+        try(Connection connection = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery()){
+            rs.next();
+            return rs.getInt("discount");
+        } catch (SQLException e){
+            throw new DaoException("Failed to get discount", e);
+        }
+    }
 }

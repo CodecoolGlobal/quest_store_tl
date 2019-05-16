@@ -24,6 +24,10 @@ public class Item {
         return price;
     }
 
+    public int getDiscountedPrice(float discount){
+        return Math.round(price * (1-discount));
+    }
+
     public String getTitle() {
         return title;
     }
@@ -35,6 +39,7 @@ public class Item {
     public int getType() {
         return type;
     }
+
 
     public static class Builder {
         private int ID;
