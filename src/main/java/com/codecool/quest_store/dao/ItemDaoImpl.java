@@ -131,4 +131,18 @@ public class ItemDaoImpl implements ItemDao {
             throw new DaoException("Failed to get discount", e);
         }
     }
+
+    @Override
+    public void setDiscount(int newDiscount) throws DaoException {
+        String query =
+                "UPDATE discount SET discount = ?;";
+
+        try(Connection connection = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query)){
+            pstmt.setInt(1, newDiscount);
+            pstmt.executeUpdate();
+        } catch (SQLException e){
+            throw new DaoException("Failed to update new discount", e);
+        }
+    }
 }

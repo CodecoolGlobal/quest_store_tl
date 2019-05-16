@@ -1,6 +1,5 @@
 package com.codecool.quest_store.controllers;
 
-import com.codecool.quest_store.dao.DaoException;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.ArtifactsService;
@@ -32,19 +31,26 @@ public class ArtifactsController implements HttpHandler {
 
         String method = httpExchange.getRequestMethod();
         if (method.equals("GET")){
-            renderArtifacts(httpExchange);
+            renderArtifacts(httpExchange, activeUser);
         } else if (method.equals("POST")){
             String response = artifactsService.respondToPostMethod(httpExchange, activeUser);
             ServiceUtility.redirectToContext(httpExchange, response, ARTIFACT_CONTEXT_PATH);
         }
     }
 
-    private void renderArtifacts(HttpExchange httpExchange) throws IOException {
+    private void renderArtifacts(HttpExchange httpExchange, User user) throws IOException {
         List<Item> normalArtifacts = artifactsService.getNormalArtifacts();
         List<Item> magicArtifacts = artifactsService.getMagicArtifacts();
         int discount = artifactsService.getDiscount();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/artifacts.twig");
+
+        JtwigTemplate template;
+        if (user.getTypeId() == 1) {
+            template = JtwigTemplate.classpathTemplate("templates/student-artifacts.twig");
+        } else {
+            template = JtwigTemplate.classpathTemplate("templates/mentor-artifacts.twig");
+        }
+
         JtwigModel model = JtwigModel.newModel();
 
         model.with("normal_artifacts", normalArtifacts);
@@ -54,5 +60,5 @@ public class ArtifactsController implements HttpHandler {
         String response = template.render(model);
 
         ServiceUtility.sendResponse(httpExchange, response);
-    }
+        }
 }

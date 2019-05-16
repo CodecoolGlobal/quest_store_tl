@@ -10,5 +10,7 @@ public interface ItemDao extends Dao<Item> {
     Item getItemById(int itemId) throws DaoException;
 
     int getDiscount() throws DaoException;
+
+    void setDiscount(int newDiscount) throws DaoException;
 }
 

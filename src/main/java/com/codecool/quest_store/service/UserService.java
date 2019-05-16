@@ -38,7 +38,7 @@ public class UserService {
         try {
             int session = Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
                     .replace("\"", ""));
-            System.out.println(session);
+//            System.out.println(session);
             User student = getUser(getUserId(session));
             return student;
         }

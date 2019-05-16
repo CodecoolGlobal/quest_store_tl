@@ -22,7 +22,7 @@ public class StudentController implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         String response = "";
         String method = httpExchange.getRequestMethod();
-        System.out.println(method);
+//        System.out.println(method);
 
         if(method.equals("GET")) {
 
