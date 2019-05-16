@@ -50,7 +50,7 @@
 
         </header>
 
-        <!--Team content-->
+        <!--User content-->
 
         <section class="content">
 
@@ -106,65 +106,34 @@
 
                         <div id="primary-artifacts-container">
 
-                            <div id="primary-artifacts-container">
+                            <!--Normal Card-->
 
-                                <!--Normal Card-->
+                            {% for artifact in artifacts %}
 
-                                <div class="small-card-artifact artifact-container basic-artifact">
-
-                                    <div class="artifact-image-container">
-                                        <img src="../static/assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
-                                    </div>
-
-                                    <div class="artifact-price-container">
-                                        <span>9999</span>
-                                        <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
-                                    </div>
-
-                                    <div class="artifact-title-container">
-                                        <p>Title</p>
-                                    </div>
-
-                                    <div class="artifact-description-container">
-                                        <p>Description of artifact</p>
-                                    </div>
-
-                                    <div class="artifact-purchase-button-container">
-                                        <button>Artifact! Get your artifact here!</button>
-                                    </div>
-
-                                </div>
-
-
-                            <!--Team Artifact-->
-
-                            <div class="small-card-artifact artifact-container magic-artifact">
+                            <div class="small-card-artifact artifact-container basic-artifact">
 
                                 <div class="artifact-image-container">
-                                    <img src="../static/assets/images/artifact-icons/artifact2.png" alt="Artifact Image"/>
+                                    <img src="../static/assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
                                 </div>
 
                                 <div class="artifact-price-container">
-                                    <span>9999</span>
+                                    <span>{{ artifact.getPrice }}</span>
                                     <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
                                 </div>
 
-                                <div class="../static/artifact-title-container">
-                                    <p>Title</p>
+                                <div class="artifact-title-container">
+                                    <p>{{ artifact.getTitle }}</p>
                                 </div>
 
                                 <div class="artifact-description-container">
-                                    <p>Description of artifact</p>
+                                    <p>{{ artifact.getDescription }}</p>
                                 </div>
 
-                                <div class="artifact-purchase-button-container">
-                                    <button>Artifact! Get your artifact here!</button>
-                                </div>
 
                             </div>
+                            {% endfor %}
 
                         </div>
-
                     </div>
 
                     <!--Quests-->
@@ -176,6 +145,8 @@
                         <div id="primary-quests-container">
 
                             <!--Basic Quest-->
+
+                            {% for quest in basic_quests %}
 
                             <div class="small-card-artifact quest-container basic-quest">
 
@@ -190,24 +161,23 @@
                                 </div>
 
                                 <div class="quest-reward-container">
-                                    <p>9999</p>
+                                    <p>{{ quest.getPrice }}</p>
                                 </div>
 
                                 <div class="quest-title-container">
-                                    <p>Title</p>
+                                    <p>{{ quest.getTitle }}</p>
                                 </div>
 
                                 <div class="quest-description-container">
-                                    <p>Description</p>
-                                </div>
-
-                                <div class="quest-claim-button-container">
-                                    <button>I did it!</button>
+                                    <p>{{ quest.getDescription }}</p>
                                 </div>
 
                             </div>
+                            {% endfor %}
 
                             <!--Extra Quest-->
+
+                            {% for quest in extra_quests %}
 
                             <div class="small-card-artifact quest-container extra-quest">
 
@@ -222,24 +192,22 @@
                                 </div>
 
                                 <div class="quest-reward-container">
-                                    <p>9999</p>
+                                    <p>{{ quest.getPrice }}</p>
                                 </div>
 
                                 <div class="quest-title-container">
-                                    <p>Title</p>
+                                    <p>{{ quest.getTitle }}</p>
                                 </div>
 
                                 <div class="quest-description-container">
-                                    <p>Description</p>
-                                </div>
-
-                                <div class="quest-claim-button-container">
-                                    <button>I did it!</button>
+                                    <p>{{ quest.getDescription }}</p>
                                 </div>
 
                             </div>
+                            {% endfor %}
 
                         </div>
+
                     </div>
 
 
@@ -247,38 +215,6 @@
                     <div>
 
                         <p>Pending Quests</p>
-
-                        <!--Extra Quest-->
-
-                        <div class="small-card-artifact quest-container extra-quest">
-
-                            <div class="quest-image-container">
-                                <div class="bag-of-coins">
-                                    <img src="../static/assets/images/quest-icons/extra-quest.png" alt="Quest Image"/>
-                                </div>
-
-                                <div class="pile-of-coins">
-                                    <img src="../static/assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
-                                </div>
-                            </div>
-
-                            <div class="quest-reward-container">
-                                <p>9999</p>
-                            </div>
-
-                            <div class="quest-title-container">
-                                <p>Title</p>
-                            </div>
-
-                            <div class="quest-description-container">
-                                <p>Description</p>
-                            </div>
-
-                            <div class="quest-claim-button-container">
-                                <button>I did it!</button>
-                            </div>
-
-                        </div>
 
                     </div>
 
