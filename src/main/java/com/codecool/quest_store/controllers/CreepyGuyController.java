@@ -12,8 +12,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import com.codecool.quest_store.model.User;
+import com.codecool.quest_store.model.UserDefaultPhoto;
+import com.codecool.quest_store.model.UserType;
 
 import com.codecool.quest_store.service.CreepyGuyService;
+import com.codecool.quest_store.service.EmployeeService;
 import com.codecool.quest_store.service.ServiceUtility;
 import com.codecool.quest_store.service.UserService;
 
@@ -22,10 +25,12 @@ import com.sun.net.httpserver.HttpHandler;
 
 public class CreepyGuyController implements HttpHandler {
 
+    private EmployeeService employeeService;
     private CreepyGuyService creepyGuyService;
     private UserService userService;
 
     public CreepyGuyController() {
+        employeeService = new EmployeeService();
         creepyGuyService = new CreepyGuyService();
         userService = new UserService();
     }
@@ -68,7 +73,7 @@ public class CreepyGuyController implements HttpHandler {
                 name = inputs.get("mentor-name");
                 String surname = inputs.get("mentor-surname");
                 String email = inputs.get("mentor-email");
-                creepyGuyService.createMentor(name, surname, email);
+                employeeService.createUser(name, surname, email, UserType.MENTOR, UserDefaultPhoto.MENTOR);
 
             } else if (entry.getKey().contains("create-room-button")) {
                 name = inputs.get("room-name");
