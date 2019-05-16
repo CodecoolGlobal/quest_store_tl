@@ -183,15 +183,6 @@ public class UserDaoImpl implements UserDao, Dao<User> {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        UserDao dao = new UserDaoImpl();
-        try {
-            System.out.println(((UserDaoImpl) dao).getUser(1).getName());
-        } catch(DaoException error) {
-            error.printStackTrace();
-        }
-    }
 }
 
 

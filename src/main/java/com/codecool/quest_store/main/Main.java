@@ -8,7 +8,7 @@ import java.net.InetSocketAddress;
 
 public class Main {
     public static void main( String[] args ) throws Exception {
-        FlywayMigration.migrateDatabase();
+        //FlywayMigration.migrateDatabase();
         //http://localhost:8000/login
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
 
