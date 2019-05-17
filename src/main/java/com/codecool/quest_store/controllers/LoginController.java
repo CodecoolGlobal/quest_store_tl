@@ -17,6 +17,9 @@ public class LoginController implements HttpHandler {
 
     private LoginService login;
     private ServiceUtility utility;
+    private static final int STUDENT = 1;
+    private static final int MENTOR = 2;
+    private static final int CREEPUGUY = 3;
 
     public LoginController() {
         login = new LoginService();
@@ -49,19 +52,20 @@ public class LoginController implements HttpHandler {
             User user = login.getUser(inputs.get("name").toString(), inputs.get("password").toString());
             int userType = user.getTypeId();
 
-            if (!user.equals(null) && userType == 1) {
+            if (!user.equals(null) && userType == STUDENT) {
                 nextUrl = "http://localhost:8000/student";
             }
-            if (!user.equals(null) && userType == 2) {
+            if (!user.equals(null) && userType == MENTOR) {
                 nextUrl = "http://localhost:8000/mentor";
             }
-            if (!user.equals(null) && userType == 3) {
+            if (!user.equals(null) && userType == CREEPUGUY) {
                 nextUrl = "http://localhost:8000/creepy-guy";
             }
 
             int session = login.generateNewSessionId();
 
-            login.getSession(session, user.getId());
+            login.createSession(session, user.getId());
+            //login.getSession(session, user.getId());
 
             httpExchange.getResponseHeaders().add("Location", nextUrl);
             httpExchange.getResponseHeaders().add("Set-Cookie",
