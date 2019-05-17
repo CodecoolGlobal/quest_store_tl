@@ -20,6 +20,7 @@ public class Main {
         server.createContext("/artifacts", new ArtifactsController());
         server.createContext("/quests", new QuestsController());
         server.createContext("/mentors", new MentorsController());
+        server.createContext("/codecoolers", new StudentsController());
         server.setExecutor(null);
 
         server.start();
