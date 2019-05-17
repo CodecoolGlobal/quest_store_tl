@@ -73,7 +73,7 @@ p.action-description {
 
 .action-form-container {
     margin-top: 18%;
-    display: none;
+    /*display: none;*/
 }
 
 .action-form-container label {
@@ -125,7 +125,8 @@ p.action-description {
 
 /* notification with status update */
 
-#creepy-guy-notification-message {
+#creepy-guy-notification-message,
+#mentor-notification-message {
     margin: 0.5% auto;
     width:50%;
     height: 8%;
@@ -140,7 +141,8 @@ p.action-description {
     visibility: hidden;
 }
 
-#creepy-guy-notification-message p {
+#creepy-guy-notification-message p,
+#mentor-notification-message p {
     color: #57033b;
     font-weight: bolder;
     font-size: 20px;
