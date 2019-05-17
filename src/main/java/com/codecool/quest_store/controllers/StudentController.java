@@ -27,10 +27,14 @@ public class StudentController implements HttpHandler {
         String method = httpExchange.getRequestMethod();
         System.out.println(method);
         User student = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
-
+        String response = "";
         if(method.equals("GET")) {
             renderUser(httpExchange, student);
         }
+        if(method.equals("POST")) {
+            logout(httpExchange);
+        }
+
     }
 
     private void renderUser(HttpExchange httpExchange, User student) throws IOException {
@@ -56,4 +60,15 @@ public class StudentController implements HttpHandler {
         ServiceUtility.sendResponse(httpExchange, response);
     }
 
+    private void logout(HttpExchange httpExchange) throws IOException {
+        String response = "";
+        userService.deleteSession(httpExchange.getRequestHeaders().get("Cookie").get(0));
+        httpExchange.getResponseHeaders().add("Location", "http://localhost:8000/login");
+
+        httpExchange.sendResponseHeaders(301, response.getBytes().length);
+
+        OutputStream os = httpExchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    }
 }
