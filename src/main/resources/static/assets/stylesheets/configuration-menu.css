@@ -73,7 +73,7 @@ p.action-description {
 
 .action-form-container {
     margin-top: 18%;
-    display: none;
+    /*display: none;*/
 }
 
 .action-form-container label {
