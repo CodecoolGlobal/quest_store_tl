@@ -2,11 +2,14 @@ package com.codecool.quest_store.service;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +23,7 @@ public class ServiceUtility {
         String[] pairs = formData.split(parsingSign);
         for(String pair : pairs){
             String[] keyValue = pair.split("=");
-            String value = new URLDecoder().decode(keyValue[1], "UTF-8");
+            String value = URLDecoder.decode(keyValue[1], "UTF-8");
             map.put(keyValue[0], value);
         }
         return map;
@@ -41,5 +44,12 @@ public class ServiceUtility {
         OutputStream outputStream = httpExchange.getResponseBody();
         outputStream.write(response.getBytes(Charset.forName("UTF-8")));
         outputStream.close();
+    }
+
+    public static Map<String, String> getPOSTInputs(HttpExchange httpExchange) throws IOException {
+        InputStreamReader inputStreamReader = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String data = bufferedReader.readLine();
+        return ServiceUtility.parseData(data, ServiceUtility.AND);
     }
 }
