@@ -122,7 +122,9 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 if (resultSet.next()) {
-                    sumOfPrices = ((Number) resultSet.getObject(1)).intValue();
+                    System.out.println("calc1");
+                    sumOfPrices = resultSet.getInt("sum");
+                    System.out.println("calc2");
                 }
             }
 

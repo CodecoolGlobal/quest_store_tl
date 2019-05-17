@@ -5,6 +5,7 @@ import com.codecool.quest_store.model.Funding;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.Transaction;
 import com.codecool.quest_store.model.User;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -16,6 +17,10 @@ public class ItemService {
     private ItemDao itemDAO;
     private TransactionDao transactionDao;
     private FundingDao fundingDao;
+
+    private static final int[] ARTIFACT_TYPES = {1, 2};
+    private static final int[] QUEST_TYPES = {3, 4};
+
 
     public ItemService() {
         this.itemDAO = new ItemDaoImpl();
@@ -37,18 +42,47 @@ public class ItemService {
         return itemsOfType;
     }
 
+    public List<Item> getItemsByType(int itemType, List<Item> items) {
+        List<Item> itemsOfType = new ArrayList<>();
+        List<Item> allItems = items;
+
+        for(Item item : allItems){
+            if (item.getType() == itemType) itemsOfType.add(item);
+        }
+        return itemsOfType;
+    }
+
     public Item getItemById(int id) throws DaoException{
         return itemDAO.getItemById(id);
     }
 
     public void registerNewTransaction(Funding funding, User user) throws DaoException{
-        Transaction newTransaction = new Transaction.Builder()
-                .withFUNDING_ID(funding.getID())
-                .withUSER_ID(user.getId())
-                .withTIMESTAMP(OffsetDateTime.now(ZoneOffset.UTC))
-                .withPAID_AMOUNT(itemDAO.getItemById(funding.getITEM_ID()).getDiscountedPrice(itemDAO.getDiscount()))
-                .build();
+        Transaction newTransaction;
+        Item item = itemDAO.getItemById(funding.getITEM_ID());
+        if (isArtifact(item)){
+            newTransaction = new Transaction.Builder()
+                    .withFUNDING_ID(funding.getID())
+                    .withUSER_ID(user.getId())
+                    .withTIMESTAMP(OffsetDateTime.now(ZoneOffset.UTC))
+                    .withPAID_AMOUNT(item.getDiscountedPrice(itemDAO.getDiscount()))
+                    .build();
+        } else {
+            newTransaction = new Transaction.Builder()
+                    .withFUNDING_ID(funding.getID())
+                    .withUSER_ID(user.getId())
+                    .withTIMESTAMP(OffsetDateTime.now(ZoneOffset.UTC))
+                    .withPAID_AMOUNT(item.getPrice())
+                    .build();
+        }
         ((Dao<Transaction>) transactionDao).create(newTransaction);
+    }
+
+    private boolean isArtifact(Item item) {
+        return ArrayUtils.contains(ARTIFACT_TYPES, item.getType());
+    }
+
+    private boolean isQuest(Item item) {
+        return ArrayUtils.contains(QUEST_TYPES, item.getType());
     }
 
     public Funding registerNewFunding(User user, Item item) throws DaoException {

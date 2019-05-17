@@ -12,7 +12,25 @@
 </head>
 
 <body>
-
+{% set userType = user.getTypeId %}
+<header>
+    {% if 1 in userType %}
+        {% include "classpath:/templates/student-header.twig" ignore missing %}
+    {% endif %}
+    {% if 2 in userType %}
+        {% include "classpath:/templates/mentor-footer.twig" ignore missing %}
+    {% endif %}
+</header>
+{% if 2 in userType %}
+    <section class="discount-section">
+        <p>Current discount is {{ discount }}%</p>
+        <form method="post" action="#">
+            <label for="newDiscount">Enter new discount % (0-100)</label>
+            <input id="newDiscount" name="newDiscount" type="number" min="0" max="100">
+            <button type="submit">Save</button>
+        </form>
+    </section>
+{% endif %}
 <section class="artifacts-section content">
 
     <div id="primary-artifacts-container">
@@ -20,7 +38,7 @@
         <!--Normal Card-->
 
         {% for artifact in normal_artifacts %}
-
+        {% set newPrice = artifact.getDiscountedPrice(discount) %}
         <div class="artifact-container basic-artifact">
 
             <div class="artifact-image-container">
@@ -29,6 +47,9 @@
 
             <div class="artifact-price-container">
                 <span>{{ artifact.getPrice }}</span>
+                {% if discount != 0 %}
+                <span>{{ newPrice }}</span>
+                {% endif %}
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 
@@ -39,20 +60,20 @@
             <div class="artifact-description-container">
                 <p>{{ artifact.getDescription }}</p>
             </div>
-
+            {% if 1 in userType %}
             <div class="artifact-purchase-button-container">
                 <form method="post">
                     <button name="artifactId" value={{ artifact.getID }}>Artifact! Get your artifact here!</button>
                 </form>
             </div>
-
+            {% endif %}
         </div>
 
         {% endfor %}
 
-        {% for artifact in magic_artifacts %}
-
         <!--Team Artifact-->
+        {% for artifact in magic_artifacts %}
+        {% set newPrice = artifact.getDiscountedPrice(discount) %}
 
         <div class="artifact-container magic-artifact">
 
@@ -62,6 +83,9 @@
 
             <div class="artifact-price-container">
                 <span>{{ artifact.getPrice }}</span>
+                {% if discount != 0 %}
+                <span>{{ newPrice }}</span>
+                {% endif %}
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 
@@ -72,13 +96,13 @@
             <div class="artifact-description-container">
                 <p>{{ artifact.getDescription }}</p>
             </div>
-
+            {% if 1 in userType %}
             <div class="artifact-purchase-button-container">
                 <form method="post">
                     <button name="artifactId" value={{ artifact.getID }}>Artifact! Get your artifact here!</button>
                 </form>
             </div>
-
+            {% endif %}
         </div>
 
         {% endfor %}
@@ -86,7 +110,14 @@
     </div>
 
 </section>
-
+<footer>
+    {% if 1 in userType %}
+        {% include "classpath:/templates/student-footer.twig" ignore missing %}
+    {% endif %}
+    {% if 2 in userType %}
+        {% include "classpath:/templates/mentor-footer.twig" ignore missing %}
+    {% endif %}
+</footer>
 </body>
 
 </html>

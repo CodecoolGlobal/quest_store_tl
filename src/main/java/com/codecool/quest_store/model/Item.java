@@ -4,6 +4,7 @@ public class Item {
 
     private final int ID;
     private int price;
+    private int discountedPrice;
     private String title;
     private String description;
     private int type;
@@ -11,6 +12,15 @@ public class Item {
     private Item(Builder builder) {
         this.ID = builder.ID;
         this.price = builder.price;
+        this.title = builder.title;
+        this.description = builder.description;
+        this.type = builder.type;
+    }
+
+    private Item(Builder builder, float discount) {
+        this.ID = builder.ID;
+        this.price = builder.price;
+//        this.discountedPrice = getDiscountedPrice(discount);
         this.title = builder.title;
         this.description = builder.description;
         this.type = builder.type;
@@ -24,8 +34,8 @@ public class Item {
         return price;
     }
 
-    public int getDiscountedPrice(float discount){
-        return Math.round(price * (1-discount));
+    public int getDiscountedPrice(int discount){
+        return Math.round(price * (100-discount)/100);
     }
 
     public String getTitle() {

@@ -31,25 +31,31 @@ public class ArtifactsController implements HttpHandler {
 
         String method = httpExchange.getRequestMethod();
         if (method.equals("GET")){
-            renderArtifacts(httpExchange);
+            renderArtifacts(httpExchange, activeUser);
         } else if (method.equals("POST")){
             String response = artifactsService.respondToPostMethod(httpExchange, activeUser);
             ServiceUtility.redirectToContext(httpExchange, response, ARTIFACT_CONTEXT_PATH);
         }
     }
 
-    private void renderArtifacts(HttpExchange httpExchange) throws IOException {
+    private void renderArtifacts(HttpExchange httpExchange, User user) throws IOException {
         List<Item> normalArtifacts = artifactsService.getNormalArtifacts();
         List<Item> magicArtifacts = artifactsService.getMagicArtifacts();
+        int discount = artifactsService.getDiscount();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/artifacts.twig");
+
+        JtwigTemplate template;
+        template = JtwigTemplate.classpathTemplate("templates/artifacts.twig");
+
         JtwigModel model = JtwigModel.newModel();
 
         model.with("normal_artifacts", normalArtifacts);
         model.with("magic_artifacts", magicArtifacts);
+        model.with("discount", discount);
+        model.with("user", user);
 
         String response = template.render(model);
 
         ServiceUtility.sendResponse(httpExchange, response);
-    }
+        }
 }

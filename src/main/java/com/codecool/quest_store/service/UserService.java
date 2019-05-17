@@ -1,49 +1,78 @@
 package com.codecool.quest_store.service;
 
-import com.codecool.quest_store.dao.DaoException;
-import com.codecool.quest_store.dao.SessionDaoImpl;
-import com.codecool.quest_store.dao.UserDaoImpl;
+import com.codecool.quest_store.dao.*;
+import com.codecool.quest_store.model.Item;
+import com.codecool.quest_store.model.Transaction;
 import com.codecool.quest_store.model.User;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
     UserDaoImpl userDao;
     SessionDaoImpl sessionDao;
+    ItemDaoImpl itemDao;
+    ItemService itemService;
+    TransactionDaoImpl transactionDao;
 
     public  UserService() {
         userDao = new UserDaoImpl();
         sessionDao = new SessionDaoImpl();
+        itemDao = new ItemDaoImpl();
+        itemService = new ItemService();
+        transactionDao = new TransactionDaoImpl();
     }
 
-    private User getUser(int userId) {
-        try {
+    private User getUser(int userId) throws DaoException {
             return userDao.getUser(userId);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-        return null;
     }
 
-    private Integer getUserId(int session) {
-        try {
-            return sessionDao.getUserId(session);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-        return null;
+    private Integer getUserId(int session) throws DaoException {
+        return sessionDao.getUserId(session);
     }
 
     public User getUserByCookie(String cookie) {
         try {
             int session = Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
                     .replace("\"", ""));
-            System.out.println(session);
+//            System.out.println(session);
             User student = getUser(getUserId(session));
             return student;
         }
-        catch(UnsupportedEncodingException e){
-            e.printStackTrace();
+        catch(UnsupportedEncodingException | DaoException error){
+            error.printStackTrace();
+        }
+        return null;
+    }
+
+    private List<Item> getUserItems(int userId) {
+        try {
+            return itemDao.getUserItems(userId);
+        } catch (DaoException error) {
+            error.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Item> getUserArtifacts(int userId)  {
+        return itemService.getItemsByType(ArtifactsService.NORMAL_ARTIFACT_TYPE, getUserItems(userId));
+    }
+
+    public List<Item> getUserBasicQuests(int userId)  {
+        return itemService.getItemsByType(QuestService.BASIC_QUEST_TYPE, getUserItems(userId));
+    }
+
+    public List<Item> getUserExtraQuests(int userId) {
+        return itemService.getItemsByType(QuestService.EXTRA_QUEST_TYPE, getUserItems(userId));
+    }
+
+    public Integer getBalance(User user) {
+        try {
+            return transactionDao.getPriceSumOfRealizedQuests(user)
+                    - transactionDao.getPriceSumOfPurchasedArtifacts(user);
+        } catch (DaoException error) {
+            error.printStackTrace();
         }
         return null;
     }

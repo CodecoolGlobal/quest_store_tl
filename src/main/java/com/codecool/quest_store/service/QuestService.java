@@ -20,8 +20,8 @@ public class QuestService {
     private FundingDao fundingDao;
     private ServiceUtility serviceUtility;
     private ItemService itemService;
-    private static final int BASIC_QUEST_TYPE = 3;
-    private static final int EXTRA_QUEST_TYPE = 4;
+    public static final int BASIC_QUEST_TYPE = 3;
+    public static final int EXTRA_QUEST_TYPE = 4;
 
     public QuestService(){
         this.itemDAO = new ItemDaoImpl();
@@ -34,13 +34,17 @@ public class QuestService {
     public String respondToPostMethod(HttpExchange httpExchange, User user) throws IOException {
         String postData = new BufferedReader(new InputStreamReader(httpExchange.getRequestBody())).readLine();
         Map<String, String> postMap = serviceUtility.parseData(postData, "&");
-        int questId = Integer.parseInt(postMap.get("questId"));
-        try {
-            return handleQuestClaim(user, itemDAO.getItemById(questId));
-        } catch (DaoException e) {
-            e.printStackTrace();
-        } return postMap.toString();
 
+        if (user.getTypeId() == 1) {
+            int questId = Integer.parseInt(postMap.get("questId"));
+            try {
+                return handleQuestClaim(user, itemDAO.getItemById(questId));
+            } catch (DaoException e) {
+                e.printStackTrace();
+                return e.getMessage();
+            }
+        }
+            return "Invalid request";
     }
 
     private String handleQuestClaim(User user, Item quest) throws DaoException {
