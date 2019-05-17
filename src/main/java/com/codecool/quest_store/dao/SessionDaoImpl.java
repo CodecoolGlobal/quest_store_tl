@@ -19,6 +19,17 @@ public class SessionDaoImpl {
         }
     }
 
+    public void deleteSession(int session) throws DaoException {
+        String query = "DELETE FROM sessions WHERE session = ?;";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, session);
+            statement.executeUpdate();
+        } catch(SQLException error) {
+            throw new DaoException("It's impossible to update this session");
+        }
+    }
+
     public void updateSession(int session, int userId) throws DaoException {
         String query = "UPDATE sessions SET session = ? WHERE user_id = ?;";
         try (Connection connection = DatabaseConnector.getConnection();
@@ -70,7 +81,7 @@ public class SessionDaoImpl {
     public static void main(String[] args) {
         SessionDaoImpl dao = new SessionDaoImpl();
         try {
-            dao.getSession(1);
+            dao.deleteSession(-525031425);
         } catch(DaoException error) {
             error.printStackTrace();
         }
