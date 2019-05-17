@@ -31,22 +31,24 @@ public class MentorsController implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/mentors.twig");
-        JtwigModel model = JtwigModel.newModel();
-
         String method = httpExchange.getRequestMethod();
-        String response;
 
         if (method.equals("GET")) {
             User student = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
-            createGETModel(model);
-            response = template.render(model);
-            ServiceUtility.sendResponse(httpExchange, response);
+            renderMentor(httpExchange);
         }
     }
 
     private void createGETModel(JtwigModel model) {
         List<User> mentors = employeeService.getUsers(UserType.MENTOR);
         model.with("mentors", mentors);
+    }
+
+    private void renderMentor(HttpExchange httpExchange) throws IOException {
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/mentors.twig");
+        JtwigModel model = JtwigModel.newModel();
+        createGETModel(model);
+        String response = template.render(model);
+        ServiceUtility.sendResponse(httpExchange, response);
     }
 }
