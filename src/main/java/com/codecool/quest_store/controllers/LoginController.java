@@ -3,6 +3,7 @@ import com.codecool.quest_store.model.User;
 
 import com.codecool.quest_store.service.LoginService;
 import com.codecool.quest_store.service.ServiceUtility;
+import com.codecool.quest_store.service.UserService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -17,6 +18,7 @@ public class LoginController implements HttpHandler {
 
     private LoginService login;
     private ServiceUtility utility;
+    private UserService userService;
     private static final int STUDENT = 1;
     private static final int MENTOR = 2;
     private static final int CREEPUGUY = 3;
@@ -24,6 +26,7 @@ public class LoginController implements HttpHandler {
     public LoginController() {
         login = new LoginService();
         utility = new ServiceUtility();
+        userService = new UserService();
     }
 
     @Override
@@ -38,6 +41,8 @@ public class LoginController implements HttpHandler {
 
             response = template.render(model);
             httpExchange.sendResponseHeaders(200, response.getBytes().length);
+
+            userService.deleteSession(httpExchange.getRequestHeaders().get("Cookie").get(0));
         }
 
         if (method.equals("POST")) {
@@ -65,7 +70,6 @@ public class LoginController implements HttpHandler {
             int session = login.generateNewSessionId();
 
             login.createSession(session, user.getId());
-            //login.getSession(session, user.getId());
 
             httpExchange.getResponseHeaders().add("Location", nextUrl);
             httpExchange.getResponseHeaders().add("Set-Cookie",
