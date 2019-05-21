@@ -34,29 +34,8 @@ public class LoginService {
         }
     }
 
-    private void updateSession(int session, int userId) {
-        try {
-            sessionDao.updateSession(session, userId);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-    }
-
     public void deleteSession(int session) throws DaoException{
         sessionDao.deleteSession(session);
-    }
-
-    private Integer checkSession(int userId) {
-        try {
-            return sessionDao.getSession(userId);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-        return null;
-    }
-
-    public void getSession(int session, int userId) {
-        createSession(session, userId);
     }
 
     public int generateNewSessionId() {
