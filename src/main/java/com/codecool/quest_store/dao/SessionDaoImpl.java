@@ -30,36 +30,6 @@ public class SessionDaoImpl {
         }
     }
 
-    public void updateSession(int session, int userId) throws DaoException {
-        String query = "UPDATE sessions SET session = ? WHERE user_id = ?;";
-        try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, session);
-            statement.setInt(2, userId);
-            statement.executeUpdate();
-        }  catch(SQLException error) {
-            throw new DaoException("It's impossible to update this session");
-        }
-    }
-
-    public Integer getSession(int userId) throws DaoException {
-        String query = "SELECT * FROM sessions WHERE user_id = ?";
-        try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, userId);
-            try (ResultSet rs = statement.executeQuery()) {
-                while (rs.next()) {
-                    int session = rs.getInt("session");
-                    System.out.println(session);
-                    return session;
-                }
-            }
-        } catch (SQLException error) {
-            throw new DaoException("It's impossible to update this session");
-        }
-        return null;
-    }
-
     public Integer getUserId(int session) throws DaoException {
         String query = "SELECT user_id FROM sessions WHERE session = ?";
         try (Connection connection = DatabaseConnector.getConnection();
