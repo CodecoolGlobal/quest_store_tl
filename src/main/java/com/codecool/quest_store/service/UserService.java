@@ -35,8 +35,12 @@ public class UserService {
     }
 
     private Integer getSessionFromCookie(String cookie) throws UnsupportedEncodingException {
-        return Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
-                .replace("\"", ""));
+        if(!(Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
+                .replace("\"", "")) == null)) {
+            return Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
+                    .replace("\"", ""));
+        }
+        return null;
     }
 
     public User getUserByCookie(String cookie) {
