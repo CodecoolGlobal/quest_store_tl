@@ -19,7 +19,7 @@
 
 .artifact-container,
 .quest-container {
-    margin: 90px 10px;
+    margin: 110px 10px;
     width: 300px;
     height: 380px;
     border-top-left-radius: 10px;
@@ -100,8 +100,6 @@ div.quest-image-container img {
     font-size: 30px;
     font-weight: bolder;
     color: #F5C21B;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
-    -webkit-background-clip: text;
 }
 
 div.artifact-price-container img {
@@ -203,7 +201,8 @@ div.quest-claim-button-container {
 }
 
 div.artifact-purchase-button-container button,
-div.quest-claim-button-container button {
+div.quest-claim-button-container button,
+.save-button {
     height: 50px;
     width: 100%;
     font-size: 18px;
@@ -221,7 +220,8 @@ div.quest-claim-button-container button {
 }
 
 div.artifact-purchase-button-container button:hover,
-div.quest-claim-button-container button:hover {
+div.quest-claim-button-container button:hover,
+.save-button:hover {
     cursor: pointer;
     color: #57033b;
     background-color: #f3f3f3;
@@ -242,4 +242,38 @@ span.no-discount-price,
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* discount section */
+
+.discount-section {
+    background-color: #810f42;
+    text-align: center;
+    padding: 1%;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+#current-discount {
+    font-weight: bold;
+    font-size: 25px;
+    color: #F5C21B;
+}
+
+input#newDiscount {
+    color: #ffffff;
+    width: 3%;
+    outline-color: #fb9d06;
+    border-radius: 5%;
+    padding: 0.1%;
+    background-color: rgba(193, 193, 193, 0.36);
+}
+
+.save-button {
+    background-color: rgba(251, 157, 6, 0.25);
+    font-size: 25px;
+    width: 3%;
+    height: 0.1%;
+    padding: 0.2%;
+    border-radius: 5%;
 }
