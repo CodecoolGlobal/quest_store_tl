@@ -102,7 +102,6 @@ div.quest-image-container img {
     color: #F5C21B;
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
     -webkit-background-clip: text;
-    /*-webkit-text-fill-color: transparent;*/
 }
 
 div.artifact-price-container img {
@@ -193,7 +192,11 @@ div.quest-description-container p {
 
 /* buttons */
 
-div.artifact-purchase-button-container,
+div.artifact-purchase-button-container {
+    position: relative;
+    bottom: 35px;
+}
+
 div.quest-claim-button-container {
     position: relative;
     bottom: 70px;
@@ -234,7 +237,8 @@ span.new-price {
     color: red;
 }
 
-span.no-discount-price {
+span.no-discount-price,
+.quest-reward-container p {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
