@@ -31,9 +31,9 @@
 
     <div class="primary-main-page-container">
 
-        <div class="take-action-container" id="create-student-button">
+        <div class="take-action-container">
 
-            <div class="action-button">
+            <div class="action-button" id="create-student-button">
                 <img src="../static/assets/images/mentor/recruit-student.png" alt="Create Student" class="action-image"/>
                 <h2 class="action-title">Create Student</h2>
                 <span class="action-separator">______</span>
@@ -61,9 +61,9 @@
 
         </div>
 
-        <div class="take-action-container" id="create-quest-button">
+        <div class="take-action-container">
 
-            <div class="action-button">
+            <div class="action-button" id="create-quest-button">
                 <img src="../static/assets/images/mentor/create-quest.png" alt="Create Quest" class="action-image"/>
                 <h2 class="action-title">Create Quest</h2>
                 <span class="action-separator">______</span>
@@ -82,7 +82,7 @@
 
                     <label for="new-quest-coins">Coins</label>
                     <input type="number" name="quest-coins" placeholder="Coins given upon completion"
-                           required="required" id="new-quest-coins"/>
+                           required="required" id="new-quest-coins" min="0"/>
 
                     <label for="quest-type-choice">>Quest's Type</label>
                     <input list="quest-types" id="quest-type-choice" name="quest-type-choice" pattern="Basic|Extra"
@@ -99,9 +99,9 @@
 
         </div>
 
-        <div class="take-action-container" id="create-artifact-button">
+        <div class="take-action-container">
 
-            <div class="action-button">
+            <div class="action-button" id="create-artifact-button">
                 <img src="../static/assets/images/mentor/create-artifact.png" alt="Create Artifact" class="action-image"/>
                 <h2 class="action-title">Create Artifact</h2>
                 <span class="action-separator">______</span>
@@ -120,7 +120,7 @@
 
                     <label for="new-artifact-coins">Coins</label>
                     <input type="number" name="artifact-coins" placeholder="Price of the precious artifact"
-                           required="required" id="new-artifact-coins"/>
+                           required="required" id="new-artifact-coins" min="0"/>
 
                     <label for="artifact-type-choice">>Atrifact's Type</label>
                     <input list="artifact-types" id="artifact-type-choice" name="artifact-type-choice"
@@ -138,9 +138,9 @@
 
         </div>
 
-        <div class="take-action-container" id="create-team-button">
+        <div class="take-action-container">
 
-            <div class="action-button">
+            <div class="action-button" id="create-team-button">
                 <img src="../static/assets/images/mentor/create-team.png" alt="Create Team" class="action-image"/>
                 <h2 class="action-title">Create Team</h2>
                 <span class="action-separator">______</span>
@@ -163,10 +163,10 @@
 
         </div>
 
-        <div class="take-action-container" id="review-quests-button">
+        <div class="take-action-container">
 
             <span>I am notification of pending quests</span>
-            <div class="action-button">
+            <div class="action-button" id="review-quests-button">
                 <img src="../static/assets/images/mentor/review-quests.png" alt="Review Quests" class="action-image"/>
                 <h2 class="action-title">Review Quests</h2>
                 <span class="action-separator">______</span>
@@ -184,10 +184,10 @@
 
         </div>
 
-        <div class="take-action-container" id="review-artifacts-button">
+        <div class="take-action-container">
 
             <span>I am notification of purchased artifacts</span>
-            <div class="action-button">
+            <div class="action-button" id="review-artifacts-button">
                 <img src="../static/assets/images/mentor/review-artifacts.png" alt="Review Artifacts" class="action-image"/>
                 <h2 class="action-title">Review Artifacts</h2>
                 <span class="action-separator">______</span>

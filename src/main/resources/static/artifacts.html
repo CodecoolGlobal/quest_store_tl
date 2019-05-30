@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="assets/stylesheets/main.css"/>
     <link rel="stylesheet" href="assets/stylesheets/item-card.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -32,6 +33,15 @@
     </div>
 </header>
 
+<section class="discount-section">
+    <p>Current discount: <span id="current-discount">10%</span></p>
+    <form method="post" action="#">
+        <label for="newDiscount">Enter new discount % (0-100):</label>
+        <input id="newDiscount" name="newDiscount" type="number" min="0" max="100">
+        <button type="submit" class="save-button"><i class="fa fa-save"></i></button>
+    </form>
+</section>
+
 <section class="artifacts-section content">
 
     <div id="primary-artifacts-container">
@@ -45,7 +55,7 @@
             </div>
 
             <div class="artifact-price-container">
-                <span>9999</span>
+                <span class="no-discount-price">9999999999</span>
                 <img src="assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 
@@ -72,7 +82,7 @@
             </div>
 
             <div class="artifact-price-container">
-                <span>9999</span>
+                <span class="no-discount-price">9999</span>
                 <img src="assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
 

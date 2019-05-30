@@ -19,7 +19,7 @@
 
 .artifact-container,
 .quest-container {
-    margin: 90px 0;
+    margin: 110px 10px;
     width: 300px;
     height: 380px;
     border-top-left-radius: 10px;
@@ -85,7 +85,7 @@ div.quest-image-container img {
 
 .artifact-price-container {
     position: relative;
-    padding-left: 120px;
+    padding-left: 0;
     bottom: 115px;
 }
 
@@ -97,36 +97,40 @@ div.quest-image-container img {
 
 .artifact-price-container span,
 .quest-reward-container p {
-    padding-right: 5px;
     font-size: 30px;
     font-weight: bolder;
     color: #F5C21B;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
-    -webkit-background-clip: text;
-    /*-webkit-text-fill-color: transparent;*/
 }
 
 div.artifact-price-container img {
     width: 100px;
+    position: absolute;
+    right: 0;
+}
+
+div.artifact-price-container span {
+    position: relative;
+    bottom: -40px;
+    left: 30px;
 }
 
 /* title container */
 
 div.artifact-title-container {
     position: relative;
-    bottom: 90px;
+    bottom: 70px;
 }
 
 div.quest-title-container {
     position: relative;
-    bottom: 140px;
+    bottom: 150px;
 }
 
 div.artifact-title-container,
 div.quest-title-container {
     margin: auto;
     height: 20px;
-    width: 150px;
+    width: 180px;
     padding: 5px;
     border-radius: 10px;
     border: 2px solid rgba(64, 156, 255, 0.74);
@@ -153,7 +157,7 @@ div.quest-title-container p {
 
 div.artifact-description-container {
     position: relative;
-    bottom: 78px;
+    bottom: 58px;
 }
 
 div.quest-description-container {
@@ -186,14 +190,19 @@ div.quest-description-container p {
 
 /* buttons */
 
-div.artifact-purchase-button-container,
+div.artifact-purchase-button-container {
+    position: relative;
+    bottom: 35px;
+}
+
 div.quest-claim-button-container {
     position: relative;
     bottom: 70px;
 }
 
 div.artifact-purchase-button-container button,
-div.quest-claim-button-container button {
+div.quest-claim-button-container button,
+.save-button {
     height: 50px;
     width: 100%;
     font-size: 18px;
@@ -211,7 +220,8 @@ div.quest-claim-button-container button {
 }
 
 div.artifact-purchase-button-container button:hover,
-div.quest-claim-button-container button:hover {
+div.quest-claim-button-container button:hover,
+.save-button:hover {
     cursor: pointer;
     color: #57033b;
     background-color: #f3f3f3;
@@ -227,8 +237,43 @@ span.new-price {
     color: red;
 }
 
-span.no-discount-price {
+span.no-discount-price,
+.quest-reward-container p {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* discount section */
+
+.discount-section {
+    background-color: #810f42;
+    text-align: center;
+    padding: 1%;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+#current-discount {
+    font-weight: bold;
+    font-size: 25px;
+    color: #F5C21B;
+}
+
+input#newDiscount {
+    color: #ffffff;
+    width: 3%;
+    outline-color: #fb9d06;
+    border-radius: 5%;
+    padding: 0.1%;
+    background-color: rgba(193, 193, 193, 0.36);
+}
+
+.save-button {
+    background-color: rgba(251, 157, 6, 0.25);
+    font-size: 25px;
+    width: 3%;
+    height: 0.1%;
+    padding: 0.2%;
+    border-radius: 5%;
 }
