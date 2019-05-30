@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
     <link rel="stylesheet" href="../static/assets/stylesheets/configuration-menu.css"/>
 
-    <script src="../static/scripts/configuration-menu.js" defer></script>
-    <script src="../static/scripts/creepy-guy.js" defer></script>
+    <script src="../static/scripts/creepy-guy.js" async type="module"></script>
 
 </head>
 
@@ -43,8 +42,8 @@
                     Quest Store.</p>
             </div>
 
-            <div class="action-form-container">
-                <form class="action-form" method="POST" id="create-mentor-form">
+            <div class="action-form-container" id="create-mentor-form">
+                <form class="action-form" method="POST">
                     <label for="new-mentor-name">Name</label>
                     <input type="text" name="mentor-name" placeholder="Mentor's Name" required="required"
                            id="new-mentor-name"/>
@@ -63,7 +62,7 @@
 
         </div>
 
-        <div class="take-action-container">
+        <div class="take-action-container" id="create-room-button">
 
             <div class="action-button">
                 <img src="../static/assets/images/creepy-guy/create-room.png" alt="Create Room" class="action-image"/>
@@ -73,7 +72,7 @@
                     programmers!</p>
             </div>
 
-            <div class="action-form-container">
+            <div class="action-form-container" id="create-room-form">
                 <form class="action-form" method="POST" id="create-room-form">
                     <label for="new-room-name">Name</label>
                     <input type="text" name="room-name" placeholder="Room's Name" required="required"
@@ -85,7 +84,7 @@
 
         </div>
 
-        <div class="take-action-container">
+        <div class="take-action-container" id="edit-levels-button">
 
             <div class="action-button">
                 <img src="../static/assets/images/creepy-guy/edit-levels.png" alt="Edit Levels" class="action-image"/>
@@ -95,7 +94,7 @@
                     button.</p>
             </div>
 
-            <div class="action-form-container">
+            <div class="action-form-container" id="edit-levels-form">
                 <form class="action-form" method="POST" id="edit-levels-form">
                     <p>Some Levels</p>
                     <span class="edit-levels">Some level interaction goes here</span>
