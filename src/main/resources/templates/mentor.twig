@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
     <link rel="stylesheet" href="../static/assets/stylesheets/configuration-menu.css"/>
 
-    <script src="../static/scripts/configuration-menu.js" defer></script>
-    <script src="../static/scripts/mentor.js" defer></script>
+    <script src="../static/scripts/mentor.js" async type="module"></script>
 
 </head>
 
@@ -42,8 +41,8 @@
                     drill.</p>
             </div>
 
-            <div class="action-form-container">
-                <form class="action-form" method="POST" id="create-student-form">
+            <div class="action-form-container" id="create-student-form">
+                <form class="action-form" method="POST">
                     <label for="new-codecooler-name">Name</label>
                     <input type="text" name="cc-name" placeholder="Codecooler's Name" required="required"
                            id="new-codecooler-name"/>
@@ -71,8 +70,8 @@
                 <p class="action-description">It's ADVENTURE TIME!</p>
             </div>
 
-            <div class="action-form-container">
-                <form class="action-form" method="POST" id="create-quest-form">
+            <div class="action-form-container" id="create-quest-form">
+                <form class="action-form" method="POST">
                     <label for="new-quest-name">Name</label>
                     <input type="text" name="quest-name" placeholder="Name your quest" required="required"
                            id="new-quest-name"/>
@@ -109,8 +108,8 @@
                 <p class="action-description">Make sure to close the door before leaving.</p>
             </div>
 
-            <div class="action-form-container">
-                <form class="action-form" method="POST" id="create-artifact-form">
+            <div class="action-form-container" id="create-artifact-form">
+                <form class="action-form" method="POST">
                     <label for="new-artifact-name">Name</label>
                     <input type="text" name="artifact-name" placeholder="Name your artifact" required="required"
                            id="new-artifact-name"/>
@@ -148,9 +147,9 @@
                 <p class="action-description">So it begins.</p>
             </div>
 
-            <div class="action-form-container">
+            <div class="action-form-container" id="create-team-form">
 
-                <form class="action-form" method="POST" id="create-team-form">
+                <form class="action-form" method="POST">
                     <label for="new-team-name">Name</label>
                     <input type="text" name="team-name" placeholder="Team's Name" required="required"
                            id="new-team-name"/>
@@ -174,8 +173,8 @@
                 <p class="action-description">Feeling like an NPC in MMO yet?</p>
             </div>
 
-            <div class="action-form-container">
-                <form class="action-form" method="POST" id="review-quests-form">
+            <div class="action-form-container" id="review-quests-form">
+                <form class="action-form" method="POST">
                     <span class="review-data">Codecooler's Name</span>
                     <span class="review-data">Quest's Title</span>
                     <input type="submit" name="accept-quest-button" value="Accept"/>
@@ -195,8 +194,8 @@
                 <p class="action-description">Disable used artifacts.</p>
             </div>
 
-            <div class="action-form-container">
-                <form class="action-form" method="POST" id="review-artifacts-form">
+            <div class="action-form-container" id="review-artifacts-form">
+                <form class="action-form" method="POST">
                     <span class="review-data">Codecooler's Name / Team's Name</span>
                     <span class="review-data">Artifact's Title</span>
                     <input type="submit" name="disable-artifact-button" value="Disable"/>
