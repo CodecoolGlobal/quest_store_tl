@@ -15,6 +15,7 @@ public class UserService {
     ItemDaoImpl itemDao;
     ItemService itemService;
     TransactionDaoImpl transactionDao;
+    LoginService loginService;
 
     public  UserService() {
         userDao = new UserDaoImpl();
@@ -22,6 +23,7 @@ public class UserService {
         itemDao = new ItemDaoImpl();
         itemService = new ItemService();
         transactionDao = new TransactionDaoImpl();
+        loginService = new LoginService();
     }
 
     private User getUser(int userId) throws DaoException {
@@ -32,13 +34,19 @@ public class UserService {
         return sessionDao.getUserId(session);
     }
 
+    private Integer getSessionFromCookie(String cookie) throws UnsupportedEncodingException {
+        if(!(Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
+                .replace("\"", "")) == null)) {
+            return Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
+                    .replace("\"", ""));
+        }
+        return null;
+    }
+
     public User getUserByCookie(String cookie) {
         try {
-            int session = Integer.valueOf(ServiceUtility.parseData(cookie, ServiceUtility.SEMICOLON).get("session")
-                    .replace("\"", ""));
-//            System.out.println(session);
-            User student = getUser(getUserId(session));
-            return student;
+            int session = getSessionFromCookie(cookie);
+            return getUser(getUserId(session));
         }
         catch(UnsupportedEncodingException | DaoException error){
             error.printStackTrace();
@@ -75,6 +83,14 @@ public class UserService {
             error.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteSession(String cookie) {
+        try{
+            loginService.deleteSession(getSessionFromCookie(cookie));
+        } catch (UnsupportedEncodingException | DaoException error) {
+            error.printStackTrace();
+        }
     }
 
 }

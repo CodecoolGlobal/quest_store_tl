@@ -26,7 +26,7 @@ public class LoginService {
         return null;
     }
 
-    private void createSession(int session, int userId) {
+    public void createSession(int session, int userId) {
         try {
             sessionDao.createSession(session, userId);
         } catch (DaoException error) {
@@ -34,29 +34,8 @@ public class LoginService {
         }
     }
 
-    private void updateSession(int session, int userId) {
-        try {
-            sessionDao.updateSession(session, userId);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-    }
-
-    private Integer checkSession(int userId) {
-        try {
-            return sessionDao.getSession(userId);
-        } catch (DaoException error) {
-            error.printStackTrace();
-        }
-        return null;
-    }
-
-    public void getSession(int session, int userId) {
-        if (!(checkSession(userId) == null)) {
-            updateSession(session, userId);
-        } else {
-            createSession(session, userId);
-        }
+    public void deleteSession(int session) throws DaoException{
+        sessionDao.deleteSession(session);
     }
 
     public int generateNewSessionId() {

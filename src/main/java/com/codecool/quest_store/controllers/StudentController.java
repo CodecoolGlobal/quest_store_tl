@@ -27,7 +27,7 @@ public class StudentController implements HttpHandler {
         String method = httpExchange.getRequestMethod();
         System.out.println(method);
         User student = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
-
+        String response = "";
         if(method.equals("GET")) {
             renderUser(httpExchange, student);
         }
@@ -55,5 +55,4 @@ public class StudentController implements HttpHandler {
         String response = template.render(model);
         ServiceUtility.sendResponse(httpExchange, response);
     }
-
 }

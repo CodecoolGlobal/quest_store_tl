@@ -103,7 +103,7 @@ div.quest-image-container img {
     color: #F5C21B;
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /*-webkit-text-fill-color: transparent;*/
 }
 
 div.artifact-price-container img {
@@ -215,4 +215,20 @@ div.quest-claim-button-container button:hover {
     cursor: pointer;
     color: #57033b;
     background-color: #f3f3f3;
+}
+
+span.old-price {
+    text-decoration: line-through;
+    color: black;
+}
+
+span.new-price {
+    font-weight: bold;
+    color: red;
+}
+
+span.no-discount-price {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 30, 2, 0.3)), to(#020100));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

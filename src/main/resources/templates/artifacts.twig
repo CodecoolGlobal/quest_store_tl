@@ -25,7 +25,7 @@
     <section class="discount-section">
         <p>Current discount is {{ discount }}%</p>
         <form method="post" action="#">
-            <label for="newDiscount">Enter new discount % (0-100)</label>
+            <label for="newDiscount">Enter new discount % (0-yellow100)</label>
             <input id="newDiscount" name="newDiscount" type="number" min="0" max="100">
             <button type="submit">Save</button>
         </form>
@@ -46,9 +46,11 @@
             </div>
 
             <div class="artifact-price-container">
-                <span>{{ artifact.getPrice }}</span>
-                {% if discount != 0 %}
-                <span>{{ newPrice }}</span>
+                {% if discount == 0 %}
+                <span class="no-discount-price">{{ artifact.getPrice }}</span>
+                {% else %}
+                <span class="old-price">{{ artifact.getPrice }}</span>
+                <span class="new-price">{{ newPrice }}</span>
                 {% endif %}
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
@@ -82,9 +84,11 @@
             </div>
 
             <div class="artifact-price-container">
-                <span>{{ artifact.getPrice }}</span>
-                {% if discount != 0 %}
-                <span>{{ newPrice }}</span>
+                {% if discount == 0 %}
+                <span class="no-discount-price">{{ artifact.getPrice }}</span>
+                {% else %}
+                <span class="old-price">{{ artifact.getPrice }}</span>
+                <span class="new-price">{{ newPrice }}</span>
                 {% endif %}
                 <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
             </div>
