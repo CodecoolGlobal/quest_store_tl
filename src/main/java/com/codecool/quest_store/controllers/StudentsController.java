@@ -41,6 +41,7 @@ public class StudentsController implements HttpHandler {
     private void createGETModel(JtwigModel model) {
         List<User> codecoolers = employeeService.getUsers(UserType.CODECOOLER);
         model.with("codecoolers", codecoolers);
+        model.with("balance", userService);
     }
 
     private void renderCodecoolers(HttpExchange httpExchange) throws IOException {

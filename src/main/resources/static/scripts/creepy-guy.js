@@ -1,7 +1,10 @@
 "use strict";
 
+import { addEventListenerForTakeActionContainer } from './configuration-menu.js';
+
 window.onload = function () {
     addEventListenerForViewMentorsButton();
+    enableEventListenersForTakeActionContainer();
     addEventListenerForNotificationOfMentor();
 };
 
@@ -12,7 +15,7 @@ function showMentorNotification() {
 }
 
 function redirectToMentorsPage() {
-    window.location.href="/mentors";
+    window.location.href = "/mentors";
 }
 
 function addEventListenerForViewMentorsButton() {
@@ -28,3 +31,10 @@ function addEventListenerForNotificationOfMentor() {
 function handleMentorNotification() {
     showMentorNotification();
 }
+
+function enableEventListenersForTakeActionContainer() {
+    addEventListenerForTakeActionContainer("create-mentor-button", "create-mentor-form");
+    addEventListenerForTakeActionContainer("create-room-button", "create-room-form");
+    addEventListenerForTakeActionContainer("edit-levels-button", "edit-levels-form");
+}
+

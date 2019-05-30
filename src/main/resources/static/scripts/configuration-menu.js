@@ -1,22 +1,5 @@
 "use strict";
 
-window.onload = function () {
-    EnableEventListenerToggleHideShowForm();
-};
-
-function EnableEventListenerToggleHideShowForm() {
-    let takeActionButtons = document.getElementsByClassName("action-button");
-    let actionForms = document.getElementsByClassName("action-form-container");
-
-    for (let i = 0; i < takeActionButtons.length; i++) {
-        for (let j = 0; j < actionForms.length; j++) {
-            takeActionButtons[i].addEventListener("click", function () {
-                toggleHideShowActionForm(actionForms[i]);
-            });
-        }
-    }
-}
-
 function closeActionForm(actionForm) {
     actionForm.style.display = "none";
 }
@@ -26,9 +9,17 @@ function openActionForm(actionForm) {
 }
 
 function toggleHideShowActionForm(actionForm) {
-    if (actionForm.style.display === "none") {
-        openActionForm(actionForm);
-    } else {
+    if (actionForm.style.display === "block") {
         closeActionForm(actionForm);
+    } else {
+        openActionForm(actionForm);
     }
+}
+
+export function addEventListenerForTakeActionContainer(createButton, createForm) {
+    let createObjectButton = document.getElementById(createButton);
+    let createObjectForm = document.getElementById(createForm);
+    createObjectButton.addEventListener("click", function () {
+        toggleHideShowActionForm(createObjectForm);
+    });
 }
