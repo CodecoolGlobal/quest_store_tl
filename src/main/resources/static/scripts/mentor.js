@@ -1,7 +1,10 @@
 "use strict";
 
+import { addEventListenerForTakeActionContainer } from './configuration-menu.js';
+
 window.onload = function () {
     handleViewButtonsRedirection();
+    enableEventListenersForTakeActionContainer();
 };
 
 function redirectToCodecoolersPage() {
@@ -44,4 +47,13 @@ function handleViewButtonsRedirection() {
     addEventListenerForViewCodecoolersButton();
     addEventListenerForViewQuestsButton();
     addEventListenerForViewArtifactsButton();
+}
+
+function enableEventListenersForTakeActionContainer() {
+    addEventListenerForTakeActionContainer("create-student-button", "create-student-form");
+    addEventListenerForTakeActionContainer("create-quest-button", "create-quest-form");
+    addEventListenerForTakeActionContainer("create-artifact-button", "create-artifact-form");
+    addEventListenerForTakeActionContainer("create-team-button", "create-team-form");
+    addEventListenerForTakeActionContainer("review-quests-button", "review-quests-form");
+    addEventListenerForTakeActionContainer("review-artifacts-button", "review-artifacts-form");
 }
