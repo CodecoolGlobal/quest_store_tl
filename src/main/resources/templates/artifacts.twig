@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
     <link rel="stylesheet" href="../static/assets/stylesheets/item-card.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -23,11 +24,11 @@
 </header>
 {% if 2 in userType %}
     <section class="discount-section">
-        <p>Current discount is {{ discount }}%</p>
+        <p>Current discount: <span id="current-discount">{{ discount }}%</span></p>
         <form method="post" action="#">
-            <label for="newDiscount">Enter new discount % (0-100)</label>
+            <label for="newDiscount">Enter new discount % (0-100):</label>
             <input id="newDiscount" name="newDiscount" type="number" min="0" max="100">
-            <button type="submit">Save</button>
+            <button type="submit" class="save-button"><i class="fa fa-save"></i></button>
         </form>
     </section>
 {% endif %}
