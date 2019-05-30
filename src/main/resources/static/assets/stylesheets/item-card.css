@@ -19,7 +19,7 @@
 
 .artifact-container,
 .quest-container {
-    margin: 90px 0;
+    margin: 90px 10px;
     width: 300px;
     height: 380px;
     border-top-left-radius: 10px;
@@ -85,7 +85,7 @@ div.quest-image-container img {
 
 .artifact-price-container {
     position: relative;
-    padding-left: 120px;
+    padding-left: 0;
     bottom: 115px;
 }
 
@@ -97,7 +97,6 @@ div.quest-image-container img {
 
 .artifact-price-container span,
 .quest-reward-container p {
-    padding-right: 5px;
     font-size: 30px;
     font-weight: bolder;
     color: #F5C21B;
@@ -108,25 +107,33 @@ div.quest-image-container img {
 
 div.artifact-price-container img {
     width: 100px;
+    position: absolute;
+    right: 0;
+}
+
+div.artifact-price-container span {
+    position: relative;
+    bottom: -40px;
+    left: 30px;
 }
 
 /* title container */
 
 div.artifact-title-container {
     position: relative;
-    bottom: 90px;
+    bottom: 70px;
 }
 
 div.quest-title-container {
     position: relative;
-    bottom: 140px;
+    bottom: 150px;
 }
 
 div.artifact-title-container,
 div.quest-title-container {
     margin: auto;
     height: 20px;
-    width: 150px;
+    width: 180px;
     padding: 5px;
     border-radius: 10px;
     border: 2px solid rgba(64, 156, 255, 0.74);
@@ -153,7 +160,7 @@ div.quest-title-container p {
 
 div.artifact-description-container {
     position: relative;
-    bottom: 78px;
+    bottom: 58px;
 }
 
 div.quest-description-container {
