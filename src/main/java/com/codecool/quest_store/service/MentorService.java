@@ -6,7 +6,6 @@ import com.codecool.quest_store.dao.ItemDaoImpl;
 
 import com.codecool.quest_store.model.Item;
 
-import com.codecool.quest_store.model.ItemType;
 import com.codecool.quest_store.view.View;
 
 public class MentorService {
@@ -19,14 +18,12 @@ public class MentorService {
         view = new View();
     }
 
-    public void createItem(String title, String description, int price, ItemType ITEM_TYPE) {
-        Item item;
-
-        item = new Item.Builder()
+    public void createItem(String title, String description, int price, int itemType) {
+        Item item = new Item.Builder()
                 .withTitle(title)
                 .withDescription(description)
                 .withPrice(price)
-                .withType(ITEM_TYPE.getItemType())
+                .withType(itemType)
                 .build();
 
         try {
