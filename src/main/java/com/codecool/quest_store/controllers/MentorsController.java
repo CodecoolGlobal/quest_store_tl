@@ -32,7 +32,7 @@ public class MentorsController implements HttpHandler {
         String method = httpExchange.getRequestMethod();
 
         if (method.equals("GET")) {
-            User student = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
+            userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
             renderMentor(httpExchange);
         }
     }
