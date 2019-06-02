@@ -1,11 +1,12 @@
 package com.codecool.quest_store.dao;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.codecool.quest_store.model.Room;
 
-public class RoomDaoImpl implements Dao<Room> {
+public class RoomDaoImpl implements Dao<Room>, RoomDao {
 
     @Override
     public void create(Room room) throws DaoException {
@@ -53,5 +54,32 @@ public class RoomDaoImpl implements Dao<Room> {
         } catch (SQLException e){
             throw new DaoException("failed to extract team from result set", e);
         }
+    }
+
+    @Override
+    public Map<String, Integer> getRoomTypes() throws DaoException {
+        String query = "SELECT id, name FROM rooms";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            return getRoomTypesFrom(preparedStatement);
+        } catch (SQLException e) {
+            throw new DaoException("Failed to get room types.");
+        }
+    }
+
+    private Map<String, Integer> getRoomTypesFrom(PreparedStatement preparedStatement) throws DaoException {
+        Map<String, Integer> roomTypes = new HashMap<>();
+        Integer id;
+        String roomType;
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                roomType = resultSet.getString("name");
+                roomTypes.put(roomType, id);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Failed to populate map of room types");
+        }
+        return roomTypes;
     }
 }
