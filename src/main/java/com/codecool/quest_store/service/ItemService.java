@@ -1,31 +1,35 @@
 package com.codecool.quest_store.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.codecool.quest_store.dao.*;
 import com.codecool.quest_store.model.Funding;
 import com.codecool.quest_store.model.Item;
 import com.codecool.quest_store.model.Transaction;
 import com.codecool.quest_store.model.User;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
+import com.codecool.quest_store.view.View;
 
 public class ItemService {
 
     private ItemDao itemDAO;
     private TransactionDao transactionDao;
     private FundingDao fundingDao;
+    private View view;
 
     private static final int[] ARTIFACT_TYPES = {1, 2};
     private static final int[] QUEST_TYPES = {3, 4};
-
 
     public ItemService() {
         this.itemDAO = new ItemDaoImpl();
         this.transactionDao = new TransactionDaoImpl();
         this.fundingDao = new FundingDaoImpl();
+        view = new View();
     }
 
     public List<Item> getAllItemsOfType(int itemType) {
@@ -36,7 +40,7 @@ public class ItemService {
         } catch (DaoException e) {
             e.printStackTrace();
         }
-        for(Item item : allItems){
+        for (Item item : allItems) {
             if (item.getType() == itemType) itemsOfType.add(item);
         }
         return itemsOfType;
@@ -46,20 +50,20 @@ public class ItemService {
         List<Item> itemsOfType = new ArrayList<>();
         List<Item> allItems = items;
 
-        for(Item item : allItems){
+        for (Item item : allItems) {
             if (item.getType() == itemType) itemsOfType.add(item);
         }
         return itemsOfType;
     }
 
-    public Item getItemById(int id) throws DaoException{
+    public Item getItemById(int id) throws DaoException {
         return itemDAO.getItemById(id);
     }
 
-    public void registerNewTransaction(Funding funding, User user) throws DaoException{
+    public void registerNewTransaction(Funding funding, User user) throws DaoException {
         Transaction newTransaction;
         Item item = itemDAO.getItemById(funding.getITEM_ID());
-        if (isArtifact(item)){
+        if (isArtifact(item)) {
             newTransaction = new Transaction.Builder()
                     .withFUNDING_ID(funding.getID())
                     .withUSER_ID(user.getId())
@@ -87,7 +91,6 @@ public class ItemService {
 
     public Funding registerNewFunding(User user, Item item) throws DaoException {
         int newFundingId = fundingDao.getFundingSequenceNextVal();
-//        System.out.println("funding next val = " + newFundingId);
         Funding newFunding;
         if (user.getTeamId() != 0) {
             newFunding = new Funding.Builder()
@@ -107,5 +110,15 @@ public class ItemService {
 
     public void updateFundingStatusAsPending(Funding funding) throws DaoException {
         fundingDao.updateFundingStatus(funding, 2);
+    }
+
+    public Map<String, Integer> getItemTypes() {
+        Map<String, Integer> itemTypes = null;
+        try {
+            itemTypes = itemDAO.getItemTypes();
+        } catch (DaoException e) {
+            view.printError(e.getMessage());
+        }
+        return itemTypes;
     }
 }
