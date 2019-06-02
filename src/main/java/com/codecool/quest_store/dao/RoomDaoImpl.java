@@ -1,30 +1,31 @@
 package com.codecool.quest_store.dao;
 
-import com.codecool.quest_store.model.Room;
-
 import java.sql.*;
+import java.util.Map;
+
+import com.codecool.quest_store.model.Room;
 
 public class RoomDaoImpl implements Dao<Room> {
 
     @Override
-    public void create(Room thing) throws DaoException {
+    public void create(Room room) throws DaoException {
         String SQL = "INSERT INTO rooms (name) VALUES (?)";
 
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(SQL)) {
-            pstmt.setString(1, thing.getRoomName());
+            pstmt.setString(1, room.getRoomName());
             pstmt.executeUpdate();
         } catch (SQLException e){
-            throw new DaoException("failed to create room " + thing.getRoomName(), e);
+            throw new DaoException("failed to create room " + room.getRoomName(), e);
         }
 
     }
 
     @Override
-    public void update(Room thing) throws DaoException {
+    public void update(Room room) throws DaoException {
 
-        int id = thing.getId();
-        String newName = thing.getRoomName();
+        int id = room.getId();
+        String newName = room.getRoomName();
 
         String SQL =
                 "UPDATE rooms SET name = ? WHERE id = ?;";
