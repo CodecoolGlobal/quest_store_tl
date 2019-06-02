@@ -12,7 +12,6 @@ import com.codecool.quest_store.model.RoomType;
 import com.codecool.quest_store.model.User;
 
 import com.codecool.quest_store.model.UserDefaultPhoto;
-import com.codecool.quest_store.model.UserType;
 import com.codecool.quest_store.view.View;
 
 public class EmployeeService {
@@ -27,17 +26,15 @@ public class EmployeeService {
         view = new View();
     }
 
-    public void createUser(String name, String surname, String email, UserType USER_TYPE, UserDefaultPhoto USER_PHOTO) {
-        User user;
-
-        user = new User.UserBuilder()
+    public void createUser(String name, String surname, String email, int userType, UserDefaultPhoto USER_PHOTO) {
+        User user = new User.UserBuilder()
                 .withName(name)
                 .withSurname(surname)
                 .withPhoneNumber(null)
                 .withEmail(email)
                 .withPassword("123")
                 .withPhoto(USER_PHOTO.getUserPhoto())
-                .withTypeId(USER_TYPE.getUserType())
+                .withTypeId(userType)
                 .withRoomId(RoomType.PROGBASIC.getRoomType())
                 .build();
 
@@ -49,11 +46,11 @@ public class EmployeeService {
         }
     }
 
-    public List<User> getUsers(UserType USER_TYPE) {
+    public List<User> getUsers(int userType) {
         List<User> users = new ArrayList<>();
 
         try {
-            users = userDao.getUsersByType(USER_TYPE.getUserType());
+            users = userDao.getUsersByType(userType);
             view.printSuccess("Successfully retrieved users.");
         } catch (DaoException e) {
             view.printError(e.getMessage());
