@@ -36,7 +36,7 @@ public class CreepyGuyController implements HttpHandler {
         String method = httpExchange.getRequestMethod();
 
         if (method.equals("GET")) {
-            User activeUser = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
+            userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
             renderCreepyGuy(httpExchange);
         }
 
