@@ -11,7 +11,6 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import com.codecool.quest_store.model.User;
-import com.codecool.quest_store.model.UserType;
 
 import com.codecool.quest_store.service.EmployeeService;
 import com.codecool.quest_store.service.ServiceUtility;
@@ -33,13 +32,14 @@ public class StudentsController implements HttpHandler {
         String method = httpExchange.getRequestMethod();
 
         if (method.equals("GET")) {
-            User activeUser = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
+            userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
             renderCodecoolers(httpExchange);
         }
     }
 
     private void createGETModel(JtwigModel model) {
-        List<User> codecoolers = employeeService.getUsers(UserType.CODECOOLER);
+        int codecoolerType = userService.getUserTypes().get("Codecooler");
+        List<User> codecoolers = employeeService.getUsers(codecoolerType);
         model.with("codecoolers", codecoolers);
         model.with("balance", userService);
     }
