@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import com.codecool.quest_store.model.ItemType;
 import com.codecool.quest_store.model.UserDefaultPhoto;
-import com.codecool.quest_store.model.UserType;
 import com.codecool.quest_store.service.EmployeeService;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -16,9 +15,8 @@ import com.sun.net.httpserver.HttpHandler;
 
 import com.codecool.quest_store.service.MentorService;
 import com.codecool.quest_store.service.ServiceUtility;
-import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.service.UserService;
-
+import com.codecool.quest_store.model.User;
 
 public class MentorController implements HttpHandler {
 
@@ -77,7 +75,8 @@ public class MentorController implements HttpHandler {
         String name = inputs.get("cc-name");
         String surname = inputs.get("cc-surname");
         String email = inputs.get("cc-email");
-        employeeService.createUser(name, surname, email, UserType.CODECOOLER, UserDefaultPhoto.CODECOOLER);
+        int userType = userService.getUserTypes().get("Codecooler");
+        employeeService.createUser(name, surname, email, userType, UserDefaultPhoto.CODECOOLER);
 
     }
 
