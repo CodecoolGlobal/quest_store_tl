@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.codecool.quest_store.model.Item;
@@ -162,17 +161,6 @@ public class ItemDaoImpl implements ItemDao {
 
         } catch (SQLException e){
             throw new DaoException("Failed to get item by id", e);
-        }
-    }
-
-    public static void main(String[] args) {
-        ItemDaoImpl dao = new ItemDaoImpl();
-        try {
-            for(Item item : dao.getUserItems(1)) {
-                System.out.println(item.getType());
-            }
-        } catch(DaoException error) {
-            error.printStackTrace();
         }
     }
 }
