@@ -12,8 +12,6 @@ import com.sun.net.httpserver.HttpHandler;
 
 import com.codecool.quest_store.model.User;
 
-import com.codecool.quest_store.model.UserType;
-
 import com.codecool.quest_store.service.EmployeeService;
 import com.codecool.quest_store.service.ServiceUtility;
 import com.codecool.quest_store.service.UserService;
@@ -40,7 +38,8 @@ public class MentorsController implements HttpHandler {
     }
 
     private void createGETModel(JtwigModel model) {
-        List<User> mentors = employeeService.getUsers(UserType.MENTOR);
+        int mentorType = userService.getUserTypes().get("Mentor");
+        List<User> mentors = employeeService.getUsers(mentorType);
         model.with("mentors", mentors);
     }
 
