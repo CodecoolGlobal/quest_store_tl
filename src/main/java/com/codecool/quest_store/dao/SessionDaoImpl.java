@@ -36,7 +36,7 @@ public class SessionDaoImpl {
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, session);
             try (ResultSet rs = statement.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
                     int user_id = rs.getInt("user_id");
                     System.out.println(session);
                     return user_id;
@@ -46,14 +46,5 @@ public class SessionDaoImpl {
             throw new DaoException("It's impossible to update this session");
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        SessionDaoImpl dao = new SessionDaoImpl();
-        try {
-            dao.deleteSession(-525031425);
-        } catch(DaoException error) {
-            error.printStackTrace();
-        }
     }
 }

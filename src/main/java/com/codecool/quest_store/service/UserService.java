@@ -1,21 +1,22 @@
 package com.codecool.quest_store.service;
 
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
+
 import com.codecool.quest_store.dao.*;
 import com.codecool.quest_store.model.Item;
-import com.codecool.quest_store.model.Transaction;
 import com.codecool.quest_store.model.User;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import com.codecool.quest_store.view.View;
 
 public class UserService {
-    UserDaoImpl userDao;
-    SessionDaoImpl sessionDao;
-    ItemDaoImpl itemDao;
-    ItemService itemService;
-    TransactionDaoImpl transactionDao;
-    LoginService loginService;
+    private UserDaoImpl userDao;
+    private SessionDaoImpl sessionDao;
+    private ItemDaoImpl itemDao;
+    private ItemService itemService;
+    private TransactionDaoImpl transactionDao;
+    private LoginService loginService;
+    private View view;
 
     public  UserService() {
         userDao = new UserDaoImpl();
@@ -24,6 +25,7 @@ public class UserService {
         itemService = new ItemService();
         transactionDao = new TransactionDaoImpl();
         loginService = new LoginService();
+        view = new View();
     }
 
     private User getUser(int userId) throws DaoException {
@@ -49,7 +51,7 @@ public class UserService {
             return getUser(getUserId(session));
         }
         catch(UnsupportedEncodingException | DaoException error){
-            error.printStackTrace();
+            view.printError(error.getMessage());
         }
         return null;
     }
@@ -58,7 +60,7 @@ public class UserService {
         try {
             return itemDao.getUserItems(userId);
         } catch (DaoException error) {
-            error.printStackTrace();
+            view.printError(error.getMessage());
         }
         return null;
     }
@@ -80,7 +82,7 @@ public class UserService {
             return transactionDao.getPriceSumOfRealizedQuests(user)
                     - transactionDao.getPriceSumOfPurchasedArtifacts(user);
         } catch (DaoException error) {
-            error.printStackTrace();
+            view.printError(error.getMessage());
         }
         return null;
     }
@@ -89,8 +91,17 @@ public class UserService {
         try{
             loginService.deleteSession(getSessionFromCookie(cookie));
         } catch (UnsupportedEncodingException | DaoException error) {
-            error.printStackTrace();
+            view.printError(error.getMessage());
         }
     }
 
+    public Map<String, Integer> getUserTypes() {
+        Map<String, Integer> userTypes = null;
+        try {
+           userTypes = userDao.getUserTypes();
+        } catch (DaoException e) {
+            view.printError(e.getMessage());
+        }
+        return  userTypes;
+    }
 }

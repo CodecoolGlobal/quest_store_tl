@@ -1,10 +1,13 @@
 package com.codecool.quest_store.dao;
 
-import com.codecool.quest_store.model.User;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import com.codecool.quest_store.model.User;
 
 public class UserDaoImpl implements UserDao, Dao<User> {
 
@@ -182,6 +185,33 @@ public class UserDaoImpl implements UserDao, Dao<User> {
             throw new DaoException("There isn't an applicant with data: " + name + " " + password);
         }
         return null;
+    }
+
+    @Override
+    public Map<String, Integer> getUserTypes() throws DaoException {
+        String query = "SELECT id, type FROM user_types";
+        try (Connection connection = DatabaseConnector.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        return getUserTypesFrom(preparedStatement);
+        } catch (SQLException e) {
+            throw new DaoException("Failed to get user types.");
+        }
+    }
+
+    private Map<String, Integer> getUserTypesFrom(PreparedStatement preparedStatement) throws DaoException {
+        Map<String, Integer> userTypes = new HashMap<>();
+        Integer id;
+        String userType;
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                userType = resultSet.getString("type");
+                userTypes.put(userType, id);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Failed to populate map of user types");
+        }
+        return userTypes;
     }
 }
 

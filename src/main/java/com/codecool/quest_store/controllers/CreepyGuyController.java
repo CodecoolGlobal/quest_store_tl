@@ -9,7 +9,6 @@ import org.jtwig.JtwigTemplate;
 
 import com.codecool.quest_store.model.User;
 import com.codecool.quest_store.model.UserDefaultPhoto;
-import com.codecool.quest_store.model.UserType;
 
 import com.codecool.quest_store.service.CreepyGuyService;
 import com.codecool.quest_store.service.EmployeeService;
@@ -37,7 +36,7 @@ public class CreepyGuyController implements HttpHandler {
         String method = httpExchange.getRequestMethod();
 
         if (method.equals("GET")) {
-            User activeUser = userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
+            userService.getUserByCookie(httpExchange.getRequestHeaders().get("Cookie").get(0));
             renderCreepyGuy(httpExchange);
         }
 
@@ -72,7 +71,8 @@ public class CreepyGuyController implements HttpHandler {
         String name = inputs.get("mentor-name");
         String surname = inputs.get("mentor-surname");
         String email = inputs.get("mentor-email");
-        employeeService.createUser(name, surname, email, UserType.MENTOR, UserDefaultPhoto.MENTOR);
+        int userType = userService.getUserTypes().get("Mentor");
+        employeeService.createUser(name, surname, email, userType, UserDefaultPhoto.MENTOR);
     }
 
     private void handleCreateRoom(Map<String, String> inputs) {
