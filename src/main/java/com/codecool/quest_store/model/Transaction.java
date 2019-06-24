@@ -1,13 +1,14 @@
 package com.codecool.quest_store.model;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
 
     private final int ID;
     private final int FUNDING_ID;
     private final int USER_ID;
-    private final LocalDate TIMESTAMP;
+    private final OffsetDateTime TIMESTAMP;
     private final int PAID_AMOUNT;
 
     private Transaction(Builder builder) {
@@ -30,8 +31,13 @@ public class Transaction {
         return USER_ID;
     }
 
-    public LocalDate getTIMESTAMP() {
+    public OffsetDateTime getTIMESTAMP() {
         return TIMESTAMP;
+    }
+
+    public String getFormattedDate() {
+        String format = "dd/MM/yy E hh:mm a";
+        return TIMESTAMP.format(DateTimeFormatter.ofPattern(format));
     }
 
     public int getPAID_AMOUNT() {
@@ -42,7 +48,7 @@ public class Transaction {
         private int ID;
         private int FUNDING_ID;
         private int USER_ID;
-        private LocalDate TIMESTAMP;
+        private OffsetDateTime TIMESTAMP;
         private int PAID_AMOUNT;
 
         public Builder withID(int ID) {
@@ -60,7 +66,7 @@ public class Transaction {
             return this;
         }
 
-        public Builder withTIMESTAMP(LocalDate TIMESTAMP) {
+        public Builder withTIMESTAMP(OffsetDateTime TIMESTAMP) {
             this.TIMESTAMP = TIMESTAMP;
             return this;
         }

@@ -1,14 +1,11 @@
 package com.codecool.quest_store.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 import com.codecool.quest_store.model.Transaction;
+import com.codecool.quest_store.model.User;
 
 public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
 
@@ -22,7 +19,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
 
             preparedStatement.setInt(1, transaction.getFUNDING_ID());
             preparedStatement.setInt(2, transaction.getUSER_ID());
-            preparedStatement.setDate(3, Date.valueOf(transaction.getTIMESTAMP()));
+            preparedStatement.setObject(3, transaction.getTIMESTAMP(), Types.TIMESTAMP_WITH_TIMEZONE);
             preparedStatement.setInt(4, transaction.getPAID_AMOUNT());
             preparedStatement.executeUpdate();
 
@@ -45,7 +42,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
 
             preparedStatement.setInt(1, transaction.getFUNDING_ID());
             preparedStatement.setInt(2, transaction.getUSER_ID());
-            preparedStatement.setDate(3, Date.valueOf(transaction.getTIMESTAMP()));
+            preparedStatement.setObject(3, transaction.getTIMESTAMP());
             preparedStatement.setInt(4, transaction.getPAID_AMOUNT());
             preparedStatement.setInt(5, transaction.getID());
             preparedStatement.executeUpdate();
@@ -60,7 +57,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
         int ID;
         int FUNDING_ID;
         int USER_ID;
-        LocalDate TIMESTAMP;
+        OffsetDateTime TIMESTAMP;
         int PAID_AMOUNT;
         Transaction transaction;
 
@@ -68,7 +65,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
             ID = resultSet.getInt("id");
             FUNDING_ID = resultSet.getInt("funding_id");
             USER_ID = resultSet.getInt("user_id");
-            TIMESTAMP = resultSet.getDate("timestamp").toLocalDate();
+            TIMESTAMP = resultSet.getObject("timestamp", OffsetDateTime.class);
             PAID_AMOUNT = resultSet.getInt("paid_amount");
         } catch (SQLException e) {
             throw new DaoException("Failed to get transaction from result set\n" + e);
@@ -86,33 +83,32 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
     }
 
     @Override
-    public int getPriceSumOfRealizedQuests(Transaction transaction) throws DaoException {
-        int userId = transaction.getUSER_ID();
-        String query = "SELECT SUM(price) FROM items "
-                + "INNER JOIN transactions "
-                + "ON transactions.id_item = items.id "
-                + "INNER JOIN item_types "
-                + "ON items.item_type = item_types.id "
-                + "INNER JOIN statuses "
-                + "ON transactions.id_status = statuses.id "
-                + "WHERE transactions.id_user = ? "
-                + "AND item_types.type='Quest' AND statuses.type='Realized'";
+    public int getPriceSumOfRealizedQuests(User user) throws DaoException {
+        int userId = user.getId();
+        String query = "SELECT SUM(paid_amount) FROM transactions "
+                + "INNER JOIN fundings "
+                + "ON transactions.funding_id = fundings.id "
+                + "INNER JOIN status_history "
+                + "ON fundings.id = status_history.funding_id "
+                + "INNER JOIN items "
+                + "ON fundings.item_id = items.id "
+                + "WHERE transactions.user_id = ? "
+                + "AND items.item_type IN (3,4) AND status_history.status_id != 4;";
         return getSumOfPrices(userId, query);
     }
 
     @Override
-    public int getPriceSumOfPurchasedArtifacts(Transaction transaction) throws DaoException {
-        int userId = transaction.getUSER_ID();
-        String query = "SELECT SUM(price) FROM items "
-                + "INNER JOIN transactions "
-                + "ON transactions.id_item = items.id "
-                + "INNER JOIN item_types "
-                + "ON items.item_type = item_types.id "
-                + "INNER JOIN statuses "
-                + "ON transactions.id_status = statuses.id "
-                + "WHERE transactions.id_user = ? "
-                + "AND item_types.type='Artifact' "
-                + "AND (statuses.type='Realized' OR statuses.type='Pending' OR statuses.type='In progress')";
+    public int getPriceSumOfPurchasedArtifacts(User user) throws DaoException {
+        int userId = user.getId();
+        String query = "SELECT SUM(paid_amount) FROM transactions "
+                + "INNER JOIN fundings "
+                + "ON transactions.funding_id = fundings.id "
+                + "INNER JOIN status_history "
+                + "ON fundings.id = status_history.funding_id "
+                + "INNER JOIN items "
+                + "ON fundings.item_id = items.id "
+                + "WHERE transactions.user_id = ? "
+                + "AND items.item_type IN (1,2) AND status_history.status_id != 4;";
         return getSumOfPrices(userId, query);
     }
 
@@ -126,7 +122,7 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 if (resultSet.next()) {
-                    sumOfPrices = ((Number) resultSet.getObject(1)).intValue();
+                    sumOfPrices = resultSet.getInt("sum");
                 }
             }
 
@@ -135,4 +131,6 @@ public class TransactionDaoImpl implements TransactionDao, Dao<Transaction> {
         }
         return sumOfPrices;
     }
+
+
 }

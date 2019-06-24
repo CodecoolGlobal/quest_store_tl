@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Student</title>
+        <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
+        <link rel="stylesheet" href="../static/assets/stylesheets/item-card.css"/>
+        <link rel="stylesheet" href="../static/assets/stylesheets/user-team.css"/>
+
+    </head>
+
+    <body>
+
+        <!--Header-->
+        <header>
+
+            <div class="primary-header flex-container-header">
+
+                <div>
+                    <img src="../static/assets/images/logo/logo.png" alt="website Logo" id="main-logo"/>
+                </div>
+
+                <div class="nav primary-nav">
+
+                    <div class="flex-item-header">
+                        <a href="student">HOME</a>
+                    </div>
+
+                    <div class="dropdown flex-item-header">
+                        <button class="dropbtn">MENU<i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="artifacts">ARTIFACTS</a>
+                            <a href="quests">QUESTS</a>
+                        </div>
+                    </div>
+
+                    <div class="flex-item-header">
+                        <a href="login">LOGOUT</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {#<div class ="primary-header">
+                <input class="search-field" type="text" placeholder="Search..." id="main-page-search">
+            </div>#}
+
+        </header>
+
+        <!--User content-->
+
+        <section class="content">
+
+            <div class="flex-container-content">
+
+                 <!--Information about student-->
+
+                <div class="user-content">
+
+                    <div class="information-user-container">
+
+                        <div class="user-photo-container">
+                            <img src="../static/assets/images/student/codecooler.png" alt="Student photo"/>
+                        </div>
+
+                        <div class="student-coins-container">
+                            <img src="../static/assets/images/student/coins-bag.png" alt="Number of Coins"/>
+                        </div>
+
+                        <div class="coins">
+                            <p>{{ wallet }}</p>
+                        </div>
+
+
+                        <div class="info-container">
+                            <p>Name:<br/>{{ name }}</p>
+                            <p>Surname:<br/>{{ surname }}</p>
+                            <p>E-mail:<br/>{{ email }}</p>
+                            <p>Phone number:<br/>{{ phone }}</p>
+                        </div>
+
+                    </div>
+
+                    <ul>
+                        <li><a href="team.html"><button class="button-student">Go to my team</button></a></li>
+                        <li><a href="quests"><button class="button-student">Go to quests</button></a></li>
+                        <li><a href="artifacts"><button class="button-student">Go to artifacts</button></a></li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+                <!--Artifacts and quests-->
+
+                <div class="artifacts-quests">
+
+                    <!--Artifacts-->
+
+                    <div>
+
+                        <p>My Artifacts</p>
+
+                        <div id="primary-artifacts-container">
+
+                            <!--Normal Card-->
+
+                            {% for artifact in artifacts %}
+
+                            <div class="small-card-artifact artifact-container basic-artifact">
+
+                                <div class="artifact-image-container">
+                                    <img src="../static/assets/images/artifact-icons/artifact1.png" alt="Artifact Image"/>
+                                </div>
+
+                                <div class="artifact-price-container">
+                                    <span class="no-discount-price">{{ artifact.getPrice }}</span>
+                                    <img src="../static/assets/images/artifact-icons/artifact-coins.png" alt="Pile of coins"/>
+                                </div>
+
+                                <div class="artifact-title-container">
+                                    <p>{{ artifact.getTitle }}</p>
+                                </div>
+
+                                <div class="artifact-description-container">
+                                    <p>{{ artifact.getDescription }}</p>
+                                </div>
+
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <!--Quests-->
+
+                    <div>
+
+                        <p>My Quest</p>
+
+                        <div id="primary-quests-container">
+
+                            <!--Basic Quest-->
+
+                            {% for quest in basic_quests %}
+
+                            <div class="small-card-artifact quest-container basic-quest">
+
+                                <div class="quest-image-container">
+                                    <div class="bag-of-coins">
+                                        <img src="../static/assets/images/quest-icons/basic-quest.png" alt="Quest Image"/>
+                                    </div>
+
+                                    <div class="pile-of-coins">
+                                        <img src="../static/assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                                    </div>
+                                </div>
+
+                                <div class="quest-reward-container">
+                                    <p>{{ quest.getPrice }}</p>
+                                </div>
+
+                                <div class="quest-title-container">
+                                    <p>{{ quest.getTitle }}</p>
+                                </div>
+
+                                <div class="quest-description-container">
+                                    <p>{{ quest.getDescription }}</p>
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                            <!--Extra Quest-->
+
+                            {% for quest in extra_quests %}
+
+                            <div class="small-card-artifact quest-container extra-quest">
+
+                                <div class="quest-image-container">
+                                    <div class="bag-of-coins">
+                                        <img src="../static/assets/images/quest-icons/extra-quest.png" alt="Quest Image"/>
+                                    </div>
+
+                                    <div class="pile-of-coins">
+                                        <img src="../static/assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                                    </div>
+                                </div>
+
+                                <div class="quest-reward-container">
+                                    <p>{{ quest.getPrice }}</p>
+                                </div>
+
+                                <div class="quest-title-container">
+                                    <p>{{ quest.getTitle }}</p>
+                                </div>
+
+                                <div class="quest-description-container">
+                                    <p>{{ quest.getDescription }}</p>
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <p>Pending Quests</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--Footer-->
+
+        <footer>
+
+            <div class="flex-container-footer">
+
+                <div id="copyright">
+                    <small>Copyright &copy; 2019 Quest Store</small>
+                </div>
+
+                <div id="icon-github" class="icons">
+                    <a href="#"><img src="../static/assets/images/navigation-icons/icon-github.png" /></a>
+                </div>
+
+                <div>
+                    <ul class="icons nav">
+                        <li class="flex-item-footer"><a href="student"><img src="../static/assets/images/navigation-icons/icon-home.png"/></a></li>
+                        <li class="flex-item-footer"><a href="login"><img src="../static/assets/images/navigation-icons/icon-logout.png"/></a></li>
+                        <li class="flex-item-footer"><label for="main-page-search"><img src="../static/assets/images/navigation-icons/icon-search.png"/></label></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </footer>
+
+    </body>
+
+</html>

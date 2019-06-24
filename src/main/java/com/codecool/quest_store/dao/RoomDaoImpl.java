@@ -1,30 +1,32 @@
 package com.codecool.quest_store.dao;
 
+import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.codecool.quest_store.model.Room;
 
-import java.sql.*;
-
-public class RoomDaoImpl implements Dao<Room> {
+public class RoomDaoImpl implements Dao<Room>, RoomDao {
 
     @Override
-    public void create(Room thing) throws DaoException {
+    public void create(Room room) throws DaoException {
         String SQL = "INSERT INTO rooms (name) VALUES (?)";
 
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(SQL)) {
-            pstmt.setString(1, thing.getRoomName());
+            pstmt.setString(1, room.getRoomName());
             pstmt.executeUpdate();
         } catch (SQLException e){
-            throw new DaoException("failed to create room " + thing.getRoomName(), e);
+            throw new DaoException("failed to create room " + room.getRoomName(), e);
         }
 
     }
 
     @Override
-    public void update(Room thing) throws DaoException {
+    public void update(Room room) throws DaoException {
 
-        int id = thing.getId();
-        String newName = thing.getRoomName();
+        int id = room.getId();
+        String newName = room.getRoomName();
 
         String SQL =
                 "UPDATE rooms SET name = ? WHERE id = ?;";
@@ -52,5 +54,32 @@ public class RoomDaoImpl implements Dao<Room> {
         } catch (SQLException e){
             throw new DaoException("failed to extract team from result set", e);
         }
+    }
+
+    @Override
+    public Map<String, Integer> getRoomTypes() throws DaoException {
+        String query = "SELECT id, name FROM rooms";
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            return getRoomTypesFrom(preparedStatement);
+        } catch (SQLException e) {
+            throw new DaoException("Failed to get room types.");
+        }
+    }
+
+    private Map<String, Integer> getRoomTypesFrom(PreparedStatement preparedStatement) throws DaoException {
+        Map<String, Integer> roomTypes = new HashMap<>();
+        Integer id;
+        String roomType;
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                roomType = resultSet.getString("name");
+                roomTypes.put(roomType, id);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Failed to populate map of room types");
+        }
+        return roomTypes;
     }
 }

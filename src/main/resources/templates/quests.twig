@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Quests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/item-card.css"/>
+
+</head>
+
+<body>
+{% set userType = user.getTypeId %}
+<header>
+    {% if 1 in userType %}
+        {% include "classpath:/templates/student-header.twig" ignore missing %}
+    {% endif %}
+    {% if 2 in userType %}
+        {% include "classpath:/templates/mentor-header.twig" ignore missing %}
+    {% endif %}
+</header>
+
+<section class="quests-section content">
+
+    <div id="primary-quests-container">
+
+        <!--Basic Quest-->
+
+        {% for quest in basic_quests %}
+
+        <div class="quest-container basic-quest">
+
+            <div class="quest-image-container">
+                <div class="bag-of-coins">
+                    <img src="../static/assets/images/quest-icons/basic-quest.png" alt="Quest Image"/>
+                </div>
+
+                <div class="pile-of-coins">
+                    <img src="../static/assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                </div>
+            </div>
+
+            <div class="quest-reward-container">
+                <p>{{ quest.getPrice }}</p>
+            </div>
+
+            <div class="quest-title-container">
+                <p>{{ quest.getTitle }}</p>
+            </div>
+
+            <div class="quest-description-container">
+                <p>{{ quest.getDescription }}</p>
+            </div>
+            {% if 1 in userType %}
+            <div class="quest-claim-button-container">
+                <form method="post">
+                    <button name="questId" value={{ quest.getID }}>I did it!</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+
+        {% endfor %}
+
+        {% for quest in extra_quests %}
+
+        <!--Extra Quest-->
+
+        <div class="quest-container extra-quest">
+
+            <div class="quest-image-container">
+                <div class="bag-of-coins">
+                    <img src="../static/assets/images/quest-icons/extra-quest.png" alt="Quest Image"/>
+                </div>
+
+                <div class="pile-of-coins">
+                    <img src="../static/assets/images/quest-icons/pile-of-coins.png" alt="Pile of Coins"/>
+                </div>
+            </div>
+
+            <div class="quest-reward-container">
+                <p>{{ quest.getPrice }}</p>
+            </div>
+
+            <div class="quest-title-container">
+                <p>{{ quest.getTitle }}</p>
+            </div>
+
+            <div class="quest-description-container">
+                <p>{{ quest.getDescription }}</p>
+            </div>
+            {% if 1 in userType %}
+            <div class="quest-claim-button-container">
+                <form method="post">
+                    <button name="questId" value={{ quest.getID }}>I did it!</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<footer>
+    {% if 1 in userType %}
+        {% include "classpath:/templates/student-footer.twig" ignore missing %}
+    {% endif %}
+    {% if 2 in userType %}
+        {% include "classpath:/templates/mentor-footer.twig" ignore missing %}
+    {% endif %}
+</footer>
+
+</body>
+
+</html>

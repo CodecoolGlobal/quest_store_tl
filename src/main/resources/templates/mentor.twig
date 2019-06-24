@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Mentor's Watch Tower</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="icon" type="image/x-icon" href="../static/assets/images/logo/favicon.ico"/>
+
+    <link rel="stylesheet" href="../static/assets/stylesheets/main.css"/>
+    <link rel="stylesheet" href="../static/assets/stylesheets/configuration-menu.css"/>
+
+    <script src="../static/scripts/mentor.js" async type="module"></script>
+
+</head>
+
+<body>
+
+<header>
+
+    {% include "classpath:/templates/mentor-header.twig" ignore missing %}
+
+</header>
+
+<section class="employees-main-page-section content">
+
+    <div id="mentor-notification-message">
+    </div>
+
+    <div class="primary-main-page-container">
+
+        <div class="take-action-container">
+
+            <div class="action-button" id="create-student-button">
+                <img src="../static/assets/images/mentor/recruit-student.png" alt="Create Student" class="action-image"/>
+                <h2 class="action-title">Create Student</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">It's time to recruit a courageous warrior... or a DPSer... you know the
+                    drill.</p>
+            </div>
+
+            <div class="action-form-container" id="create-student-form">
+                <form class="action-form" method="POST">
+                    <label for="new-codecooler-name">Name</label>
+                    <input type="text" name="cc-name" placeholder="Codecooler's Name" required="required"
+                           id="new-codecooler-name"/>
+
+                    <label for="new-codecooler-surname">Surname</label>
+                    <input type="text" name="cc-surname" placeholder="Codecooler's Surname" required="required"
+                           id="new-codecooler-surname"/>
+
+                    <label for="new-codecooler-email">E-mail</label>
+                    <input type="text" name="cc-email" placeholder="Codecooler's E-mail" required="required"
+                           id="new-codecooler-email"/>
+
+                    <input type="submit" name="recruit-student-button" value="Recruit Codecooler" id="recruit-codecooler-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button" id="create-quest-button">
+                <img src="../static/assets/images/mentor/create-quest.png" alt="Create Quest" class="action-image"/>
+                <h2 class="action-title">Create Quest</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">It's ADVENTURE TIME!</p>
+            </div>
+
+            <div class="action-form-container" id="create-quest-form">
+                <form class="action-form" method="POST">
+                    <label for="new-quest-name">Name</label>
+                    <input type="text" name="quest-name" placeholder="Name your quest" required="required"
+                           id="new-quest-name"/>
+
+                    <label for="new-quest-task">Task</label>
+                    <input type="text" name="quest-task" placeholder="Task description" required="required"
+                           id="new-quest-task"/>
+
+                    <label for="new-quest-coins">Coins</label>
+                    <input type="number" name="quest-coins" placeholder="Coins given upon completion"
+                           required="required" id="new-quest-coins" min="0"/>
+
+                    <label for="quest-type-choice">>Quest's Type</label>
+                    <input list="quest-types" id="quest-type-choice" name="quest-type-choice" pattern="Basic|Extra"
+                           title="Must be Extra or Basic" placeholder="Choose Quest's Type"/>
+
+                    <datalist id="quest-types">
+                        <option value="Basic" name="basic-quest-option">Basic</option>
+                        <option value="Extra" name="extra-quest-option">Extra</option>
+                    </datalist>
+
+                    <input type="submit" name="create-quest-button" value="No, it's not hard" id="create-quest-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button" id="create-artifact-button">
+                <img src="../static/assets/images/mentor/create-artifact.png" alt="Create Artifact" class="action-image"/>
+                <h2 class="action-title">Create Artifact</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Make sure to close the door before leaving.</p>
+            </div>
+
+            <div class="action-form-container" id="create-artifact-form">
+                <form class="action-form" method="POST">
+                    <label for="new-artifact-name">Name</label>
+                    <input type="text" name="artifact-name" placeholder="Name your artifact" required="required"
+                           id="new-artifact-name"/>
+
+                    <label for="new-artifact-description">Description</label>
+                    <input type="text" name="artifact-description" placeholder="Artifact's description"
+                           required="required" id="new-artifact-description"/>
+
+                    <label for="new-artifact-coins">Coins</label>
+                    <input type="number" name="artifact-coins" placeholder="Price of the precious artifact"
+                           required="required" id="new-artifact-coins" min="0"/>
+
+                    <label for="artifact-type-choice">>Atrifact's Type</label>
+                    <input list="artifact-types" id="artifact-type-choice" name="artifact-type-choice"
+                           pattern="Normal|Magic"
+                           title="Must be Normal or Magic" placeholder="Choose Artifact's Type"/>
+
+                    <datalist id="artifact-types">
+                        <option value="Normal" name="normal-artifact-option">Normal</option>
+                        <option value="Magic" name="magic-artifact-option">Magic</option>
+                    </datalist>
+
+                    <input type="submit" name="create-artifact-button" value="No, it's not expensive" id="create-artifact-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <div class="action-button" id="create-team-button">
+                <img src="../static/assets/images/mentor/create-team.png" alt="Create Team" class="action-image"/>
+                <h2 class="action-title">Create Team</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">So it begins.</p>
+            </div>
+
+            <div class="action-form-container" id="create-team-form">
+
+                <form class="action-form" method="POST">
+                    <label for="new-team-name">Name</label>
+                    <input type="text" name="team-name" placeholder="Team's Name" required="required"
+                           id="new-team-name"/>
+
+                    <input type="search" name="search-student" placeholder="Add a Codecooler" required="required"
+                           id="search-student"/>
+
+                    <input type="submit" name="add-member-button" value="Add to the team" id="add-member-button"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <span>I am notification of pending quests</span>
+            <div class="action-button" id="review-quests-button">
+                <img src="../static/assets/images/mentor/review-quests.png" alt="Review Quests" class="action-image"/>
+                <h2 class="action-title">Review Quests</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Feeling like an NPC in MMO yet?</p>
+            </div>
+
+            <div class="action-form-container" id="review-quests-form">
+                <form class="action-form" method="POST">
+                    <span class="review-data">Codecooler's Name</span>
+                    <span class="review-data">Quest's Title</span>
+                    <input type="submit" name="accept-quest-button" value="Accept"/>
+                    <input type="submit" name="reject-quest-button" value="Reject"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container">
+
+            <span>I am notification of purchased artifacts</span>
+            <div class="action-button" id="review-artifacts-button">
+                <img src="../static/assets/images/mentor/review-artifacts.png" alt="Review Artifacts" class="action-image"/>
+                <h2 class="action-title">Review Artifacts</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Disable used artifacts.</p>
+            </div>
+
+            <div class="action-form-container" id="review-artifacts-form">
+                <form class="action-form" method="POST">
+                    <span class="review-data">Codecooler's Name / Team's Name</span>
+                    <span class="review-data">Artifact's Title</span>
+                    <input type="submit" name="disable-artifact-button" value="Disable"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="take-action-container" id="view-codecoolers-button">
+
+            <div class="action-button">
+                <img src="../static/assets/images/mentor/view-students.png" alt="View Codecoolers" class="action-image"/>
+                <h2 class="action-title">View Codecoolers</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">We know you want to peek on Codecoolers... go on... we won't tell
+                    anyone.</p>
+            </div>
+
+        </div>
+
+        <div class="take-action-container" id="view-quests-button">
+
+            <div class="action-button">
+                <img src="../static/assets/images/mentor/view-quests.png" alt="View Quests" class="action-image"/>
+                <h2 class="action-title">View Quests</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Wonder what kind of challenges Codecoolers face?</p>
+            </div>
+
+        </div>
+
+        <div class="take-action-container" id="view-artifacts-button">
+
+            <div class="action-button">
+                <img src="../static/assets/images/mentor/view-artifacts.png" alt="View Artifacts" class="action-image"/>
+                <h2 class="action-title">View Artifacts</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Available for Indiana Jones ancestors only.</p>
+            </div>
+
+        </div>
+
+        <div class="take-action-container" id="view-teams-button">
+
+            <div class="action-button">
+                <img src="../static/assets/images/mentor/view-teams.png" alt="View Teams" class="action-image"/>
+                <h2 class="action-title">View Teams</h2>
+                <span class="action-separator">______</span>
+                <p class="action-description">Assess the gathered power that has a potential to make you do something
+                    unintelligent.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    {% include "classpath:/templates/mentor-footer.twig" ignore missing %}
+
+</footer>
+
+</body>
+
+</html>

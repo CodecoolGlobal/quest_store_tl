@@ -1,7 +1,7 @@
 package com.codecool.quest_store.model;
 
 public class User {
-    private int id;
+    private final int id;
     private String name;
     private String surname;
     private String phoneNumber;
@@ -13,7 +13,7 @@ public class User {
     private int teamId;
 
 
-    public User(Builder builder) {
+    public User(UserBuilder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.surname = builder.surname;
@@ -102,7 +102,7 @@ public class User {
         this.teamId = teamId;
     }
 
-    public static class Builder {
+    public static class UserBuilder {
         private int id;
         private String name;
         private String surname;
@@ -114,52 +114,52 @@ public class User {
         private int roomId;
         private int teamId;
 
-        public Builder withId(int id) {
+        public UserBuilder withId(int id) {
             this.id = id;
             return this;
         }
 
-        public Builder withName(String name) {
+        public UserBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder withSurname(String surname) {
+        public UserBuilder withSurname(String surname) {
             this.surname = surname;
             return this;
         }
 
-        public Builder withPhoneNumber(String phoneNumber) {
+        public UserBuilder withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
 
-        public Builder withEmail(String email) {
+        public UserBuilder withEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public Builder withPassword(String password) {
+        public UserBuilder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public Builder withPhoto(String photo) {
+        public UserBuilder withPhoto(String photo) {
             this.photo = photo;
             return this;
         }
 
-        public Builder withTypeId(int typeId) {
+        public UserBuilder withTypeId(int typeId) {
             this.typeId = typeId;
             return this;
         }
 
-        public Builder withRoomId(int roomId) {
+        public UserBuilder withRoomId(int roomId) {
             this.roomId = roomId;
             return this;
         }
 
-        public Builder withTeamId(int teamId) {
+        public UserBuilder withTeamId(int teamId) {
             this.teamId = teamId;
             return this;
         }

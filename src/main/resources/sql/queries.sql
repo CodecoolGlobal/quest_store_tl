@@ -81,9 +81,9 @@ CREATE TABLE users
   email text,
   password text,
   photo text,
-  id_user_type int,
-  id_room int,
-  id_team int,
+  user_type_id int,
+  room_id int,
+  team_id int,
   PRIMARY KEY (id),
   FOREIGN KEY (id_user_type) REFERENCES user_types (id),
   FOREIGN KEY (id_team) REFERENCES teams (id),
@@ -176,3 +176,12 @@ CREATE TABLE transactions
   FOREIGN KEY (id_item) REFERENCES items (id),
   FOREIGN KEY (id_status) REFERENCES statuses (id)
 );
+
+--get all items of user
+SELECT * FROM items
+INNER JOIN fundings ON items.id = fundings.item_id
+INNER JOIN transactions ON items.id = fundings.item_id
+INNER JOIN status_history ON fundings.id = status_history.funding_id
+INNER JOIN statuses ON status_history.status_id = statuses.id
+WHERE transactions.user_id = ?
+AND statuses.type = 'Realized';
