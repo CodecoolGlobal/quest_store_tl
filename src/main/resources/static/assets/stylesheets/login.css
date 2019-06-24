@@ -1,0 +1,106 @@
+/*
+  ========================================
+  Login Page Styles
+  ========================================
+*/
+
+/* background */
+
+.content {
+    background-image:
+            linear-gradient(to right,
+            #c8c6c6, #d2d0d0, #dcdada, #e7e4e4,
+            #f1eeee, #f1eeee, #f1eeef, #f1eeef,
+            #e6e4e6, #dcdbdc, #d2d1d2, #c8c8c8);
+}
+
+/* centering */
+
+#primary-login-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: wrap;
+    height: 100%;
+}
+
+/* user login images */
+
+.login-user-container {
+    margin: 50px 0;
+    width: 300px;
+    height: 380px;
+    border-top: 3px solid #fb9d06;
+    border-bottom: 3px solid #fb9d06;
+    background: #ffffff;
+    box-shadow:
+            0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.login-to-domain-image-container img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 8px;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    bottom: 70px;
+    box-shadow:
+            0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* user forms */
+
+.login-form {
+    text-align: center;
+}
+
+.login-form legend {
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: #57033b;
+    font-size: 35px;
+}
+
+.login-form label {
+    visibility: hidden;
+}
+
+.login-form input {
+    padding-top: 15px;
+    height: 20px;
+    width: 200px;
+    font-size: 14px;
+    text-align: center;
+    color: #fb9d06;
+    outline: none;
+    border-bottom: 1px solid #57033b;
+}
+
+.login-form input[type="submit"] {
+    padding: 0;
+    position: relative;
+    top: 25px;
+    height: 35px;
+    border: none;
+    background-color: #57033b;
+    box-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.5),
+            0 1px 0 rgba(255, 255, 255, 0.25) inset,
+            0 0 0 rgba(0, 0, 0, 0.25) inset,
+            0 20px 0 rgba(255, 255, 255, 0.03) inset,
+            0 -20px 20px rgba(0, 0, 0, 0.15) inset,
+            0 20px 20px rgba(255, 255, 255, 0.05) inset;
+    transition: all 0.4s linear 0s;
+}
+
+.login-form input[type="submit"]:hover {
+    cursor: pointer;
+    color: #57033b;
+    font-weight: bolder;
+    background-color: #f3f3f3;
+}
